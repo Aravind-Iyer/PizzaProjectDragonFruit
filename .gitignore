@@ -1,1 +1,15 @@
+# Node.js related
 node_modules/
+npm-debug.log
+.env
+
+# IntelliJ Idea Specific
+.idea/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Logs and Temporary Files
+*.log
+tmp/

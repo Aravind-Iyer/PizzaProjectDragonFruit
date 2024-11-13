@@ -1,0 +1,32 @@
+{
+  "name": "pizzaprojectdragonfruit",
+  "version": "1.0.0",
+  "description": "PizzaOrderingWebsite",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aravind-Iyer/PizzaProjectDragonFruit.git"
+  },
+  "author": "Aravi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aravind-Iyer/PizzaProjectDragonFruit/issues"
+  },
+  "homepage": "https://github.com/Aravind-Iyer/PizzaProjectDragonFruit#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "msnodesqlv8": "^4.2.1",
+    "mssql": "^11.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

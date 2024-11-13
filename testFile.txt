@@ -1,4 +1,0 @@
-Hi This is a test file.
-blah blah blah
-
-We will be using bootstrap
