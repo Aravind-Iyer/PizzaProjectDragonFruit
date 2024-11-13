@@ -1,17 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Fetch menu options when the page loads
-    fetchMenuOptions();
+    // Add event listener to the Load Menu Options button
+    const loadMenuButton = document.getElementById("loadMenuButton");
+    loadMenuButton.addEventListener("click", fetchMenuOptions);
 });
 
 // Function to fetch menu options from the backend API
 async function fetchMenuOptions() {
     try {
+        console.log("Fetching menu options from backend...");
+
         const response = await fetch('http://localhost:3000/api/menu/options');
         if (!response.ok) {
             throw new Error("Failed to fetch menu options");
         }
 
         const menuData = await response.json();
+        console.log("Menu data received:", menuData);
+
         renderMenuOptions(menuData);
     } catch (error) {
         console.error("Error:", error);
@@ -22,6 +27,7 @@ async function fetchMenuOptions() {
 // Function to render the menu options on the page
 function renderMenuOptions(menuData) {
     const menuContainer = document.getElementById("menu-container");
+    menuContainer.innerHTML = ""; // Clear previous contents
 
     // Render Pizza Options (if needed)
     if (menuData.pizzas && menuData.pizzas.length > 0) {

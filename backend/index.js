@@ -1,5 +1,6 @@
 const express = require('express');
 const sql = require('mssql');
+const path = require('path');
 const dbConfig = require('./config/dbConfig');
 const menuRoutes = require('./routes/menuRoutes');
 
@@ -20,13 +21,16 @@ sql.connect(dbConfig)
 // Middleware
 app.use(express.json());
 
-// Example Route
-app.get('/', (req, res) => {
-    res.send('Welcome to Mom & Pop’s Pizzeria API');
-});
-
 // Use Menu Routes
 app.use('/api/menu', menuRoutes);
+
+// Serve Static Files (e.g., HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, '../frontend')));  // <-- This line serves static files
+
+// Basic route to serve the menu page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/menu.html'));  // <-- This line serves menu.html when visiting root URL
+});
 
 // Start the Express Server
 app.listen(PORT, () => {
