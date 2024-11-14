@@ -5,20 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mom's and Pop's Pizzeria - Login</title>
     <link rel="stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="../js/common.js"></script>
+
 </head>
 <body>
 <!-- Header Section -->
-<header class="d-flex justify-content-between align-items-center p-4 bg-danger text-white">
-    <div class="header-left d-flex align-items-center">
-        <button class="btn btn-light me-3" onclick="goToHome()">
-            <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+    <div class="header-left">
+        <button class="btn btn-light" onclick="goToHome()">
+            <img src="../assets/icons/home-icon.png" alt="Home" width="24">
         </button>
+    </div>
+    <div class="header-title">
         <h1>Login</h1>
     </div>
-    <div class="header-right d-flex align-items-center">
-        <!-- Header buttons will dynamically change based on login state in common.js -->
+    <div class="header-right">
+        <button class="btn btn-light" onclick="toggleMenu()">
+            <img src="../assets/icons/menu-icon.png" alt="Menu" width="24">
+        </button>
     </div>
 </header>
 
@@ -56,6 +61,16 @@
 <!-- JavaScript Section -->
 <script src="../js/login.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function goToHome() {
+        window.location.href = 'home.html';
+    }
+
+    function toggleMenu() {
+        // Placeholder for future hamburger menu functionality
+        alert('Hamburger menu clicked');
+    }
+</script>
 </body>
 </html>
