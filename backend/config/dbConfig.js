@@ -1,15 +1,13 @@
-require('dotenv').config();
-const sql = require('mssql');
+// backend/config/dbConfig.js - Database Configuration
 
 const dbConfig = {
-    user: process.env.DB_USER,             // SQL Server username
-    password: process.env.DB_PASSWORD,     // SQL Server password
-    server: process.env.DB_HOST,           // SQL Server hostname or IP (e.g., localhost)
-    port: parseInt(process.env.DB_PORT, 1433), // SQL Server port (usually 1433)
-    database: process.env.DB_NAME,         // Name of the database you are connecting to
+    user: 'pizzeria_user', // Replace with your actual username for the database
+    password: 'aravind02', // Replace with your actual password
+    server: 'localhost', // Since it's the default instance, 'localhost' will work fine
+    database: 'Dragonfruit', // Ensure this matches your database name
     options: {
-        encrypt: false,                      // Set to false if not using Azure
-        trustServerCertificate: true         // Use this if you're working locally without SSL certificates
+        encrypt: false, // Set to true if required by your server's security settings
+        trustServerCertificate: true // For local development, allow self-signed certificates
     }
 };
 
