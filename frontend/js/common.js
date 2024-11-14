@@ -7,14 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // User is logged in
         const headerRight = document.querySelector('.header-right');
         headerRight.innerHTML += `
-            <button class="btn btn-light mr-2" onclick="goToAccountInfo()">
-                <img src="../assets/icons/account-icon.png" alt="Account" width="24"> Account Info
-            </button>
             <button class="btn btn-light" onclick="logout()">
                 <img src="../assets/icons/logout-icon.png" alt="Logout" width="24"> Logout
             </button>
         `;
     }
+    else {
+        // User is not logged in
+        headerRight.innerHTML += `
+            <button class="btn btn-warning me-3" onclick="goToLogin()">Login/Create Account</button>
+        `;
+    }
+
 
     // Initialize the hamburger menu
     initializeHamburgerMenu(token);
