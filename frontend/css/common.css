@@ -1,0 +1,27 @@
+/* Common styles for the hamburger menu */
+#hamburgerMenu {
+    background-color: #f8f9fa;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#hamburgerMenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#hamburgerMenu ul li {
+    margin-bottom: 10px;
+}
+
+#hamburgerMenu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+#hamburgerMenu ul li a:hover {
+    color: #dc3545; /* Bootstrap danger color */
+}

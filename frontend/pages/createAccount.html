@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mom's and Pop's Pizzeria - Login</title>
-    <link rel="stylesheet" href="../css/login.css">
+    <title>Mom's and Pop's Pizzeria - Create Account</title>
+    <link rel="stylesheet" href="../css/createAccount.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="../js/common.js"></script>
 </head>
@@ -15,37 +15,42 @@
         <button class="btn btn-light me-3" onclick="goToHome()">
             <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
         </button>
-        <h1>Login</h1>
+        <h1>Create Account</h1>
     </div>
     <div class="header-right d-flex align-items-center">
         <!-- Header buttons will dynamically change based on login state in common.js -->
     </div>
 </header>
 
-<!-- Login Form Section -->
+<!-- Create Account Form Section -->
 <main class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card p-4">
-                <h3 class="text-center mb-4">Login</h3>
-                <form id="loginForm">
+                <h3 class="text-center mb-4">Create Account</h3>
+                <form id="createAccountForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                    </div>
                     <div class="form-group">
                         <label for="username">Username/Email</label>
                         <input type="text" class="form-control" id="username" placeholder="Enter your username or email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                        <input type="password" class="form-control" id="password" placeholder="Password must be 12 or more characters" required>
                     </div>
-                    <div class="text-right">
-                        <a href="#" class="text-muted">Forgot Password?</a>
-                    </div>
-                    <div class="text-center my-3">
-                        <p>or</p>
-                        <a href="createAccount.html" class="btn btn-link">Create Account</a>
+                    <div class="form-group">
+                        <label for="retypePassword">Retype Password</label>
+                        <input type="password" class="form-control" id="retypePassword" placeholder="Retype your password" required>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-danger btn-block">Login</button>
+                        <button type="submit" class="btn btn-danger btn-block">Create Account</button>
                     </div>
                 </form>
             </div>
@@ -54,7 +59,7 @@
 </main>
 
 <!-- JavaScript Section -->
-<script src="../js/login.js"></script>
+<script src="../js/createAccount.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>

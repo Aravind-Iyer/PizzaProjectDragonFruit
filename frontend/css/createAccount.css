@@ -1,4 +1,4 @@
-/* Login Page CSS - Part of styles.css */
+/* createAccount.css for Mom's and Pop's Pizzeria Create Account Page */
 
 /* General Form Styling */
 form {
@@ -19,7 +19,7 @@ form input[type="password"] {
     border-radius: 5px;
 }
 
-/* Login Card Styling */
+/* Create Account Card Styling */
 .card {
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -45,29 +45,6 @@ form input[type="password"] {
 
 .btn-danger:hover {
     background-color: #c9302c;
-}
-
-.btn-link {
-    color: #ffbf47;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.btn-link:hover {
-    color: #ffa31a;
-    text-decoration: underline;
-}
-
-/* Forgot Password Link */
-.text-muted {
-    font-size: 0.9rem;
-    color: #6c757d;
-    text-decoration: none;
-}
-
-.text-muted:hover {
-    color: #5a6268;
-    text-decoration: underline;
 }
 
 /* Responsiveness */

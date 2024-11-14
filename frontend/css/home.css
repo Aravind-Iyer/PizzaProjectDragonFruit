@@ -1,125 +1,138 @@
+/* styles.css for Mom's and Pop's Pizzeria Homepage */
+
 /* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* General Page Styling */
-body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 20px;
 }
 
-/* Header Styling */
-.header-container {
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header Section */
+header {
+    background-color: #d9534f; /* Bootstrap danger color */
+    color: #fff;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ff6600;  /* Orange background */
-    padding: 15px;
-    color: white;
 }
 
-.header-container h1 {
-    font-size: 24px;
-    margin-left: 20px;
-}
-
-.header-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.burger-button {
-    background: none;
-    color: white;
-    font-size: 24px;
-    border: none;
-    cursor: pointer;
-    margin-right: 20px;
-}
-
-.login-button {
-    background-color: #fff;
-    color: #ff6600;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 20px;
-}
-
-.login-button:hover {
-    background-color: #e6e6e6;
-}
-
-/* Drop-down Menu Styling */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 50px;
-    right: 0;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 1000;
-}
-
-.dropdown-menu a {
-    display: block;
-    text-decoration: none;
-    color: #333;
-    padding: 10px;
-}
-
-.dropdown-menu a:hover {
-    background-color: #f2f2f2;
-}
-
-/* Main Content Styling */
-.main-content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.image-container {
-    text-align: center;
-    padding: 10px;
-}
-
-.image-container img {
-    width: 250px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.image-container p {
-    margin-top: 10px;
+.header-title h1 {
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
-/* Contact and Operating Hours */
-.info-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    margin-top: 40px;
-    background-color: #ffebcc;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.header-left button,
+.header-right button {
+    border: none;
+    cursor: pointer;
 }
 
-.contact-info h3,
-.operating-hours h3 {
-    color: #ff6600;
+.header-left button img,
+.header-right button {
+    height: 36px;
+}
+
+/* Hamburger Menu */
+nav {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+#hamburgerMenu {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    list-style: none;
+}
+
+#hamburgerMenu ul {
+    padding-left: 0;
+}
+
+#hamburgerMenu ul li {
+    padding: 10px 5px;
+}
+
+#hamburgerMenu ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Main Content Section */
+main {
+    padding: 30px;
+}
+
+.featured-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.featured-item:hover {
+    transform: scale(1.05);
+}
+
+.featured-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.featured-item h3 {
+    font-size: 1.5rem;
+    color: #d9534f;
+}
+
+/* Contact Information Box */
+.contact-info,
+.operating-hours {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: left;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact-info p,
+.operating-hours p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-title h1 {
+        font-size: 1.5rem;
+    }
+
+    .featured-item {
+        margin-bottom: 20px;
+    }
+
+    .btn-warning {
+        width: 100%;
+        text-align: center;
+    }
 }
