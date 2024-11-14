@@ -5,11 +5,12 @@
     box-sizing: border-box;
 }
 
-/* General Styling */
+/* General Page Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
+    padding: 20px;
 }
 
 /* Header Styling */
@@ -17,18 +18,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ff3300;  /* Red background color */
-    padding: 20px;
+    background-color: #ff6600;  /* Orange background */
+    padding: 15px;
     color: white;
 }
 
-.header-left h1 {
-    margin-left: 20px;
+.header-container h1 {
     font-size: 24px;
-}
-
-.header-right {
-    position: relative;
 }
 
 .burger-button {
@@ -39,7 +35,6 @@ body {
     cursor: pointer;
 }
 
-/* Drop-down Menu Styling */
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -63,26 +58,33 @@ body {
     background-color: #f2f2f2;
 }
 
-/* Main Menu Grid */
-.menu-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
+/* Customization Container Styling */
+.customization-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.menu-button {
+.customization-section {
+    margin-bottom: 20px;
+}
+
+.add-to-cart-section {
+    text-align: center;
+}
+
+#addToCartButton {
     background-color: #ff6600;
     color: white;
-    padding: 30px 40px;
-    margin: 15px;
+    padding: 15px 30px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 20px;
 }
 
-.menu-button:hover {
+#addToCartButton:hover {
     background-color: #e65c00;
 }

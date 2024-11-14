@@ -21,16 +21,26 @@ sql.connect(dbConfig)
 // Middleware
 app.use(express.json());
 
-// Use Menu Routes
-app.use('/api/menu', menuRoutes);
-
 // Serve Static Files (e.g., HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, '../frontend')));  // <-- This line serves static files
+app.use(express.static(path.join(__dirname, '../frontend')));  // Serve static files from the frontend folder
 
-// Basic route to serve the menu page
+// Basic Route to Serve Home Page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/pages/menu.html'));  // <-- This line serves menu.html when visiting root URL
+    res.sendFile(path.join(__dirname, '../frontend/pages/home.html'));  // Serve the home page at the root URL
 });
+
+// Route to Serve the Menu Page
+app.get('/menu', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/menu.html'));  // Serve the menu page at /menu
+});
+
+// Route to Serve Pizza Customization Page
+app.get('/pizza.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/pizza.html'));
+});
+
+// Use Menu API Routes
+app.use('/api/menu', menuRoutes);
 
 // Start the Express Server
 app.listen(PORT, () => {
