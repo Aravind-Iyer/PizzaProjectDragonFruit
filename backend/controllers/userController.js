@@ -95,7 +95,6 @@ const userController = {
     },
 
     // Update Account Information Functionality
-    // Update Account Information Functionality
     updateAccountInfo: async (req, res) => {
         const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 

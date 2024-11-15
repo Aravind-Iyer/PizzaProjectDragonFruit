@@ -4,6 +4,7 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
     const firstName = document.getElementById('firstName').value.trim();
     const lastName = document.getElementById('lastName').value.trim();
     const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     const retypePassword = document.getElementById('retypePassword').value;
 
@@ -23,7 +24,7 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password, firstName, lastName })
+            body: JSON.stringify({ username, password, firstName, lastName, email })
         });
 
         if (response.ok) {
