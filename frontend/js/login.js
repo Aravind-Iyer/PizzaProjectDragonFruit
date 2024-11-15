@@ -1,5 +1,3 @@
-// login.js - Handles user login functionality
-
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -18,16 +16,15 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (response.ok) {
-            // Store the token in localStorage to manage session
+            // Store token in localStorage and redirect
             localStorage.setItem('token', data.token);
             alert('Login successful');
-            // Redirect to homepage or another restricted page
-            window.location.href = 'home.html';
+            window.location.href = 'home.html'; // Redirect to homepage
         } else {
-            alert(data.message);
+            alert(data.message || 'Login failed. Please try again.');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while logging in. Please try again later.');
+        alert('An error occurred during login.');
     }
 });

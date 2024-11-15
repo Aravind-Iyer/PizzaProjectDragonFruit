@@ -3,38 +3,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
 
+    const headerRight = document.querySelector('.header-right');
     if (token) {
-        // User is logged in
-        const headerRight = document.querySelector('.header-right');
-        headerRight.innerHTML += `
-            <button class="btn btn-light" onclick="logout()">
-                <img src="../assets/icons/logout-icon.png" alt="Logout" width="24"> Logout
-            </button>
+        // User is logged in - Show logout and account info button
+        headerRight.innerHTML = `
+            <button class="btn btn-light me-3" onclick="goToAccountInfo()">Account Info</button>
+            <button class="btn btn-warning" onclick="logout()">Logout</button>
+        `;
+    } else {
+        // User is not logged in - Show Login/Create Account button
+        headerRight.innerHTML = `
+            <button class="btn btn-light" onclick="goToLogin()">Login/Create Account</button>
         `;
     }
-    else {
-        // User is not logged in
-        headerRight.innerHTML += `
-            <button class="btn btn-warning me-3" onclick="goToLogin()">Login/Create Account</button>
-        `;
-    }
-
 
     // Initialize the hamburger menu
     initializeHamburgerMenu(token);
 });
-
-// Logout function
-function logout() {
-    localStorage.removeItem('token');
-    alert('You have successfully logged out.');
-    window.location.href = 'home.html';
-}
-
-// Function to navigate to Account Info
-function goToAccountInfo() {
-    window.location.href = 'accountInfo.html';
-}
 
 // Function to navigate to Home
 function goToHome() {
@@ -44,6 +29,18 @@ function goToHome() {
 // Function to navigate to Login page
 function goToLogin() {
     window.location.href = 'login.html';
+}
+
+// Function to navigate to Account Info page
+function goToAccountInfo() {
+    window.location.href = 'accountInfo.html';
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('token');
+    alert('You have successfully logged out.');
+    window.location.href = 'home.html';
 }
 
 // Toggle the hamburger menu visibility

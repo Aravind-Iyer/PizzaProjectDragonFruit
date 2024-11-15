@@ -11,19 +11,22 @@
 </head>
 <body>
 <!-- Header Section -->
-<header class="d-flex justify-content-between align-items-center p-4 bg-danger text-white">
-  <div class="header-left d-flex align-items-center">
-    <button class="btn btn-light me-3" onclick="goToHome()">
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+  <div class="header-left">
+    <button class="btn btn-light" onclick="goToHome()">
       <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
     </button>
-    <h1 class="header-title">Mom's and Pop's Pizzeria</h1>
   </div>
-  <div class="header-right d-flex align-items-center">
-    <div class="hamburger" onclick="toggleMenu()">
-      <img src="../assets/icons/hamburger_icon.svg.png" alt="Menu" width="24">
-    </div>
+  <div class="header-title">
+    <h1>Welcome to Mom's and Pop's Pizzeria</h1>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-light" onclick="goToLogin()">
+      Login/Create Account
+    </button>
   </div>
 </header>
+
 
 <!-- Custom Hamburger Menu -->
 <nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
