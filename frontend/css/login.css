@@ -1,88 +1,79 @@
-/* Login Page CSS - Part of styles.css */
-
-/* General Form Styling */
-form {
-    margin-top: 20px;
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-form label {
-    font-weight: bold;
-    color: #333;
+/* Body styling */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
 }
 
-form input[type="text"],
-form input[type="password"] {
+/* Header styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9534F;
+    padding: 10px 20px;
+    color: white;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 60px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Login Card Styling */
+/* Main content padding */
+main {
+    padding-top: 60px;
+}
+
+/* Login form styling */
 .card {
-    background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #fff;
 }
 
 .card h3 {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #d9534f;
+    color: #D9534F;
+    margin-bottom: 20px;
 }
 
-/* Buttons */
-.btn-danger {
-    background-color: #d9534f;
-    border: none;
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.btn-block {
+    width: 100%;
     padding: 10px;
     font-weight: bold;
+    color: #fff;
+    background-color: #D9534F;
+    border: none;
     border-radius: 5px;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.3s ease;
 }
 
-.btn-danger:hover {
-    background-color: #c9302c;
-}
-
-.btn-link {
-    color: #ffbf47;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.btn-link:hover {
-    color: #ffa31a;
-    text-decoration: underline;
-}
-
-/* Forgot Password Link */
-.text-muted {
-    font-size: 0.9rem;
-    color: #6c757d;
-    text-decoration: none;
-}
-
-.text-muted:hover {
-    color: #5a6268;
-    text-decoration: underline;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-    .card {
-        padding: 20px;
-    }
-
-    .btn-danger {
-        width: 100%;
-        text-align: center;
-    }
-
-    form input[type="text"],
-    form input[type="password"] {
-        padding: 8px;
-    }
+.btn-block:hover {
+    background-color: #C9302C;
 }

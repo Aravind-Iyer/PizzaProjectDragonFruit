@@ -1,80 +1,41 @@
-/* styles.css for Mom's and Pop's Pizzeria Homepage */
-
-/* General Reset */
+/* Global reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
 }
 
-body {
-    background-color: #f8f9fa;
-    color: #333;
-}
-
-/* Header Section */
-header {
-    background-color: #d9534f; /* Bootstrap danger color */
-    color: #fff;
-    padding: 20px;
+/* Header styling */
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #D9534F;
+    padding: 10px 20px;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 60px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header-title h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
-.header-left button,
-.header-right button {
-    border: none;
-    cursor: pointer;
-}
-
-.header-left button img,
-.header-right button {
-    height: 36px;
-}
-
-/* Hamburger Menu */
-nav {
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-#hamburgerMenu {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    list-style: none;
-}
-
-#hamburgerMenu ul {
-    padding-left: 0;
-}
-
-#hamburgerMenu ul li {
-    padding: 10px 5px;
-}
-
-#hamburgerMenu ul li a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Main Content Section */
+/* Main content padding */
 main {
-    padding: 30px;
+    padding-top: 60px;
 }
 
+/* Content box styling */
 .featured-item {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -98,9 +59,7 @@ main {
     color: #d9534f;
 }
 
-/* Contact Information Box */
-.contact-info,
-.operating-hours {
+.contact-info, .operating-hours {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -108,31 +67,4 @@ main {
     text-align: left;
     color: #333;
     margin-bottom: 20px;
-}
-
-.contact-info p,
-.operating-hours p {
-    font-size: 1rem;
-    margin-bottom: 8px;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .header-title h1 {
-        font-size: 1.5rem;
-    }
-
-    .featured-item {
-        margin-bottom: 20px;
-    }
-
-    .btn-warning {
-        width: 100%;
-        text-align: center;
-    }
 }
