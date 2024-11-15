@@ -70,6 +70,21 @@
         </button>
     </div>
 </header>
+<!-- Hamburger Menu Button in the whitespace below header -->
+<div class="hamburger-container text-end p-2" style="display: none; position: absolute; top: 88px; right: 10px;">
+    <button class="btn btn-light" onclick="toggleMenu()">
+        <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
+    </button>
+</div>
+
+<!-- Custom Hamburger Menu -->
+<nav id="hamburgerMenu" class="d-none custom-hamburger-menu" style="position: absolute; top: 110px; right: 20px;">
+    <ul>
+        <li><a href="order.html">Place Order</a></li>
+        <li><a href="accountInfo.html">Account Info</a></li>
+        <li><a href="cart.html">Cart</a></li>
+    </ul>
+</nav>
 
 <!-- Account Info Section -->
 <main class="container mt-5">
