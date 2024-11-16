@@ -77,10 +77,7 @@ function toggleMenu() {
 // Add item to cart
 async function addToCart(drinkId) {
     const token = localStorage.getItem('token');
-    if (!token) {
-        alert('You must be logged in to add items to the cart.');
-        return;
-    }
+    const customerId = localStorage.getItem('customerId'); // Retrieve customerId from localStorage
 
     const size = document.querySelector(`input[name="size${drinkId}"]:checked`)?.value;
     if (!size) {
@@ -106,7 +103,7 @@ async function addToCart(drinkId) {
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
-                customerId: 1, // Replace with dynamic customer ID
+                customerId: parseInt(customerId, 10), // Use the dynamic customerId
                 itemId: drinkId,
                 itemType: 'Drink',
                 itemName: document.querySelector(`#drink-${drinkId} h3`).textContent,

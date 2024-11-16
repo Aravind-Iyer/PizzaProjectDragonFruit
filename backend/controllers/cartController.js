@@ -1,18 +1,21 @@
 const { connectToDB, sql } = require('../database/dbConnection');
+const cartService = require('../services/cartService');
 
 const cartController = {
     // 1. Fetch all cart items for a specific customer
     getCart: async (req, res) => {
-        const { customerId } = req.query;
+        const { customerId } = req.query; // Ensure customerId is being passed from frontend
         try {
+            console.log('Fetching cart for customer:', customerId); // Debug - Log the customer ID
             const pool = await connectToDB();
             const result = await pool.request()
                 .input('CustomerID', sql.Int, customerId)
                 .query(`
-                    SELECT CartID, ItemID, ItemType, ItemName, Quantity, Cost, (Quantity * Cost) AS Total
-                    FROM Cart
-                    WHERE CustomerID = @CustomerID
-                `);
+                SELECT CartID, ItemID, ItemType, ItemName, Quantity, Cost, (Quantity * Cost) AS Total
+                FROM Cart
+                WHERE CustomerID = @CustomerID
+            `);
+            console.log('Cart items fetched:', result.recordset); // Debug - Log fetched items
             res.status(200).json(result.recordset);
         } catch (err) {
             console.error('Error fetching cart items:', err);
