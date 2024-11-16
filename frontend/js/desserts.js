@@ -42,13 +42,16 @@ function updateDessertPlaceholders(desserts) {
     desserts.forEach((dessert, index) => {
         const dessertCard = document.getElementById(`dessert-${index + 1}`);
         if (dessertCard) {
-            dessertCard.querySelector('img').src = dessert.ImageURL; // Use ImageURL
-            dessertCard.querySelector('h3').textContent = dessert.DessertName; // Use DessertName
-            dessertCard.querySelector(`#price-${index + 1}`).textContent = `$${dessert.Cost.toFixed(2)}`; // Use Cost
+            dessertCard.querySelector('img').src = dessert.ImageURL;
+            dessertCard.querySelector('h3').textContent = dessert.DessertName;
+            dessertCard.querySelector(`#price-${index + 1}`).textContent = `$${dessert.Cost.toFixed(2)}`;
+            dessertCard.querySelector('button').setAttribute(
+                'onclick',
+                `addToCart(${dessert.DessertID}, '${dessert.DessertName}')`
+            );
         }
     });
 }
-
 
 // Hamburger menu toggle
 function toggleMenu() {
@@ -58,10 +61,24 @@ function toggleMenu() {
 }
 
 // Placeholder Add to Cart Function
-function addToCart(dessertId) {
-    const quantity = document.querySelector(`#quantity-${dessertId}`).value;
-    alert(`Added ${quantity} of Dessert ${dessertId} to cart!`);
+function addToCart(dessertId, dessertName) {
+    const quantityInput = document.querySelector(`#quantity-${dessertId}`);
+    const quantity = parseInt(quantityInput.value, 10);
+
+    if (isNaN(quantity) || quantity <= 0) {
+        alert('Please enter a valid quantity.');
+        return;
+    }
+
+    if (quantity > 5) {
+        alert(`You can only add up to 5 of ${dessertName}.`);
+        quantityInput.value = 5; // Reset quantity to the maximum allowed
+        return;
+    }
+
+    alert(`Added ${quantity} of ${dessertName} to cart!`);
 }
+
 
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
