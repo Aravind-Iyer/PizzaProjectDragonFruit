@@ -13,18 +13,21 @@ body {
 }
 
 /* Header Section */
+/* Header Section */
 .header {
     background-color: #D9534F;
     color: white;
-    padding: 10px;
+    padding: 10px 20px; /* Adjusted to match home.css */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: 60px; /* Set consistent height */
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional for a consistent look */
 }
 
 .header-title h1 {
@@ -62,7 +65,7 @@ body {
     text-decoration: none;
     font-weight: bold;
     display: block; /* Ensure clickable area spans the whole line */
-    text-align: center; /* Center-align the text */
+    text-align: left; /* Center-align the text */
 }
 
 /* Drink Cards */
