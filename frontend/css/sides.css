@@ -109,6 +109,52 @@ body {
     background-color: #b52e27;
 }
 
+/* Types of Dipping Sauces*/
+.sauce-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    margin-top: 160px;
+}
+
+.sauce-item {
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.sauce-item:hover {
+    transform: scale(1.05);
+}
+
+.sauce-item img {
+    width: 50px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.sauce-item h5 {
+    font-size: 0.8rem;
+    color: #D9534F;
+    margin: 0;
+}
+
+.sauce-item button {
+    background-color: #D9534F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 /* Quantity Section */
 .quantity {
     display: flex;
