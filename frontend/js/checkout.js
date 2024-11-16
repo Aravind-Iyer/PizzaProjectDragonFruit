@@ -7,17 +7,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryList = document.getElementById('summaryList');
     const totalPriceEl = document.getElementById('totalPrice');
 
-    let cart = []; // Mock data; this will be replaced with fetched cart data
-    let totalPrice = 0;
+    let cart = JSON.parse(localStorage.getItem('cart')) || []; // Retrieve cart from localStorage
+    let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0; // Retrieve total price from localStorage
+    const customerId = parseInt(localStorage.getItem('customerId'));
+
+
 
     // Fetch cart data dynamically
-    fetch('http://localhost:3000/api/cart')
-        .then(response => response.json())
+    fetch(`http://localhost:3000/api/cart?customerId=${customerId}`) // Use the correct customerId
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch cart items'); // Handle errors
+            return response.json();
+        })
         .then(data => {
-            cart = data;
-            renderCartSummary(cart);
+            cart = data; // Store fetched cart data
+            console.log('Cart fetched successfully:', cart); // Debug - Log fetched cart
+            renderCartSummary(cart); // Render the cart summary
         })
         .catch(err => console.error('Error fetching cart data:', err));
+
 
     // Listen for payment method selection
     paymentMethods.forEach(method => {
@@ -38,19 +46,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render the cart summary
     function renderCartSummary(cartItems) {
-        summaryList.innerHTML = ''; // Clear existing summary
-        totalPrice = 0;
+        summaryList.innerHTML = ''; // Clear the summary section
+        totalPrice = 0; // Reset total price
 
         cartItems.forEach(item => {
+            console.log('Rendering item:', item); // Debug - Log each item in the cart
             const listItem = document.createElement('li');
-            listItem.textContent = `${item.itemName} (x${item.quantity}) - $${(item.cost * item.quantity).toFixed(2)}`;
+            listItem.textContent = `${item.ItemName} (x${item.Quantity}) - $${(item.Quantity * item.Cost).toFixed(2)}`;
             summaryList.appendChild(listItem);
 
-            totalPrice += item.cost * item.quantity;
+            totalPrice += item.Quantity * item.Cost; // Accumulate the total price
         });
 
-        totalPriceEl.textContent = totalPrice.toFixed(2);
+        console.log('Total Price:', totalPrice); // Debug - Log calculated total price
+        totalPriceEl.textContent = totalPrice.toFixed(2); // Update the total price in the DOM
     }
+
 
     // Cancel order functionality
     window.cancelOrder = () => {
@@ -67,26 +78,86 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const paymentData = {
+            customerId,
+            paymentMethod: selectedMethod.value,
+            cartItems: cart,
+            totalPrice,
+        };
+
         if (selectedMethod.id === 'creditCard') {
             const cardNumber = document.getElementById('cardNumber').value.trim();
             const expiryDate = document.getElementById('expiryDate').value.trim();
             const cvv = document.getElementById('cvv').value.trim();
             const billingAddress = document.getElementById('billingAddress').value.trim();
 
-            if (!cardNumber || !expiryDate || !cvv || !billingAddress) {
-                alert('Please fill out all card details.');
+            if (!cardNumber || cardNumber.length !== 16 || isNaN(cardNumber)) {
+                alert('Please enter a valid 16-digit card number.');
                 return;
             }
+            if (!expiryDate || !cvv || cvv.length !== 3 || isNaN(cvv)) {
+                alert('Please provide a valid expiry date and CVV.');
+                return;
+            }
+            if (!billingAddress) {
+                alert('Please provide your billing address.');
+                return;
+            }
+
+            paymentData.cardNumber = cardNumber;
+            paymentData.expiryDate = expiryDate;
+            paymentData.cvv = cvv;
+            paymentData.billingAddress = billingAddress;
         } else if (selectedMethod.id === 'giftCard') {
             const giftCardNumber = document.getElementById('giftCardNumber').value.trim();
             if (!giftCardNumber) {
                 alert('Please enter your gift card number.');
                 return;
             }
+            paymentData.giftCardNumber = giftCardNumber;
         }
 
+        console.log('Payment payload:', paymentData); // Debug - Log the payment payload
         alert('Processing payment...');
-        confirmationSection.classList.remove('d-none');
+        fetch('http://localhost:3000/api/payments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(paymentData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Payment processing failed.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                confirmationSection.classList.remove('d-none');
+                alert('Payment successful! Payment ID: ' + data.paymentId);
+
+                // Clear local storage and redirect
+                localStorage.removeItem('cart');
+                localStorage.removeItem('totalPrice');
+
+                fetch(`http://localhost:3000/api/cart/clear`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ customerId }),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            console.error('Failed to clear cart:', response);
+                        }
+                        window.location.href = 'orderSummary.html'; // Redirect after clearing the cart
+                    })
+                    .catch(err => console.error('Error clearing cart:', err));
+            })
+            .catch(err => {
+                console.error('Error submitting payment:', err);
+                alert('Failed to process payment. Please try again.');
+            });
+
     };
 
     // Hamburger Menu Toggle

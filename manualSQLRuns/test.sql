@@ -1,12 +1,8 @@
-USE Dragonfruit;
-
--- Insert sample drinks into the Drinks table
-INSERT INTO Drinks (DrinkName, Size, Cost, ImageURL)
-VALUES
-    ('Coca-Cola', 'Small', 1.99, '../assets/images/coca-cola.jpg'),
-    ('Pepsi', 'Small', 1.89, '../assets/images/pepsi.jpg'),
-    ('Sprite', 'Small', 1.79, '../assets/images/sprite.jpg'),
-    ('Fanta Orange', 'Small', 1.99, '../assets/images/fanta.jpg'),
-    ('Mountain Dew', 'Small', 1.89, '../assets/images/mountain-dew.jpg'),
-    ('Dr Pepper', 'Small', 1.99, '../assets/images/dr-pepper.jpg'),
-    ('7UP', 'Small', 1.79, '../assets/images/7up.jpg');
+CREATE TABLE PaymentItems (
+                              PaymentItemID INT IDENTITY PRIMARY KEY,    -- Unique ID for each purchased item
+                              PaymentID INT NOT NULL FOREIGN KEY REFERENCES Payments(PaymentID), -- Links to Payments table
+                              ItemID INT NOT NULL,                       -- ID of the purchased item
+                              ItemName VARCHAR(100) NOT NULL,            -- Name of the purchased item
+                              Quantity INT NOT NULL,                     -- Quantity purchased
+                              Cost DECIMAL(10, 2) NOT NULL               -- Cost of the item
+);
