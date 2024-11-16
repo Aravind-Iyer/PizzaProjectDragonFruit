@@ -1,0 +1,118 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Header Section */
+header {
+    background-color: #D9534F;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Hamburger Menu */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 150px;
+    z-index: 1000;
+    display: none;
+}
+
+.custom-hamburger-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.custom-hamburger-menu li {
+    margin: 10px 0;
+}
+
+.custom-hamburger-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Payment Methods Section */
+.payment-methods h2 {
+    font-size: 1.5rem;
+    color: #D9534F;
+}
+
+.payment-methods .form-check {
+    margin-bottom: 10px;
+}
+
+/* Payment Form */
+.payment-form {
+    display: none;
+}
+
+.payment-form.active {
+    display: block;
+}
+
+.payment-form .form-label {
+    font-weight: bold;
+    color: #D9534F;
+}
+
+/* Summary Section */
+.summary h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.summary ul {
+    list-style: none;
+    padding: 0;
+}
+
+.summary ul li {
+    margin: 5px 0;
+}
+
+.total h4 {
+    font-weight: bold;
+    color: #D9534F;
+}
+
+/* Action Buttons */
+.action-buttons button {
+    width: 48%;
+    font-size: 1rem;
+}
+
+/* Confirmation Section */
+.confirmation h4 {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #D9534F;
+    background-color: #f1f1f1;
+    color: green;
+}
