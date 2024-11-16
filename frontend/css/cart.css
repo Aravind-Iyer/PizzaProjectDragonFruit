@@ -70,3 +70,47 @@ body {
 .button-section button:hover {
     transform: scale(1.05);
 }
+/* Hamburger Menu Styles */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 120px; /* Adjust based on header height */
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    width: 150px;
+}
+
+.custom-hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-hamburger-menu li {
+    margin: 10px 0;
+}
+
+.custom-hamburger-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+/* Hamburger container styling to position the button in the whitespace */
+.hamburger-container {
+    position: relative;
+    right: 10px; /* Adjust as needed to align with the right edge */
+}

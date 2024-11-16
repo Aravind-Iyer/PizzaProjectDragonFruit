@@ -57,11 +57,11 @@ function updateDessertPlaceholders(desserts) {
 function toggleMenu() {
     const menu = document.getElementById("hamburgerMenu");
     menu.classList.toggle("d-none");
+    menu.classList.toggle("d-none");
     menu.classList.toggle("d-block");
 }
 
-// Placeholder Add to Cart Function
-function addToCart(dessertId, dessertName) {
+async function addToCart(dessertId, dessertName) {
     const quantityInput = document.querySelector(`#quantity-${dessertId}`);
     const quantity = parseInt(quantityInput.value, 10);
 
@@ -76,7 +76,43 @@ function addToCart(dessertId, dessertName) {
         return;
     }
 
-    alert(`Added ${quantity} of ${dessertName} to cart!`);
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('You must be logged in to add items to the cart.');
+        return;
+    }
+
+    // Add the item to the cart in the backend
+    try {
+        const response = await fetch('http://localhost:3000/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                customerId: 1, // Replace with dynamic customer ID if available
+                itemId: dessertId,
+                itemType: 'Dessert',
+                itemName: dessertName,
+                quantity: quantity,
+                cost: parseFloat(
+                    document.querySelector(`#price-${dessertId}`).textContent.replace('$', '')
+                )
+            })
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error adding to cart:', errorText);
+            throw new Error('Failed to add item to cart.');
+        }
+
+        alert(`Added ${quantity} of ${dessertName} to cart!`);
+    } catch (error) {
+        console.error('Add to cart error:', error);
+        alert('Could not add item to cart. Please try again.');
+    }
 }
 
 

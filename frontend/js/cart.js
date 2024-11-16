@@ -3,37 +3,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!token) {
         alert('You must be logged in to view your cart.');
         window.location.href = 'login.html';
+        return;
     }
 
-    try {
-        // Fetch cart items dynamically from the backend
-        const response = await fetch('http://localhost:3000/api/cart', {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+    // Fetch cart items when the page loads
+    fetchCart();
+});
 
+// Fetch cart items from the backend
+async function fetchCart() {
+    const customerId = 1; // Replace with dynamic user data if available
+    try {
+        const response = await fetch(`http://localhost:3000/api/cart?customerId=${customerId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
         if (!response.ok) throw new Error('Failed to fetch cart items.');
 
         const cartItems = await response.json();
         renderCartItems(cartItems);
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching cart:', error);
         alert('Could not load cart items.');
     }
-});
+}
 
+// Render cart items to the page
 function renderCartItems(cartItems) {
     const orderItemsContainer = document.querySelector('.order-items');
+    orderItemsContainer.innerHTML = ''; // Clear existing items
     let totalPrice = 0;
 
     cartItems.forEach((item) => {
-        const itemTotal = item.price * item.quantity;
+        const itemTotal = item.Quantity * item.Cost;
         totalPrice += itemTotal;
 
         const itemElement = `
-            <div class="order-item">
-                <span>${item.name}</span>
-                <span>Qty: ${item.quantity}</span>
-                <span>Price: $${item.price.toFixed(2)}</span>
+            <div class="order-item d-flex justify-content-between align-items-center p-2">
+                <span>${item.ItemName}</span>
+                <div class="d-flex gap-2 align-items-center">
+                    <button class="btn btn-sm btn-light" onclick="updateCart(${item.CartID}, ${item.Quantity - 1})">-</button>
+                    <span>${item.Quantity}</span>
+                    <button class="btn btn-sm btn-light" onclick="updateCart(${item.CartID}, ${item.Quantity + 1})">+</button>
+                </div>
+                <span>$${itemTotal.toFixed(2)}</span>
+                <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.CartID})">Remove</button>
             </div>
         `;
         orderItemsContainer.innerHTML += itemElement;
@@ -42,6 +55,53 @@ function renderCartItems(cartItems) {
     document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
 }
 
+// Update cart item quantity
+async function updateCart(cartId, newQuantity) {
+    if (newQuantity < 1) {
+        alert('Quantity must be at least 1.');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/api/cart', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cartId, quantity: newQuantity })
+        });
+        if (!response.ok) throw new Error('Failed to update cart item.');
+
+        fetchCart(); // Refresh cart
+    } catch (error) {
+        console.error('Error updating cart:', error);
+        alert('Could not update cart item.');
+    }
+}
+
+// Remove an item from the cart
+async function removeFromCart(cartId) {
+    try {
+        const response = await fetch('http://localhost:3000/api/cart', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cartId })
+        });
+        if (!response.ok) throw new Error('Failed to remove cart item.');
+
+        fetchCart(); // Refresh cart
+    } catch (error) {
+        console.error('Error removing from cart:', error);
+        alert('Could not remove cart item.');
+    }
+}
+
+// Proceed to checkout
+function proceedToCheckout() {
+    alert('Proceeding to checkout...');
+    // Redirect or implement checkout logic
+    window.location.href = 'checkout.html';
+}
+
+// Cancel order and redirect to menu
 function cancelOrder() {
     if (confirm('Are you sure you want to cancel your order?')) {
         alert('Order cancelled.');
@@ -49,21 +109,26 @@ function cancelOrder() {
     }
 }
 
-function proceedToCheckout() {
-    alert('Proceeding to checkout...');
-    window.location.href = 'checkout.html';
-}
-
+// Redirect to account information page
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }
 
+// Logout the user and clear token
 function logout() {
     localStorage.removeItem('token');
     alert('You have successfully logged out.');
     window.location.href = 'home.html';
 }
 
+// Redirect to home page
 function goToHome() {
     window.location.href = 'home.html';
+}
+
+// Toggle the hamburger menu
+function toggleMenu() {
+    const menu = document.getElementById("hamburgerMenu");
+    menu.classList.toggle("d-none");
+    menu.classList.toggle("d-block");
 }

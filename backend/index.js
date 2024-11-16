@@ -24,6 +24,8 @@ try {
 } catch (err) {
     console.error('Error importing user routes:', err);
 }
+const cartRoutes = require('./routes/cartRoutes');
+app.use('/api', cartRoutes);
 
 // Root endpoint just to test if server is running
 app.get('/', (req, res) => {
