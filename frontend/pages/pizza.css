@@ -1,0 +1,31 @@
+#container {
+    display: flex;
+    justify-content: center;
+    /* center horizontally */
+    align-items: center;
+    /* center vertically */
+}
+
+.header-left{
+    font: 100;
+    margin: auto;
+}
+
+.form{
+    margin: 50px;
+    border-spacing: 200px;
+}
+
+.crusts {
+    color: aqua;
+    border-spacing:50px;
+}
+
+[attribute|="value"] {
+        position: fixed;
+        bottom: 0;
+    
+        /* And if you want the div to be full-width: */
+        left: 0;
+        right: 0;
+}
