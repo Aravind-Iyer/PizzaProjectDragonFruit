@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's and Pop's Pizzeria - Sides</title>
+    <link rel="stylesheet" href="../css/desserts.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Header Section -->
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+    <div class="header-left">
+        <button class="btn btn-light" onclick="goToHome()">
+            <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
+        </button>
+    </div>
+    <div class="header-title">
+        <h1>Sides</h1>
+    </div>
+    <div class="header-right d-flex gap-2">
+        <button class="btn btn-light" onclick="goToAccountInfo()" style="display: none;">Account Info</button>
+        <button class="btn btn-warning" onclick="logout()" style="display: none;">Logout</button>
+    </div>
+</header>
+
+<!-- Hamburger Menu Button -->
+<div class="hamburger-container text-end p-2">
+    <button class="btn btn-light" onclick="toggleMenu()">
+        <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
+    </button>
+</div>
+
+<!-- Custom Hamburger Menu -->
+<nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+    <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="accountInfo.html">Account Info</a></li>
+    </ul>
+</nav>
+
+<!-- Main Content for Sides -->
+<main class="container mt-5 text-center">
+    <div class="dessert-options">
+        <!-- Placeholder Sides Cards -->
+        <div class="sides-item" id="sides-1">
+            <img src="../assets/icons/placeholder.png" alt="Sides Placeholder">
+            <h3>Dipping Sauces</h3>
+            <p id="price-1">$0.00</p>
+            <div class="quantity">
+                <label for="quantity-1">Qty:</label>
+                <input type="number" id="quantity-1" min="0" value="0">
+            </div>
+            <button onclick="addToCart(1, 'Dipping Sauces')">Add to Cart</button>
+        </div>
+        <div class="sides-item" id="sides-2">
+            <img src="../assets/icons/placeholder.png" alt="Sides Placeholder">
+            <h3>Chicken Wings</h3>
+            <p id="price-2">$0.00</p>
+            <div class="quantity">
+                <label for="quantity-2">Qty:</label>
+                <input type="number" id="quantity-2" min="0" value="0">
+            </div>
+            <button onclick="addToCart(2, 'Chicken Wings')">Add to Cart</button>
+        </div>
+        <div class="sides-item" id="sides-3">
+            <img src="../assets/icons/placeholder.png" alt="Sides Placeholder">
+            <h3>Breadsticks</h3>
+            <p id="price-3">$0.00</p>
+            <div class="quantity">
+                <label for="quantity-3">Qty:</label>
+                <input type="number" id="quantity-3" min="0" value="0">
+            </div>
+            <button onclick="addToCart(3, 'Breadsticks')">Add to Cart</button>
+        </div>
+        <div class="sides-item" id="sides-4">
+            <img src="../assets/icons/placeholder.png" alt="Sides Placeholder">
+            <h3>Garlic Knots</h3>
+            <p id="price-4">$0.00</p>
+            <div class="quantity">
+                <label for="quantity-4">Qty:</label>
+                <input type="number" id="quantity-4" min="0" value="0">
+            </div>
+            <button onclick="addToCart(4, 'Garlic Knots')">Add to Cart</button>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/desserts.js"></script>
+</body>
+</html>
