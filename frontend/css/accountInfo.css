@@ -105,7 +105,7 @@ main {
 
 .custom-hamburger-menu {
     position: absolute;
-    top: 110px; /* Dropdown appears slightly below the hamburger button */
+    top: 150px; /* Dropdown appears slightly below the hamburger button */
     right: 20px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
