@@ -90,9 +90,9 @@ function initializeHamburgerMenu(token) {
     if (!hamburgerMenu) return;
 
     let menuItems = `
-        <li><a href="order.html">Place Order</a></li>
-        <li><a href="accountInfo.html">Account Info</a></li>
+        <li><a href="menu.html">Menu</a></li>
         <li><a href="cart.html">Cart</a></li>
+        <li><a href="accountInfo.html">Account Info</a></li>
     `;
 
     hamburgerMenu.innerHTML = `<ul>${menuItems}</ul>`;
