@@ -4,7 +4,9 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const cors = require('cors');
+// Enable CORS for all routes
+app.use(cors());
 // Middleware to parse JSON
 app.use(express.json());
 
@@ -13,8 +15,12 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Importing user routes
 try {
+    // Import routes
     const userRoutes = require('./routes/userRoutes');
+    const dessertRoutes = require('./routes/dessertRoutes');
+
     app.use('/api', userRoutes);
+    app.use('/api', dessertRoutes);
 } catch (err) {
     console.error('Error importing user routes:', err);
 }
