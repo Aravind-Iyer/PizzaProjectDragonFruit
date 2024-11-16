@@ -27,22 +27,28 @@
   </div>
 </header>
 
+<!-- Hamburger Menu Button in the whitespace below header -->
+<div class="hamburger-container text-end p-2" style="display: none; position: absolute; top: 88px; right: 10px;">
+  <button class="btn btn-light" onclick="toggleMenu()">
+    <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
+  </button>
+</div>
 
 <!-- Custom Hamburger Menu -->
-<nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+<nav id="hamburgerMenu" class="d-none custom-hamburger-menu" style="position: absolute; top: 110px; right: 20px;">
   <ul>
-    <li><a href="order.html">Place Order</a></li>
-    <li><a href="accountInfo.html">Account Info</a></li>
+    <li><a href="menu.html">Menu</a></li>
     <li><a href="cart.html">Cart</a></li>
+    <li><a href="accountInfo.html">Account Info</a></li>
   </ul>
 </nav>
-
 <!-- Main Content -->
 <main class="container text-center mt-5">
   <!-- Featured Items Section -->
   <div class="row my-4">
+    <!-- Updated Pizza Featured Item Section -->
     <div class="col-md-6">
-      <div class="featured-item">
+      <div class="featured-item" onclick="navigateToMenu()" style="cursor: pointer;">
         <img src="../assets/images/pizza-placeholder.jpg" alt="Picture of Pizza" class="img-fluid">
         <h3>Pizza</h3>
       </div>

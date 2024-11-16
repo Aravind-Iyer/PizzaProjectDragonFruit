@@ -10,15 +10,36 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="btn btn-light me-3" onclick="goToAccountInfo()">Account Info</button>
             <button class="btn btn-warning" onclick="logout()">Logout</button>
         `;
+
+        // Show the hamburger menu button for logged-in users
+        const hamburgerContainer = document.querySelector('.hamburger-container');
+        if (hamburgerContainer) {
+            hamburgerContainer.style.display = 'block';
+        }
     } else {
         // User is not logged in - Show Login/Create Account button
         headerRight.innerHTML = `
             <button class="btn btn-light" onclick="goToLogin()">Login/Create Account</button>
         `;
+
+        // Hide the hamburger menu button for non-logged-in users
+        const hamburgerContainer = document.querySelector('.hamburger-container');
+        if (hamburgerContainer) {
+            hamburgerContainer.style.display = 'none';
+        }
     }
 
     // Initialize the hamburger menu
     initializeHamburgerMenu(token);
+
+    // Close the menu when clicking outside
+    document.addEventListener('click', (event) => {
+        const menu = document.getElementById('hamburgerMenu');
+        const button = document.querySelector('.hamburger-container button');
+        if (menu && !menu.contains(event.target) && !button.contains(event.target)) {
+            closeMenu(); // Close the menu if clicking outside
+        }
+    });
 });
 
 // Function to navigate to Home
@@ -45,10 +66,21 @@ function logout() {
 
 // Toggle the hamburger menu visibility
 function toggleMenu() {
+    console.log("Hamburger menu button clicked"); // Debug message
     const menu = document.getElementById('hamburgerMenu');
     if (menu) {
-        menu.classList.toggle('d-none');
-        menu.classList.toggle('d-block');
+        const isMenuHidden = menu.classList.contains('d-none');
+        menu.classList.toggle('d-none', !isMenuHidden);
+        menu.classList.toggle('d-block', isMenuHidden);
+    }
+}
+
+// Close the hamburger menu
+function closeMenu() {
+    const menu = document.getElementById('hamburgerMenu');
+    if (menu) {
+        menu.classList.add('d-none');
+        menu.classList.remove('d-block');
     }
 }
 
@@ -58,9 +90,9 @@ function initializeHamburgerMenu(token) {
     if (!hamburgerMenu) return;
 
     let menuItems = `
-        <li><a href="order.html">Place Order</a></li>
-        <li><a href="accountInfo.html">Account Info</a></li>
+        <li><a href="menu.html">Menu</a></li>
         <li><a href="cart.html">Cart</a></li>
+        <li><a href="accountInfo.html">Account Info</a></li>
     `;
 
     hamburgerMenu.innerHTML = `<ul>${menuItems}</ul>`;

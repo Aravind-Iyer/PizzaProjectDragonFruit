@@ -18,16 +18,28 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #D9534F;
-    padding: 10px 20px;
+    background-color: #D9534F; /* Consistent red color */
+    padding: 10px 20px; /* Consistent padding */
     color: white;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    height: 60px;
+    height: 60px; /* Set consistent height */
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Align header-right buttons with consistent spacing */
+.header-right {
+    display: flex;
+    gap: 27px;
+    align-items: center;
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 1.5rem; /* Consistent font size for the title */
 }
 
 /* Main content padding */
@@ -81,4 +93,48 @@ main {
 
 .btn-danger:hover {
     background-color: #c9302c;
+}
+
+/* Hamburger Menu Styling */
+.hamburger-container {
+    position: absolute;
+    top: 70px; /* Align to match below the header */
+    right: 20px;
+    display: none; /* Initially hidden */
+}
+
+.custom-hamburger-menu {
+    position: absolute;
+    top: 110px; /* Dropdown appears slightly below the hamburger button */
+    right: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+}
+
+.custom-hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-hamburger-menu ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-hamburger-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.custom-hamburger-menu ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.custom-hamburger-menu ul li a:hover {
+    text-decoration: underline;
 }

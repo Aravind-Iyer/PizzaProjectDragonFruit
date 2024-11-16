@@ -18,16 +18,28 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #D9534F;
-    padding: 10px 20px;
+    background-color: #D9534F; /* Consistent red color */
+    padding: 10px 20px; /* Consistent padding */
     color: white;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    height: 60px;
+    height: 60px; /* Set consistent height */
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Align header-right buttons with consistent spacing */
+.header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 1.5rem; /* Consistent font size for the title */
 }
 
 /* Main content padding */
@@ -67,4 +79,49 @@ main {
     text-align: left;
     color: #333;
     margin-bottom: 20px;
+}
+
+/* Hamburger Menu Styles */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 60px; /* Adjust based on header height */
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    width: 150px;
+}
+
+.custom-hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-hamburger-menu li {
+    margin: 10px 0;
+}
+
+.custom-hamburger-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+/* Hamburger container styling to position the button in the whitespace */
+.hamburger-container {
+    position: relative;
+    right: 10px; /* Adjust as needed to align with the right edge */
 }
