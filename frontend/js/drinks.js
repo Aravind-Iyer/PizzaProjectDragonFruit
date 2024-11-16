@@ -1,4 +1,4 @@
-drinks.cssdocument.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
 
     // Account Info and Logout Button Setup
@@ -19,7 +19,7 @@ drinks.cssdocument.addEventListener('DOMContentLoaded', async () => {
             headers: { Authorization: `Bearer ${token}` }
         });
 
-        // If the response is not OK, log the status and the error message
+        // If the response is not OK, log the status and throw an error
         if (!response.ok) {
             console.error('Error in response:');
             console.error('Status:', response.status);
@@ -29,26 +29,43 @@ drinks.cssdocument.addEventListener('DOMContentLoaded', async () => {
 
         const drinks = await response.json();
         console.log('Fetched Drinks:', drinks); // Log the fetched data
-        updateDrinkPlaceholders(drinks);
+        renderDrinkCards(drinks);
     } catch (error) {
         console.error('Fetch error:', error); // Log the full error in the console
         alert('Could not load drinks. Please try again later.');
     }
-
 });
 
-// Update placeholders with dynamic data
-function updateDrinkPlaceholders(drinks) {
-    drinks.forEach((drink, index) => {
-        const drinkCard = document.getElementById(`drink-${index + 1}`);
-        if (drinkCard) {
-            drinkCard.querySelector('img').src = drink.ImageURL; // Use ImageURL
-            drinkCard.querySelector('h3').textContent = drink.DrinkName; // Use DrinkName
-            drinkCard.querySelector(`#price-${index + 1}`).textContent = `$${drink.Cost.toFixed(2)}`; // Use Cost
-        }
+// Render the drink cards dynamically
+function renderDrinkCards(drinks) {
+    const drinkOptionsContainer = document.querySelector('.drink-options');
+    drinkOptionsContainer.innerHTML = ''; // Clear the container
+
+    drinks.forEach((drink) => {
+        const drinkCard = document.createElement('div');
+        drinkCard.classList.add('drink-item');
+        drinkCard.id = `drink-${drink.DrinkID}`;
+
+        drinkCard.innerHTML = `
+            <img src="${drink.ImageURL}" alt="${drink.DrinkName}">
+            <h3>${drink.DrinkName}</h3>
+            <p id="price-${drink.DrinkID}">$${drink.Cost.toFixed(2)}</p>
+            <form>
+                ${['Small', 'Medium', 'Large'].map((size) => `
+                    <input type="radio" id="${size.toLowerCase()}${drink.DrinkID}" name="size${drink.DrinkID}" value="${size}">
+                    <label for="${size.toLowerCase()}${drink.DrinkID}">${size}</label><br>
+                `).join('')}
+            </form>
+            <div class="quantity">
+                <label for="quantity-${drink.DrinkID}">Qty:</label>
+                <input type="number" id="quantity-${drink.DrinkID}" min="1" value="1">
+            </div>
+            <button onclick="addToCart(${drink.DrinkID})">Add to Cart</button>
+        `;
+
+        drinkOptionsContainer.appendChild(drinkCard);
     });
 }
-
 
 // Hamburger menu toggle
 function toggleMenu() {
@@ -57,10 +74,57 @@ function toggleMenu() {
     menu.classList.toggle("d-block");
 }
 
-// Placeholder Add to Cart Function
-function addToCart(drinkId) {
-    const quantity = document.querySelector(`#quantity-${drinkId}`).value;
-    alert(`Added ${quantity} of Drink ${drinkId} to cart!`);
+// Add item to cart
+async function addToCart(drinkId) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('You must be logged in to add items to the cart.');
+        return;
+    }
+
+    const size = document.querySelector(`input[name="size${drinkId}"]:checked`)?.value;
+    if (!size) {
+        alert('Please select a size for the drink.');
+        return;
+    }
+
+    const quantity = parseInt(document.querySelector(`#quantity-${drinkId}`).value, 10);
+    if (isNaN(quantity) || quantity <= 0) {
+        alert('Please enter a valid quantity.');
+        return;
+    }
+
+    const price = parseFloat(
+        document.querySelector(`#price-${drinkId}`).textContent.replace('$', '')
+    );
+
+    try {
+        const response = await fetch('http://localhost:3000/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                customerId: 1, // Replace with dynamic customer ID
+                itemId: drinkId,
+                itemType: 'Drink',
+                itemName: document.querySelector(`#drink-${drinkId} h3`).textContent,
+                size: size,
+                quantity: quantity,
+                cost: price
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to add item to cart.');
+        }
+
+        alert(`Added ${quantity} ${size} of drink to cart!`);
+    } catch (error) {
+        console.error('Add to cart error:', error);
+        alert('Could not add item to cart. Please try again.');
+    }
 }
 
 function goToAccountInfo() {

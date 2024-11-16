@@ -1,12 +1,12 @@
--- Create Cart Table
-CREATE TABLE Dragonfruit.dbo.Cart (
-                                      CartID INT IDENTITY(1,1) NOT NULL, -- Unique cart item identifier
-                                      CustomerID INT NOT NULL, -- Links cart to a specific customer
-                                      ItemID INT NOT NULL, -- Links to item ID from Pizza, Desserts, etc.
-                                      ItemType CHAR(50) NOT NULL, -- Specifies the type of item (Pizza, Dessert, etc.)
-                                      ItemName CHAR(100) NOT NULL, -- Name of the item for easy reference
-                                      Quantity INT NOT NULL, -- Number of items in the cart
-                                      Cost DECIMAL(10, 2) NOT NULL, -- Price per unit of the item
-                                      CONSTRAINT CartPK PRIMARY KEY (CartID),
-                                      CONSTRAINT CartCustomerFK FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
-);
+USE Dragonfruit;
+
+-- Insert sample drinks into the Drinks table
+INSERT INTO Drinks (DrinkName, Size, Cost, ImageURL)
+VALUES
+    ('Coca-Cola', 'Small', 1.99, '../assets/images/coca-cola.jpg'),
+    ('Pepsi', 'Small', 1.89, '../assets/images/pepsi.jpg'),
+    ('Sprite', 'Small', 1.79, '../assets/images/sprite.jpg'),
+    ('Fanta Orange', 'Small', 1.99, '../assets/images/fanta.jpg'),
+    ('Mountain Dew', 'Small', 1.89, '../assets/images/mountain-dew.jpg'),
+    ('Dr Pepper', 'Small', 1.99, '../assets/images/dr-pepper.jpg'),
+    ('7UP', 'Small', 1.79, '../assets/images/7up.jpg');
