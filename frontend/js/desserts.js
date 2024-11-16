@@ -57,7 +57,6 @@ function updateDessertPlaceholders(desserts) {
 function toggleMenu() {
     const menu = document.getElementById("hamburgerMenu");
     menu.classList.toggle("d-none");
-    menu.classList.toggle("d-none");
     menu.classList.toggle("d-block");
 }
 

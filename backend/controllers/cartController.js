@@ -78,6 +78,22 @@ const cartController = {
             console.error('Error removing from cart:', err);
             res.status(500).json({ message: 'Error removing from cart' });
         }
+    },
+    // Clear all items in the cart for a customer
+    clearCart: async (req, res) => {
+        const { customerId } = req.body;
+        try {
+            const pool = await connectToDB();
+            await pool.request()
+                .input('CustomerID', sql.Int, customerId)
+                .query(`
+                DELETE FROM Cart WHERE CustomerID = @CustomerID
+            `);
+            res.status(200).json({ message: 'Cart cleared successfully' });
+        } catch (err) {
+            console.error('Error clearing cart:', err);
+            res.status(500).json({ message: 'Error clearing cart' });
+        }
     }
 };
 

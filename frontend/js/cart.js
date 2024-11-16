@@ -102,12 +102,27 @@ function proceedToCheckout() {
 }
 
 // Cancel order and redirect to menu
-function cancelOrder() {
-    if (confirm('Are you sure you want to cancel your order?')) {
-        alert('Order cancelled.');
-        window.location.href = 'menu.html';
+async function cancelOrder() {
+    const customerId = 1; // Replace with dynamic customer ID if available
+    if (confirm('Are you sure you want to cancel your order? This will clear your cart.')) {
+        try {
+            const response = await fetch('http://localhost:3000/api/cart/clear', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ customerId })
+            });
+
+            if (!response.ok) throw new Error('Failed to clear cart.');
+
+            alert('Order cancelled. Your cart has been cleared.');
+            fetchCart(); // Refresh the cart to show it's empty
+        } catch (error) {
+            console.error('Error cancelling order:', error);
+            alert('Could not cancel order. Please try again.');
+        }
     }
 }
+
 
 // Redirect to account information page
 function goToAccountInfo() {
