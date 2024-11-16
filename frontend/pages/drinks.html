@@ -19,27 +19,26 @@
         <h1>Drinks</h1>
     </div>
     <div class="header-right d-flex gap-2">
-        <button class="btn btn-light" onclick="goToAccountInfo()" style="display: none;">Account Info</button>
-        <button class="btn btn-warning" onclick="logout()" style="display: none;">Logout</button>
+        <button class="btn btn-light" onclick="goToAccountInfo()">Account Info</button>
+        <button class="btn btn-warning" onclick="logout()">Logout</button>
     </div>
 </header>
 
 <!-- Hamburger Menu Button -->
-<div class="hamburger-container text-end p-2">
+<div class="hamburger-container text-end p-2" style="position: relative;">
     <button class="btn btn-light" onclick="toggleMenu()">
         <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
     </button>
+    <!-- Custom Hamburger Menu -->
+    <nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="accountInfo.html">Account Info</a></li>
+        </ul>
+    </nav>
 </div>
-
-<!-- Custom Hamburger Menu -->
-<nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
-    <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="cart.html">Cart</a></li>
-        <li><a href="accountInfo.html">Account Info</a></li>
-    </ul>
-</nav>
 
 <!-- Main Content for Drinks -->
 <main class="container mt-5 text-center">
