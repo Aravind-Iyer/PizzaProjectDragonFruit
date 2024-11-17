@@ -1,7 +1,7 @@
 const { connectToDB, sql } = require('../database/dbConnection');
 
 const drinkController = {
-    // Fetch all drinks
+
     getAllDrinks: async (req, res) => {
         try {
             const pool = await connectToDB();
@@ -14,7 +14,7 @@ const drinkController = {
                     RTRIM(ImageURL) AS ImageURL
                 FROM Drinks
             `);
-            // Log the data fetched from the database
+
             console.log('Database Results:', result.recordset);
 
             res.status(200).json(result.recordset);

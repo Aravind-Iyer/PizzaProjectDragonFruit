@@ -1,3 +1,4 @@
+// SCROLL DOWN
 /**
  * Validates a card number using the Luhn Algorithm.
  * @param {string} cardNumber - The card number to validate.
@@ -44,6 +45,8 @@ module.exports = {
  * @param {string} cardNumber - The card number to validate.
  * @returns {boolean} - Returns true if valid, false otherwise.
  */
+
+// ignore the stuff up i tried to setup a real auth stuff but yeah.......
 function validateCardNumber(cardNumber) {
     return cardNumber && typeof cardNumber === 'string' && cardNumber.length === 16 && /^\d+$/.test(cardNumber);
 }

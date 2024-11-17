@@ -13,11 +13,11 @@ const paymentService = {
         const pool = await connectToDB();
 
         try {
-            // Start a transaction
+
             const transaction = new sql.Transaction(pool);
             await transaction.begin();
 
-            // Insert payment record into `Payments` table
+            // Insert payment record
             const paymentResult = await transaction.request()
                 .input('CustomerID', sql.Int, customerId)
                 .input('PaymentMethod', sql.VarChar(50), paymentMethod)
@@ -32,7 +32,7 @@ const paymentService = {
 
             const paymentId = paymentResult.recordset[0].PaymentID;
 
-            // Insert cart items into `PaymentItems` table
+            // Insert cart items into PaymentItems
             for (const item of cartItems) {
                 await transaction.request()
                     .input('PaymentID', sql.Int, paymentId)
@@ -45,7 +45,7 @@ const paymentService = {
                         VALUES (@PaymentID, @ItemID, @ItemName, @Quantity, @Cost)
                     `);
             }
-            // Clear the cart for the customer
+
             await transaction.request()
                 .input('CustomerID', sql.Int, customerId)
                 .query(`
@@ -53,7 +53,7 @@ const paymentService = {
                     WHERE CustomerID = @CustomerID
                 `);
 
-            // Commit the transaction
+
             await transaction.commit();
 
             return { paymentId };

@@ -1,7 +1,7 @@
 const { connectToDB, sql } = require('../database/dbConnection');
 
 const cartService = {
-    // Fetch all cart items for a customer
+
     getCart: async (customerId) => {
         const pool = await connectToDB();
         const result = await pool.request()
@@ -14,7 +14,7 @@ const cartService = {
         return result.recordset;
     },
 
-    // Add an item to the cart
+    // add cart
     addToCart: async ({ customerId, itemId, itemType, itemName, quantity, cost }) => {
         const pool = await connectToDB();
         await pool.request()
@@ -30,7 +30,7 @@ const cartService = {
             `);
     },
 
-    // Update cart item quantity
+
     updateCart: async (cartId, quantity) => {
         const pool = await connectToDB();
         await pool.request()
@@ -43,7 +43,7 @@ const cartService = {
             `);
     },
 
-    // Remove an item from the cart
+
     removeFromCart: async (cartId) => {
         const pool = await connectToDB();
         await pool.request()
@@ -51,7 +51,7 @@ const cartService = {
             .query(`DELETE FROM Cart WHERE CartID = @CartID`);
     },
 
-    // Clear the cart for a customer
+
     clearCart: async (customerId) => {
         const pool = await connectToDB();
         await pool.request()

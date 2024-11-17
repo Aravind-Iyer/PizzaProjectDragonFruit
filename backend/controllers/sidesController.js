@@ -1,20 +1,20 @@
 const { connectToDB, sql } = require('../database/dbConnection');
 
-// Controller for Sides Operations
+
 const sidesController = {
-    // Get all sides
+
     getAllSides: async (req, res) => {
         try {
             const pool = await connectToDB();
             const result = await pool.request().query(`
             SELECT
                 SidesID,
-                RTRIM(SidesName) AS SidesName, -- Trim trailing spaces
+                RTRIM(SidesName) AS SidesName, 
                 Cost,
-                RTRIM(ImageURL) AS ImageURL -- Trim trailing spaces
+                RTRIM(ImageURL) AS ImageURL 
             FROM Sides
         `);
-            console.log('Fetched Sides:', result.recordset); // Log fetched data
+            console.log('Fetched Sides:', result.recordset);
             res.status(200).json(result.recordset);
         } catch (err) {
             console.error('Error fetching sides:', err);
