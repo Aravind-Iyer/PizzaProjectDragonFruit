@@ -9,9 +9,13 @@ const cors = require('cors');
 app.use(cors());
 // Middleware to parse JSON
 app.use(express.json());
+// Register routes
+
 
 // Serve static files from the "frontend" folder
 app.use(express.static(path.join(__dirname, '../frontend')));
+const drinkRoutes = require('./routes/drinkRoutes');
+app.use('/api', drinkRoutes);
 
 // Importing user routes
 try {
@@ -26,6 +30,8 @@ try {
 }
 const cartRoutes = require('./routes/cartRoutes');
 app.use('/api', cartRoutes);
+const paymentRoutes = require('./routes/paymentRoutes');
+app.use('/api', paymentRoutes);
 
 // Root endpoint just to test if server is running
 app.get('/', (req, res) => {

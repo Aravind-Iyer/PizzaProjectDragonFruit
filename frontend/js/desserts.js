@@ -63,6 +63,12 @@ function toggleMenu() {
 async function addToCart(dessertId, dessertName) {
     const quantityInput = document.querySelector(`#quantity-${dessertId}`);
     const quantity = parseInt(quantityInput.value, 10);
+    const customerId = localStorage.getItem('customerId');
+
+    if (!customerId) {
+        alert('Customer ID is missing. Please log in again.');
+        return;
+    }
 
     if (isNaN(quantity) || quantity <= 0) {
         alert('Please enter a valid quantity.');
@@ -75,11 +81,24 @@ async function addToCart(dessertId, dessertName) {
         return;
     }
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert('You must be logged in to add items to the cart.');
+    const priceSelector = `#price-${dessertId}`;
+    const priceElement = document.querySelector(priceSelector);
+
+    if (!priceElement) {
+        alert(`Price element not found for ${dessertName}.`);
         return;
     }
+
+    const cost = parseFloat(priceElement.textContent.replace('$', ''));
+
+    console.log({
+        customerId: parseInt(customerId, 10),
+        itemId: dessertId,
+        itemType: 'Dessert',
+        itemName: dessertName,
+        quantity: quantity,
+        cost: cost,
+    });
 
     // Add the item to the cart in the backend
     try {
@@ -87,18 +106,16 @@ async function addToCart(dessertId, dessertName) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
             body: JSON.stringify({
-                customerId: 1, // Replace with dynamic customer ID if available
+                customerId: parseInt(customerId, 10),
                 itemId: dessertId,
                 itemType: 'Dessert',
                 itemName: dessertName,
                 quantity: quantity,
-                cost: parseFloat(
-                    document.querySelector(`#price-${dessertId}`).textContent.replace('$', '')
-                )
-            })
+                cost: cost,
+            }),
         });
 
         if (!response.ok) {
@@ -113,6 +130,7 @@ async function addToCart(dessertId, dessertName) {
         alert('Could not add item to cart. Please try again.');
     }
 }
+
 
 
 function goToAccountInfo() {

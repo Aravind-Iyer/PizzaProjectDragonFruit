@@ -1,0 +1,141 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Section */
+/* Header Section */
+.header {
+    background-color: #D9534F;
+    color: white;
+    padding: 10px 20px; /* Adjusted to match home.css */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Set consistent height */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional for a consistent look */
+}
+
+.header-title h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Hamburger Menu */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 100%; /* Position below the button */
+    right: 0; /* Align with the right edge of the container */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    width: 150px;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.custom-hamburger-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center; /* Center-align the menu items */
+}
+
+.custom-hamburger-menu li {
+    margin-bottom: 10px;
+}
+
+.custom-hamburger-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block; /* Ensure clickable area spans the whole line */
+    text-align: left; /* Center-align the text */
+}
+
+/* Drink Cards */
+.drink-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin-top: 80px;
+}
+
+.drink-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.drink-item:hover {
+    transform: scale(1.05);
+}
+
+.drink-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.drink-item h3 {
+    font-size: 1.2rem;
+    color: #D9534F;
+    margin: 0;
+}
+
+.drink-item button {
+    background-color: #D9534F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.drink-item button:hover {
+    background-color: #b52e27;
+}
+
+/* Quantity Section */
+.quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.quantity label {
+    margin-right: 5px;
+    font-weight: bold;
+    color: #D9534F;
+}
+
+.quantity input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
