@@ -86,7 +86,7 @@ main {
 /* Hamburger Menu Styles */
 .custom-hamburger-menu {
     position: absolute;
-    top: 60px; /* Adjust based on header height */
+    top: 50px; /* Adjust based on header height */
     right: 10px;
     background-color: #ffffff;
     border: 1px solid #ddd;
