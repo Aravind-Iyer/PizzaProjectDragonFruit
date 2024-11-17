@@ -54,7 +54,7 @@ function updateDessertPlaceholders(desserts) {
     desserts.forEach((dessert, index) => {
         const dessertCard = document.getElementById(`dessert-${index + 1}`);
         if (dessertCard) {
-            dessertCard.querySelector('img').src = dessert.ImageURL;
+            dessertCard.querySelector('img').src = `http://localhost:3000/${dessert.ImageURL}`;
             dessertCard.querySelector('h3').textContent = dessert.DessertName;
             dessertCard.querySelector(`#price-${index + 1}`).textContent = `$${dessert.Cost.toFixed(2)}`;
             dessertCard.querySelector('button').setAttribute(
