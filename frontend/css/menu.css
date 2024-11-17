@@ -155,12 +155,14 @@ body {
     transform: scale(1.05);
 }
 
-/* Image styling inside the menu options */
 .featured-item img {
-    max-width: 100%;
-    height: auto; /* Keep image proportions */
+    width: 100%; /* Ensure the images are responsive within their container */
+    height: 400px; /* Set a fixed height to standardize the image sizes */
+    object-fit: cover; /* Ensures the images are cropped proportionally to fit */
+    border-radius: 5px;
     margin-bottom: 10px;
 }
+
 
 /* Heading inside each menu option */
 .featured-item h3 {

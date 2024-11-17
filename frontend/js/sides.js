@@ -63,9 +63,10 @@ function renderSides(sides) {
     sidesContainer.innerHTML = ''; // Clear existing content
 
     sides.forEach((side) => {
+        const imagePath = `/${side.ImageURL}`; // Prepend '/' to make the path relative to the server's root
         const sideItem = `
             <div class="sides-item">
-                <img src="${side.ImageURL}" alt="${side.SidesName}">
+                <img src="${imagePath}" alt="${side.SidesName}">
                 <h3>${side.SidesName}</h3>
                 <p>$${side.Cost.toFixed(2)}</p>
                 <div class="quantity">
