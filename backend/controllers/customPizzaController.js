@@ -5,7 +5,7 @@ const customPizzaController = {
     createPizza: async (req, res) => {
         const { customerId, pizzaName, crust, sauce, cheese, size, toppings, cost } = req.body;
         try {
-            // Step 1: Create custom pizza
+            // to table for faviored page later useagae
             const pizzaId = await customPizzaService.createPizza({
                 customerId,
                 pizzaName,
@@ -17,7 +17,7 @@ const customPizzaController = {
                 cost,
             });
 
-            // Step 2: Add the created pizza to the cart
+            // to cart
             await cartService.addToCart({
                 customerId,
                 itemId: pizzaId,

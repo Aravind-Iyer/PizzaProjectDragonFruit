@@ -4,9 +4,9 @@ const cartService = require('../services/cartService');
 const cartController = {
     // 1. Fetch all cart items for a specific customer
     getCart: async (req, res) => {
-        const { customerId } = req.query; // Ensure customerId is being passed from frontend
+        const { customerId } = req.query;
         try {
-            console.log('Fetching cart for customer:', customerId); // Debug - Log the customer ID
+            console.log('Fetching cart for customer:', customerId);
             const pool = await connectToDB();
             const result = await pool.request()
                 .input('CustomerID', sql.Int, customerId)
@@ -15,7 +15,7 @@ const cartController = {
                 FROM Cart
                 WHERE CustomerID = @CustomerID
             `);
-            console.log('Cart items fetched:', result.recordset); // Debug - Log fetched items
+            console.log('Cart items fetched:', result.recordset);
             res.status(200).json(result.recordset);
         } catch (err) {
             console.error('Error fetching cart items:', err);
@@ -23,7 +23,7 @@ const cartController = {
         }
     },
 
-    // 2. Add an item to the cart
+    // 2. Add to cart.........
     addToCart: async (req, res) => {
         const { customerId, itemId, itemType, itemName, quantity, cost } = req.body;
         try {
@@ -46,7 +46,7 @@ const cartController = {
         }
     },
 
-    // 3. Update cart item quantity
+    // 3. Update cart...............
     updateCart: async (req, res) => {
         const { cartId, quantity } = req.body;
         try {
@@ -66,7 +66,7 @@ const cartController = {
         }
     },
 
-    // 4. Remove an item from the cart
+    // 4. Remove an item ....
     removeFromCart: async (req, res) => {
         const { cartId } = req.body;
         try {
@@ -82,7 +82,7 @@ const cartController = {
             res.status(500).json({ message: 'Error removing from cart' });
         }
     },
-    // Clear all items in the cart for a customer
+    // Clear all items
     clearCart: async (req, res) => {
         const { customerId } = req.body;
         try {

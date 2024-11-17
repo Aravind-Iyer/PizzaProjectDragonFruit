@@ -3,8 +3,8 @@ const router = express.Router();
 const customPizzaController = require('../controllers/customPizzaController');
 
 // Routes for Custom Pizza
-router.post('/custom-pizza', customPizzaController.createPizza); // Create a pizza
-router.get('/custom-pizza', customPizzaController.getPizzasByCustomer); // Get pizzas by customer
-router.delete('/custom-pizza', customPizzaController.deletePizza); // Delete a pizza
+router.post('/custom-pizza', customPizzaController.createPizza);
+router.get('/custom-pizza', customPizzaController.getPizzasByCustomer);
+router.delete('/custom-pizza', customPizzaController.deletePizza);
 
 module.exports = router;

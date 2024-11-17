@@ -7,8 +7,8 @@ const dbConfig = {
     server: process.env.DB_SERVER, // Use environment variable
     database: process.env.DB_DATABASE, // Use environment variable
     options: {
-        encrypt: process.env.DB_ENCRYPT === 'true', // Convert string to boolean
-        trustServerCertificate: process.env.DB_TRUST_SERVER_CERTIFICATE === 'true' // Convert string to boolean
+        encrypt: process.env.DB_ENCRYPT === 'true',
+        trustServerCertificate: process.env.DB_TRUST_SERVER_CERTIFICATE === 'true'
     }
 };
 

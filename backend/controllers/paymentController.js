@@ -27,19 +27,19 @@ const paymentController = {
 
             const pool = await connectToDB();
 
-            // Start a database transaction
+
             const transaction = new sql.Transaction(pool);
             await transaction.begin();
 
             try {
-                // 1. Clear previous `OrderSummary` data for this customer
+                // 1. Clear previous OrderSummary table for new order
                 await transaction.request()
                     .input('CustomerID', sql.Int, customerId)
                     .query(`
                         DELETE FROM OrderSummary
                         WHERE CustomerID = @CustomerID
                     `);
-                // Insert payment into Payments table
+                // Inserting payment into Payments table
                 const paymentResult = await transaction.request()
                     .input('CustomerID', sql.Int, customerId)
                     .input('PaymentMethod', sql.VarChar(50), paymentMethod)
@@ -54,7 +54,7 @@ const paymentController = {
 
                 const paymentId = paymentResult.recordset[0].PaymentID;
 
-                // Insert cart items into OrderSummary table
+                // Inserting cart items into OrderSummary table
                 for (const item of cartItems) {
                     await transaction.request()
                         .input('CustomerID', sql.Int, customerId)
@@ -69,12 +69,12 @@ const paymentController = {
                         `);
                 }
 
-                // Clear the cart
+                // Clearing the cart after payment
                 await transaction.request()
                     .input('CustomerID', sql.Int, customerId)
                     .query(`DELETE FROM Cart WHERE CustomerID = @CustomerID`);
 
-                // Commit the transaction
+
                 await transaction.commit();
 
                 res.status(200).json({
@@ -82,7 +82,7 @@ const paymentController = {
                     paymentId,
                 });
             } catch (err) {
-                // Rollback the transaction if an error occurs
+                // ig rollback in a way need ti improve this thoughn
                 await transaction.rollback();
                 console.error('Error during transaction:', err);
                 res.status(500).json({ error: 'Failed to process payment' });

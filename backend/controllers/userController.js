@@ -2,12 +2,12 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { connectToDB, sql } = require('../database/dbConnection');
 
-// Mock Secret Key for JWT Token (should be moved to .env in a real project)
+// use this/ implemenmt this if i have the itme
 const SECRET_KEY = 'your_secret_key';
 
-// Controller for User Operations
+
 const userController = {
-    // Login Functionality
+    // Login stuff
     login: async (req, res) => {
         const { username, password } = req.body;
         try {
@@ -27,7 +27,7 @@ const userController = {
                 res.json({
                     message: 'Login successful',
                     token,
-                    customerId: user.CustomerID, // Add CustomerID to the response
+                    customerId: user.CustomerID,
                 });
 
             } else {
@@ -39,7 +39,7 @@ const userController = {
         }
     },
 
-    // Create Account Functionality
+    // Create Account
     createAccount: async (req, res) => {
         const { username, password, email, firstName, lastName } = req.body;
         try {
@@ -69,7 +69,7 @@ const userController = {
         }
     },
 
-    // Get Account Information Functionality
+    // Get Account Info
     getAccountInfo: async (req, res) => {
         const token = req.headers.authorization.split(' ')[1];
         try {
@@ -87,7 +87,7 @@ const userController = {
                     firstName: user.FirstName,
                     lastName: user.LastName,
                     phone: user.Phone || '',
-                    dob: user.DOB || '', // Assuming DOB field exists
+                    dob: user.DOB || '',
                     address: user.Address || ''
                 });
             } else {
@@ -99,7 +99,7 @@ const userController = {
         }
     },
 
-    // Update Account Information Functionality
+    // Update Account Info
     updateAccountInfo: async (req, res) => {
         const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
@@ -108,36 +108,36 @@ const userController = {
         }
 
         try {
-            // Verify token to get the user's username
+            // Verify token to get the user's username might not work not sure idk w.e dont chagne though
             const decoded = jwt.verify(token, SECRET_KEY);
             const { email, phone, address } = req.body;
 
-            // Ensure all fields are provided
+            // basicaly making sure all fields are providedd
             if (!email || !phone || !address) {
                 console.log('Missing fields:', { email, phone, address });
                 return res.status(400).json({ message: 'All fields (email, phone, address) are required.' });
             }
 
-            // Ensure phone number length is valid (should be 10 characters)
+            // valid phone num length
             if (phone.length > 10) {
                 return res.status(400).json({ message: 'Phone number must be 10 characters or less.' });
             }
 
-            // Connect to the database
+            // Connect to database
             const pool = await connectToDB();
 
-            // Check if the user exists
+            // Check if user is real!
             const userExists = await pool.request()
                 .input('Username', sql.Char(100), decoded.username)
                 .query('SELECT * FROM Customer WHERE Username = @Username');
 
             if (userExists.recordset.length > 0) {
-                // Update user information in the database
+
                 const updateResult = await pool.request()
                     .input('Username', sql.Char(100), decoded.username)
                     .input('Email', sql.Char(150), email)
-                    .input('Phone', sql.Char(10), phone) // Updated to allow up to 10 characters
-                    .input('Address', sql.Char(100), address) // Kept as CHAR(100)
+                    .input('Phone', sql.Char(10), phone)
+                    .input('Address', sql.Char(100), address)
                     .query('UPDATE Customer SET Email = @Email, Phone = @Phone, Address = @Address WHERE Username = @Username');
 
                 if (updateResult.rowsAffected[0] === 0) {
@@ -157,7 +157,7 @@ const userController = {
     },
 
 
-    // Delete Account Functionality
+
     deleteAccount: async (req, res) => {
         const token = req.headers.authorization.split(' ')[1];
         try {
