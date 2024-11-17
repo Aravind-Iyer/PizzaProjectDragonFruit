@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0; // Retrieve total price from localStorage
     const customerId = parseInt(localStorage.getItem('customerId'));
 
-
-
     // Fetch cart data dynamically
     fetch(`http://localhost:3000/api/cart?customerId=${customerId}`) // Use the correct customerId
         .then(response => {
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCartSummary(cart); // Render the cart summary
         })
         .catch(err => console.error('Error fetching cart data:', err));
-
 
     // Listen for payment method selection
     paymentMethods.forEach(method => {
@@ -62,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         totalPriceEl.textContent = totalPrice.toFixed(2); // Update the total price in the DOM
     }
 
-
     // Cancel order functionality
     window.cancelOrder = () => {
         if (confirm('Are you sure you want to cancel the order?')) {
@@ -79,12 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const paymentData = {
-            customerId,
-            paymentMethod: selectedMethod.value,
-            cartItems: cart,
-            totalPrice,
+            customerId, // Customer ID
+            paymentMethod: selectedMethod.value, // Selected payment method
+            cartItems: cart, // Cart data (item details)
+            totalPrice, // Total price of the cart
         };
 
+        // Handle credit card details if selected
         if (selectedMethod.id === 'creditCard') {
             const cardNumber = document.getElementById('cardNumber').value.trim();
             const expiryDate = document.getElementById('expiryDate').value.trim();
@@ -157,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error submitting payment:', err);
                 alert('Failed to process payment. Please try again.');
             });
-
     };
 
     // Hamburger Menu Toggle

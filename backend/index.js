@@ -34,6 +34,9 @@ const paymentRoutes = require('./routes/paymentRoutes');
 app.use('/api', paymentRoutes);
 const sidesRoutes = require('./routes/sidesRoutes'); // Add this line
 app.use('/api', sidesRoutes); // Add this line
+const orderRoutes = require('./routes/orderSummaryRoutes');
+app.use('/api', orderRoutes);
+
 
 // Root endpoint just to test if server is running
 app.get('/', (req, res) => {
