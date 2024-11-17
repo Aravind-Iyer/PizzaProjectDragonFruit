@@ -43,6 +43,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             menu.classList.remove('d-block');
         }
     })
+    const cartButton = document.querySelector('.go-to-cart-button');
+
+    // Fetch cart items count (assuming cart is stored in localStorage)
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
+
+    // Update the button text dynamically
+    if (itemCount > 0) {
+        cartButton.textContent = `🛒 Go to Cart (${itemCount})`;
+    } else {
+        cartButton.textContent = `🛒 Go to Cart`;
+    }
 });
 
 // Render sides dynamically into the DOM
