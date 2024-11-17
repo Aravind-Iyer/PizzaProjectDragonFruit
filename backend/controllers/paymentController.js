@@ -58,14 +58,14 @@ const paymentController = {
                 for (const item of cartItems) {
                     await transaction.request()
                         .input('CustomerID', sql.Int, customerId)
-                        .input('PaymentID', sql.Int, paymentId)
+                        .input('paymentMethod', sql.VarChar(50), paymentMethod)
                         .input('ItemType', sql.VarChar(50), item.ItemType.trim())
                         .input('ItemName', sql.VarChar(100), item.ItemName.trim())
                         .input('Quantity', sql.Int, item.Quantity)
                         .input('Cost', sql.Decimal(10, 2), item.Cost)
                         .query(`
-                            INSERT INTO OrderSummary (CustomerID, PaymentID, ItemType, ItemName, Quantity, Cost)
-                            VALUES (@CustomerID, @PaymentID, @ItemType, @ItemName, @Quantity, @Cost)
+                            INSERT INTO OrderSummary (CustomerID, paymentMethod, ItemType, ItemName, Quantity, Cost)
+                            VALUES (@CustomerID, @paymentMethod, @ItemType, @ItemName, @Quantity, @Cost)
                         `);
                 }
 
