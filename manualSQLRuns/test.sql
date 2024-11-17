@@ -1,5 +1,3 @@
-UPDATE Sides
-SET
-    SidesName = 'Homemade Dipping Sauces',
-    Cost = 3.00
-WHERE SidesID = 1;
+UPDATE Desserts
+SET ImageURL = REPLACE(ImageURL, '../', '')
+WHERE ImageURL LIKE '../%';

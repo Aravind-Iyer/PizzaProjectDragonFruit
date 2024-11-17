@@ -84,10 +84,12 @@ body {
 
 .dessert-item img {
     width: 100%;
-    height: auto;
+    max-height: 150px; /* Adjust height as needed */
+    object-fit: cover; /* Ensure images fill the space proportionally */
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
 
 .dessert-item h3 {
     font-size: 1.2rem;
