@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Fetch cart items from the backend
 async function fetchCart() {
-    const customerId = 1; // Replace with dynamic user data if available
+    const customerId = parseInt(localStorage.getItem('customerId'));
+
     try {
         const response = await fetch(`http://localhost:3000/api/cart?customerId=${customerId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

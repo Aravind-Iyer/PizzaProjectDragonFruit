@@ -1,12 +1,8 @@
--- Create Cart Table
-CREATE TABLE Dragonfruit.dbo.Cart (
-                                      CartID INT IDENTITY(1,1) NOT NULL, -- Unique cart item identifier
-                                      CustomerID INT NOT NULL, -- Links cart to a specific customer
-                                      ItemID INT NOT NULL, -- Links to item ID from Pizza, Desserts, etc.
-                                      ItemType CHAR(50) NOT NULL, -- Specifies the type of item (Pizza, Dessert, etc.)
-                                      ItemName CHAR(100) NOT NULL, -- Name of the item for easy reference
-                                      Quantity INT NOT NULL, -- Number of items in the cart
-                                      Cost DECIMAL(10, 2) NOT NULL, -- Price per unit of the item
-                                      CONSTRAINT CartPK PRIMARY KEY (CartID),
-                                      CONSTRAINT CartCustomerFK FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+CREATE TABLE PaymentItems (
+                              PaymentItemID INT IDENTITY PRIMARY KEY,    -- Unique ID for each purchased item
+                              PaymentID INT NOT NULL FOREIGN KEY REFERENCES Payments(PaymentID), -- Links to Payments table
+                              ItemID INT NOT NULL,                       -- ID of the purchased item
+                              ItemName VARCHAR(100) NOT NULL,            -- Name of the purchased item
+                              Quantity INT NOT NULL,                     -- Quantity purchased
+                              Cost DECIMAL(10, 2) NOT NULL               -- Cost of the item
 );

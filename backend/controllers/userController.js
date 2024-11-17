@@ -24,7 +24,12 @@ const userController = {
             const passwordMatch = await bcrypt.compare(password, user.Password.trim());
             if (passwordMatch) {
                 const token = jwt.sign({ username: user.Username }, SECRET_KEY, { expiresIn: '1h' });
-                res.json({ message: 'Login successful', token });
+                res.json({
+                    message: 'Login successful',
+                    token,
+                    customerId: user.CustomerID, // Add CustomerID to the response
+                });
+
             } else {
                 res.status(400).json({ message: 'Invalid credentials' });
             }
