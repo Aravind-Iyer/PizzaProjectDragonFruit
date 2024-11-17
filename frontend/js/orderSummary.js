@@ -9,40 +9,38 @@ document.addEventListener('DOMContentLoaded', async () => {
     fetchOrderSummary();
 });
 
-// Fetch the order summary grouped by item type
+// Fetch the order summary grouped by item type and payment info
 async function fetchOrderSummary() {
     const customerId = localStorage.getItem('customerId');
-
     try {
-        const response = await fetch(`http://localhost:3000/api/cart?customerId=${customerId}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        const response = await fetch(`http://localhost:3000/api/orderSummary?customerId=${customerId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
-
         if (!response.ok) throw new Error('Failed to fetch order summary.');
 
-        const orderItems = await response.json();
-        groupAndRenderOrderItems(orderItems);
+        const orderData = await response.json();
+        renderOrderSummary(orderData);
     } catch (error) {
         console.error('Error fetching order summary:', error);
-        alert('Could not load your order summary.');
+        alert('Could not load your order summary. Please try again later.');
     }
 }
 
-// Group and render items by category
-function groupAndRenderOrderItems(items) {
-    const groupedItems = groupItemsByType(items);
+// Render the order summary data into the DOM
+function renderOrderSummary(orderData) {
+    const groupedItems = groupItemsByType(orderData);
     const orderDetails = document.getElementById('orderDetails');
     orderDetails.innerHTML = '';
 
     let totalPrice = 0;
 
-    for (const [category, categoryItems] of Object.entries(groupedItems)) {
+    for (const [category, items] of Object.entries(groupedItems)) {
         const categoryHeader = document.createElement('h5');
         categoryHeader.textContent = category;
         categoryHeader.classList.add('group-header');
         orderDetails.appendChild(categoryHeader);
 
-        categoryItems.forEach((item) => {
+        items.forEach((item) => {
             const itemElement = document.createElement('div');
             itemElement.classList.add('order-item');
             itemElement.innerHTML = `
@@ -55,10 +53,14 @@ function groupAndRenderOrderItems(items) {
         });
     }
 
-    document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
-    document.getElementById('paymentInfo').textContent = 'Paid with Card | Last Four Digits: xxxx8390';
-    document.getElementById('estimatedArrival').textContent = '8:32 p.m.';
+    document.getElementById('totalPrice').textContent = `$${totalPrice.toFixed(2)}`;
+    document.getElementById('paymentInfo').textContent = orderData[0]?.PaymentMethod || 'N/A';
+    document.getElementById('estimatedArrival').textContent = new Date(orderData[0]?.OrderDate).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 }
+
 
 // Group items by their type
 function groupItemsByType(items) {
