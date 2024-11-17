@@ -17,7 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function navigateToMenu() {
     window.location.href = 'menu.html';
 }
-// home.js
+// Function to navigate to the sides page
+function navigateToSides() {
+    window.location.href = 'sides.html';
+}
+
 
 // Function to toggle the hamburger menu
 function toggleMenu() {
