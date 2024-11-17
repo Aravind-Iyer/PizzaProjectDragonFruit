@@ -1,0 +1,178 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Section */
+.header {
+    background-color: #D9534F;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Hamburger Menu */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    width: 150px;
+}
+
+.custom-hamburger-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.custom-hamburger-menu li {
+    margin-bottom: 10px;
+}
+
+.custom-hamburger-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sides-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin-top: 80px;
+}
+
+.sides-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.sides-item:hover {
+    transform: scale(1.05);
+}
+
+.sides-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.sides-item h3 {
+    font-size: 1.2rem;
+    color: #D9534F;
+    margin: 0;
+}
+
+.sides-item button {
+    background-color: #D9534F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sides-item button:hover {
+    background-color: #b52e27;
+}
+
+/* Types of Dipping Sauces*/
+.sauce-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    margin-top: 160px;
+}
+
+.sauce-item {
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.sauce-item:hover {
+    transform: scale(1.05);
+}
+
+.sauce-item img {
+    width: 50px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.sauce-item h5 {
+    font-size: 0.8rem;
+    color: #D9534F;
+    margin: 0;
+}
+
+.sauce-item button {
+    background-color: #D9534F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Quantity Section */
+.quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.quantity label {
+    margin-right: 5px;
+    font-weight: bold;
+    color: #D9534F;
+}
+
+.quantity input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
