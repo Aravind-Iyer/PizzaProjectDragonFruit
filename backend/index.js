@@ -34,6 +34,10 @@ const paymentRoutes = require('./routes/paymentRoutes');
 app.use('/api', paymentRoutes);
 const sidesRoutes = require('./routes/sidesRoutes'); // Add this line
 app.use('/api', sidesRoutes); // Add this line
+
+const customPizzaRoutes = require('./routes/customPizzaRoutes');
+app.use('/api', customPizzaRoutes);
+
 const orderRoutes = require('./routes/orderSummaryRoutes');
 app.use('/api', orderRoutes);
 

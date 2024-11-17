@@ -1,21 +1,15 @@
-// pizza.js
-
-// Check if user is logged in
 if (!localStorage.getItem('token')) {
     alert('You must be logged in to access the menu.');
     window.location.href = 'login.html'; // Redirect to login page
 }
 
-// Initialize DOM elements after content is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
 
-    // DOM elements
-    const accountInfoButton = document.querySelector('.header-right button:first-child'); // Account Info button
-    const logoutButton = document.querySelector('.header-right button.btn-warning'); // Logout button
-    const cartButton = document.querySelector('.go-to-cart-button');
+    // Account Info and Logout buttons
+    const accountInfoButton = document.querySelector('.header-right button:first-child');
+    const logoutButton = document.querySelector('.header-right button.btn-warning');
 
-    // Show/hide Account Info and Logout buttons based on authentication
     if (token) {
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
@@ -24,74 +18,126 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutButton.style.display = 'none';
     }
 
-    // Fetch cart items count (if cart exists in localStorage)
+    // Update Cart Button with Item Count
+    const cartButton = document.querySelector('.go-to-cart-button');
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
+    cartButton.textContent = itemCount > 0 ? `🛒 Go to Cart (${itemCount})` : '🛒 Go to Cart';
 
-    // Update "Go to Cart" button dynamically
-    if (itemCount > 0) {
-        cartButton.textContent = `🛒 Go to Cart (${itemCount})`;
-    } else {
-        cartButton.textContent = `🛒 Go to Cart`;
+    // Pizza Form Logic
+    const costDisplay = document.getElementById('costDisplay');
+    let baseCost = 8;
+    let totalCost = baseCost;
+    const selectedToppings = new Set();
+
+    // Toppings selection logic
+    document.querySelectorAll('.center-section input[type="checkbox"]').forEach(input => {
+        input.addEventListener('change', () => {
+            if (input.checked) {
+                selectedToppings.add(input.value);
+                totalCost += 1.5; // $1.5 per topping
+            } else {
+                selectedToppings.delete(input.value);
+                totalCost -= 1.5;
+            }
+            updateCost();
+        });
+    });
+
+    // Update cost display
+    function updateCost() {
+        const size = document.getElementById('size').value;
+        const cheese = document.getElementById('cheese').value;
+
+        let sizeCost = 0;
+        if (size === 'medium') sizeCost = 2;
+        if (size === 'large') sizeCost = 4;
+        if (size === 'extraLarge') sizeCost = 6;
+
+        // Cheese cost logic
+        let cheeseCost = 0;
+        if (cheese === 'light') cheeseCost = 0.5;
+        if (cheese === 'normal') cheeseCost = 1;
+        if (cheese === 'extra') cheeseCost = 2;
+
+        costDisplay.textContent = `Total Cost: $${(baseCost + sizeCost + cheeseCost + selectedToppings.size * 1.5).toFixed(2)}`;
     }
 
-    // Set up custom pizza form
-    const pizzaForm = document.getElementById('pizzaForm');
-    const costDisplay = document.getElementById('costDisplay');
-    let totalCost = 0;
+    // Trigger cost updates on size and cheese change
+    document.getElementById('size').addEventListener('change', updateCost);
+    document.getElementById('cheese').addEventListener('change', updateCost);
 
-    // Update total cost on form changes
-    pizzaForm.addEventListener('change', () => {
-        totalCost = calculateCost();
-        costDisplay.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
-    });
+    // Add to Cart
+    document.getElementById('addToCartBtn').addEventListener('click', async () => {
+        const pizzaName = document.getElementById('pizzaName').value;
+        if (!pizzaName.trim()) {
+            alert('Please enter a name for your pizza.');
+            return;
+        }
 
-    // Handle form submission
-    pizzaForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent page reload
-        const formData = new FormData(pizzaForm);
-
+        // Gather pizza details
         const pizzaDetails = {
-            crust: formData.get('crust'),
-            sauce: formData.get('sauce'),
-            toppings: formData.getAll('toppings'),
-            size: formData.get('size'),
-            pizzaName: formData.get('pizzaName'),
-            cost: totalCost,
+            crust: document.getElementById('crust').value,
+            sauce: document.getElementById('sauce').value,
+            cheese: document.getElementById('cheese').value,
+            size: document.getElementById('size').value,
+            toppings: Array.from(selectedToppings),
+            name: pizzaName,
+            cost: parseFloat(costDisplay.textContent.replace('Total Cost: $', '')),
         };
 
-        // Simulate adding to cart
         console.log('Pizza Details:', pizzaDetails);
-        alert('Your custom pizza has been added to the cart.');
 
-        // TODO: Send pizzaDetails to backend API in future implementation
+        try {
+            // Send pizza details to backend API
+            const response = await fetch('/api/custom-pizza', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Include token if needed
+                },
+                body: JSON.stringify({
+                    customerId: localStorage.getItem('customerId'), // Ensure customerId is set
+                    pizzaName: pizzaDetails.name,
+                    crust: pizzaDetails.crust,
+                    sauce: pizzaDetails.sauce,
+                    cheese: pizzaDetails.cheese,
+                    size: pizzaDetails.size,
+                    toppings: pizzaDetails.toppings,
+                    cost: pizzaDetails.cost,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add pizza to the cart');
+            }
+
+            const data = await response.json();
+            alert('Pizza added to cart successfully!');
+            console.log('Response:', data);
+
+        } catch (error) {
+            console.error('Error adding pizza to cart:', error);
+            alert('Error adding pizza to cart. Please try again.');
+        }
     });
 
-    // Helper function: Calculate total cost
-    function calculateCost() {
-        let cost = 8; // Base cost for small pizza
-        const size = pizzaForm.querySelector('#size').value;
-
-        // Adjust cost for pizza size
-        if (size === 'medium') cost += 2;
-        if (size === 'large') cost += 4;
-
-        // Add cost for toppings (max charge for 3 toppings at $1 each)
-        const toppings = pizzaForm.querySelectorAll('#toppings option:checked').length;
-        cost += Math.min(toppings, 3); // Only charge for up to 3 toppings
-
-        return cost;
+    // Hamburger Menu Toggle
+    const hamburgerButton = document.querySelector('.hamburger-container button');
+    if (!hamburgerButton.dataset.listenerAdded) {
+        hamburgerButton.addEventListener('click', toggleMenu);
+        hamburgerButton.dataset.listenerAdded = 'true'; // Ensure the listener is added only once
     }
 });
 
-// Function to toggle the hamburger menu
 function toggleMenu() {
+    console.log('Toggling menu');
     const menu = document.getElementById('hamburgerMenu');
     menu.classList.toggle('d-none');
     menu.classList.toggle('d-block');
+    console.log('Menu classes:', menu.className);
 }
 
-// Navigation functions
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }

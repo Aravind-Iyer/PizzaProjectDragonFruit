@@ -21,51 +21,27 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #D9534F; /* Red header */
+    background-color: #D9534F;
     color: white;
-    position: fixed; /* Fixes the header to the top of the viewport */
-    top: 0; /* Absolutely at the top */
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%; /* Full width */
-    height: 60px; /* Consistent height */
+    width: 100%;
+    height: 60px;
     z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for visibility */
-    padding: 10px 20px; /* Space inside the header */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
 }
 
-/* Header Title */
 .header-title h1 {
     margin: 0;
     font-size: 1.5rem;
-    color: #ffffff; /* White text */
     text-align: center;
-    width: 100%; /* Ensures centering in the header */
+    color: white;
+    width: 100%;
 }
 
-/* Left Header Button */
-.header-left button {
-    background-color: white;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.header-left button img {
-    width: 20px;
-    height: 20px;
-}
-
-/* Right Header Buttons */
-.header-right {
-    display: flex;
-    gap: 10px;
-}
-
+.header-left button,
 .header-right button {
     background-color: white;
     color: black;
@@ -77,55 +53,74 @@ body {
 
 .header-right button.btn-warning {
     background-color: #FFC107;
-    color: black;
+}
+
+/* Hamburger Menu Container */
+.hamburger-container {
+    position: relative; /* Relative to the container for correct positioning */
+    right: 10px; /* Adjust as needed */
+    z-index: 1100; /* Ensure it appears above other elements */
 }
 
 /* Hamburger Menu Styles */
 .custom-hamburger-menu {
-    position: absolute;
-    top: 130px; /* Match menu.css */
-    right: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1050; /* Ensure it appears above other elements */
-    padding: 10px;
-    width: 150px;
+    position: absolute; /* Position relative to the .hamburger-container */
+    top: 70px; /* Adjust this to align the menu with the button */
+    right: 10px; /* Align to the right edge */
+    background-color: #ffffff; /* Background color of the menu */
+    border: 1px solid #ddd; /* Light border for better visibility */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for a pop-out effect */
+    z-index: 1050; /* Ensure it's above other elements */
+    padding: 10px; /* Internal padding inside the menu */
+    width: 200px; /* Menu width */
+    display: none; /* Initially hidden */
 }
 
+/* Hamburger Menu List Styles */
 .custom-hamburger-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
 }
 
+/* Hamburger Menu List Item */
 .custom-hamburger-menu li {
-    margin: 10px 0;
+    margin: 10px 0; /* Space between each item */
 }
 
+/* Hamburger Menu Links */
 .custom-hamburger-menu a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
+    color: #333; /* Dark gray text for better readability */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Bold text */
+    display: block; /* Ensure the entire line is clickable */
+    padding: 5px; /* Padding inside each link for better clickability */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
 }
 
+/* Hover Effect for Links */
+.custom-hamburger-menu a:hover {
+    background-color: #f1f1f1; /* Light gray hover background */
+    border-radius: 3px; /* Slightly rounded on hover */
+}
+
+/* Utility Classes */
 .d-none {
-    display: none !important;
+    display: none !important; /* Hidden by default */
 }
 
 .d-block {
-    display: block !important;
+    display: block !important; /* Show when toggled */
 }
 
-/* Hamburger container styling */
-.hamburger-container {
-    position: relative;
-    right: 10px;
+/* Make Sure Parent Container Doesn't Clip the Menu */
+.container {
+    overflow: visible !important; /* Prevent clipping */
 }
 
-/* Floating Cart Button */
+
+/* Go to Cart Button */
 .go-to-cart-button {
     position: fixed;
     bottom: 20px;
@@ -135,55 +130,74 @@ body {
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
+    font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
     z-index: 1000;
-    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.go-to-cart-button:hover {
-    background-color: #c9302c;
-    transform: scale(1.1);
+/* Main Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 80px; /* Space for the fixed header */
+    overflow: visible;
 }
-/* Pizza Builder Styling */
-.pizza-builder {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 20px;
+
+.left-section,
+.center-section,
+.right-section {
+    flex: 1;
+    background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    height: 500px; /* Uniform height for all boxes */
 }
 
-.pizza-builder .form-label {
+.right-section img {
+    max-height: 300px; /* Fixed image height */
+    width: auto;
+    margin-bottom: 20px;
+}
+
+.topping-category {
+    margin-bottom: 20px;
+}
+
+.topping-category h5 {
+    margin-bottom: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section,
+    .center-section,
+    .right-section {
+        height: auto;
+    }
+}
+/* Add to Cart Section */
+.add-to-cart-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Full width of the box */
+    margin-top: 52px; /* Adjust this to push it further down */
+    padding-top: 15px; /* Add some internal spacing */
+    border-top: 1px solid #ddd; /* Optional separator for clarity */
+}
+.add-to-cart-section span {
     font-weight: bold;
-    color: #D9534F;
+    font-size: 1rem;
 }
-
-.pizza-builder .form-select,
-.pizza-builder .form-control {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
+.add-to-cart-section button {
+    padding: 8px 16px;
     font-size: 1rem;
 }
 
-.pizza-builder .btn-submit {
-    background-color: #D9534F;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.pizza-builder .btn-submit:hover {
-    background-color: #c9302c;
-}
