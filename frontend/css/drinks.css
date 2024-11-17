@@ -139,3 +139,25 @@ body {
     border-radius: 5px;
     padding: 5px;
 }
+/* Floating "Go to Cart" button styles */
+.go-to-cart-button {
+    position: fixed;
+    bottom: 20px; /* Space from the bottom of the page */
+    right: 20px; /* Space from the right of the page */
+    background-color: #d9534f; /* Matching red color */
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 50px; /* Rounded button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none; /* Remove underline for anchor link */
+    z-index: 1000; /* Ensure it's above other elements */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.go-to-cart-button:hover {
+    background-color: #c9302c; /* Slightly darker red on hover */
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}

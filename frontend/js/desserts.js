@@ -34,6 +34,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Fetch error:', error); // Log the full error in the console
         alert('Could not load desserts. Please try again later.');
     }
+    const cartButton = document.querySelector('.go-to-cart-button');
+
+    // Fetch cart items count (assuming cart is stored in localStorage)
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
+
+    // Update the button text dynamically
+    if (itemCount > 0) {
+        cartButton.textContent = `🛒 Go to Cart (${itemCount})`;
+    } else {
+        cartButton.textContent = `🛒 Go to Cart`;
+    }
 
 });
 
