@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mom's and Pop's Pizzeria - Home</title>
-    <link rel="stylesheet" href="../css/pizza.css" />
     <!-- Updated Bootstrap CSS Link -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="../css/pizza.css" />
     <script src="../js/pizza.js"></script>
   </head>
 
@@ -19,52 +19,55 @@
       class="d-flex justify-content-between align-items-center p-3 bg-danger text-white"
     >
       <div class="header-left">
+        <button class="btn btn-transparent" onclick="goToHome()">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"  style="color:white;" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
         <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/></svg>
         </button>
       </div>
-      <div class="header-title">
+      <div class="header-title" length="20px">
         <h1>Welcome to Mom's and Pop's Pizzeria</h1>
       </div>
       <div class="header-right">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <button class="btn btn-transparent" onclick="toggleMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-list" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
         </svg>
+        </button>
+        <nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+        <ul>
+            <li><a href="order.html" id="balls">Place Order</a></li>
+            <li><a href="accountInfo.html">Account Info</a></li>
+            <li><a href="cart.html">Cart</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
     <!-- Custom Hamburger Menu -->
-    <nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
-      <ul>
-        <li><a href="order.html">Place Order</a></li>
-        <li><a href="accountInfo.html">Account Info</a></li>
-        <li><a href="cart.html">Cart</a></li>
-      </ul>
-    </nav>
 
     <!-- Main Content -->
     <div class="container">
-    <!--main class="container text-center mt-5"-->
+    <main class="container text-center mt-5">
       <!-- Featured Items Section -->
-      <form action="/action_page.php">
-        <label for="crusts" id="crusts">Please choose a crust:</label>
-        <select name="crusts" id="crusts1">
+      <form action="/action_page.php" method="post">
+        <label for="crusts" id="crusts" style="padding: 10px;">Please choose a crust:</label>
+        <select name="crusts" id="crusts1" required>
           <option value="cheesy" id="crusts2">Cheesy</option>
           <option value="Handmade" id="crusts3">Handmade</option>
           <option value="Garlic" id="crusts4">Garlic</option>
           <option value="double" id="crusts5">Double Crust</option>
           <option value="stuffed" id="crusts6">Stuffed Crust</option>
         </select>
-        <label for="crusts">Please choose a sauce:</label>
-        <select name="crusts" id="crusts">
+        <label for="crusts" style="text-align: center; padding-left: 50px">Please choose a sauce:</label>
+        <select name="crusts" id="crusts" required>
           <option value="marinara">Marinara</option>
           <option value="Alfredo">Alfredo</option>
           <option value="Pesto">Pesto</option>
           <option value="bbq">BBQ</option>
           <option value="buffalo">Buffalo</option>
         </select>
-        <label for="sauces">Please choose a cheese:</label>
-        <select name="sauces" id="sauces">
+        <label for="sauces" style="padding-left: 50px;">Please choose a cheese:</label>
+        <select name="sauces" id="sauces" required>
           <option value="cheddar">Cheddar</option>
           <option value="Mozzarella">Mozzarella</option>
           <option value="Provolone">Provolone</option>
@@ -72,50 +75,88 @@
           <option value="Jack">Jack</option>
         </select>
         <br><br>
-        <label for="sauces">Topping 1:</label>
-        <select name="sauces" id="sauces">
-          <option value="marinara">Marinara</option>
-          <option value="bbq">BBQ</option>
-          <option value="opel">Pesto</option>
-          <option value="audi">Alfredo</option>
-          <option value="audi">Buffalo</option>
+        <label for="tp1" style="padding-right: 10px; outline-color: 10px">Topping 1:</label>
+        <select name="tp1" id="tp1" required>
+          <option value="none">None</option>
+          <option value="pepporini">Pepporini</option>
+          <option value="sausage">Sausage</option>
+          <option value="mushrooms">Mushrooms</option>
+          <option value="bolives">Black Olives</option>
+          <option value="bacon">Bacon</option>
+          <option value="bpeppers">Bell Peppers</option>
+          <option value="chicken">Chicken</option>
+          <option value="onions">Onions</option>
+          <option value="ham">Ham</option>
+          <option value="spinach">Spinach</option>
         </select>
-        <label for="sauces">Topping 2:</label>
-        <select name="sauces" id="sauces">
-          <option value="marinara">Marinara</option>
-          <option value="bbq">BBQ</option>
-          <option value="opel">Pesto</option>
-          <option value="audi">Alfredo</option>
-          <option value="audi">Buffalo</option>
+        <label for="tp2" style="padding-left: 20px;">Topping 2:</label>
+        <select name="tp2" id="tp2" required>
+          <option value="none">None</option>
+          <option value="pepporini">Pepporini</option>
+          <option value="sausage">Sausage</option>
+          <option value="mushrooms">Mushrooms</option>
+          <option value="bolives">Black Olives</option>
+          <option value="bacon">Bacon</option>
+          <option value="bpeppers">Bell Peppers</option>
+          <option value="chicken">Chicken</option>
+          <option value="onions">Onions</option>
+          <option value="ham">Ham</option>
+          <option value="spinach">Spinach</option>
         </select>
-        <label for="sauces">Topping 3:</label>
-        <select name="sauces" id="sauces">
-          <option value="marinara">Marinara</option>
-          <option value="bbq">BBQ</option>
-          <option value="opel">Pesto</option>
-          <option value="audi">Alfredo</option>
-          <option value="audi">Buffalo</option>
+        <label for="tp3">Topping 3:</label>
+        <select name="tp3" id="tp3" required>
+          <option value="none">None</option>
+          <option value="pepporini">Pepporini</option>
+          <option value="sausage">Sausage</option>
+          <option value="mushrooms">Mushrooms</option>
+          <option value="bolives">Black Olives</option>
+          <option value="bacon">Bacon</option>
+          <option value="bpeppers">Bell Peppers</option>
+          <option value="chicken">Chicken</option>
+          <option value="onions">Onions</option>
+          <option value="ham">Ham</option>
+          <option value="spinach">Spinach</option>
         </select>
-        <label for="sauces">Topping 4:</label>
-        <select name="sauces" id="sauces">
-          <option value="marinara">Marinara</option>
-          <option value="bbq">BBQ</option>
-          <option value="opel">Pesto</option>
-          <option value="audi">Alfredo</option>
-          <option value="audi">Buffalo</option>
+        <label for="tp4">Topping 4:</label>
+        <select name="tp4" id="tp4" required>
+          <option value="none">None</option>
+          <option value="pepporini">Pepporini</option>
+          <option value="sausage">Sausage</option>
+          <option value="mushrooms">Mushrooms</option>
+          <option value="bolives">Black Olives</option>
+          <option value="bacon">Bacon</option>
+          <option value="bpeppers">Bell Peppers</option>
+          <option value="chicken">Chicken</option>
+          <option value="onions">Onions</option>
+          <option value="ham">Ham</option>
+          <option value="spinach">Spinach</option>
         </select>
-        <label for="sauces">Topping 5:</label>
-        <select name="sauces" id="sauces">
-          <option value="marinara">Marinara</option>
-          <option value="bbq">BBQ</option>
-          <option value="opel">Pesto</option>
-          <option value="audi">Alfredo</option>
-          <option value="audi">Buffalo</option>
+        <label for="tp5">Topping 5:</label>
+        <select name="tp5" id="tp5" required>
+          <option value="none">None</option>
+          <option value="pepporini">Pepporini</option>
+          <option value="sausage">Sausage</option>
+          <option value="mushrooms">Mushrooms</option>
+          <option value="bolives">Black Olives</option>
+          <option value="bacon">Bacon</option>
+          <option value="bpeppers">Bell Peppers</option>
+          <option value="chicken">Chicken</option>
+          <option value="onions">Onions</option>
+          <option value="ham">Ham</option>
+          <option value="spinach">Spinach</option>
         </select>
         <br><br>
-        <input type="submit" value="Submit">
+        <label for="crusts" id="crusts" style="padding: 10px;">Please choose a size:</label>
+        <select name="crusts" id="crusts1" required>
+          <option value="small" id="crusts2">Small</option>
+          <option value="medium" id="crusts3">Medium</option>
+          <option value="large" id="crusts4">Large</option>
+          <option value="xl" id="crusts5">Extra Large</option>
+        </select>
+        <input type="text" class="form-control" placeholder="Enter the Name of Your Pizza" required>
+        <input type="submit" value="Submit" style="position: fixed; bottom: 20px; right: 20px; border-radius: 3px; background-color: tomato; color: white; border: none; text-align: center;" width="100px" height="100px" onclick="goToDatabase()">
       </form>
-    <!--/main-->
+    </main>
   </div>
 
     <!-- JavaScript Section -->
