@@ -1,8 +1,10 @@
-CREATE TABLE PaymentItems (
-                              PaymentItemID INT IDENTITY PRIMARY KEY,    -- Unique ID for each purchased item
-                              PaymentID INT NOT NULL FOREIGN KEY REFERENCES Payments(PaymentID), -- Links to Payments table
-                              ItemID INT NOT NULL,                       -- ID of the purchased item
-                              ItemName VARCHAR(100) NOT NULL,            -- Name of the purchased item
-                              Quantity INT NOT NULL,                     -- Quantity purchased
-                              Cost DECIMAL(10, 2) NOT NULL               -- Cost of the item
-);
+INSERT INTO Sides (SidesName, Cost, ImageURL)
+VALUES
+    ('Dipping Sauces', 0.00, 'frontend/assets/images/dipping-sauces.png'),
+    ('Chicken Wings', 7.99, 'frontend/assets/images/chicken-wings.png'),
+    ('Breadsticks', 4.99, 'frontend/assets/images/breadsticks.png'),
+    ('Garlic Knots', 5.99, 'frontend/assets/images/garlic-knots.png'),
+    ('Garlic', 0.50, 'frontend/assets/images/garlic.png'),
+    ('Hot Buffalo', 0.50, 'frontend/assets/images/hot-buffalo.png'),
+    ('Ranch', 0.50, 'frontend/assets/images/ranch.png'),
+    ('Marinara', 0.50, 'frontend/assets/images/marinara.png');
