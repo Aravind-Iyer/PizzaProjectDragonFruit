@@ -104,7 +104,12 @@ function proceedToCheckout() {
 
 // Cancel order and redirect to menu
 async function cancelOrder() {
-    const customerId = 1; // Replace with dynamic customer ID if available
+    const customerId = parseInt(localStorage.getItem('customerId')); // Use dynamic customer ID from localStorage
+    if (!customerId) {
+        alert('Unable to cancel order. Customer ID not found.');
+        return;
+    }
+
     if (confirm('Are you sure you want to cancel your order? This will clear your cart.')) {
         try {
             const response = await fetch('http://localhost:3000/api/cart/clear', {
@@ -113,7 +118,9 @@ async function cancelOrder() {
                 body: JSON.stringify({ customerId })
             });
 
-            if (!response.ok) throw new Error('Failed to clear cart.');
+            if (!response.ok) {
+                throw new Error('Failed to clear cart.');
+            }
 
             alert('Order cancelled. Your cart has been cleared.');
             fetchCart(); // Refresh the cart to show it's empty
@@ -123,6 +130,7 @@ async function cancelOrder() {
         }
     }
 }
+
 
 
 // Redirect to account information page
