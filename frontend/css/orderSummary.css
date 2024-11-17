@@ -1,0 +1,104 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Header */
+.header {
+    background-color: #D9534F;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.order-summary {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#orderDetails {
+    margin-top: 100px;
+}
+
+.group-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.order-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item span {
+    display: block;
+}
+
+/* Hamburger Menu Styles */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 120px; /* Adjust based on header height */
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    width: 150px;
+}
+
+.custom-hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-hamburger-menu li {
+    margin: 10px 0;
+}
+
+.custom-hamburger-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+/* Hamburger container styling to position the button in the whitespace */
+.hamburger-container {
+    position: relative;
+    right: 10px; /* Adjust as needed to align with the right edge */
+}
