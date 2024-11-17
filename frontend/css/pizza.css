@@ -55,70 +55,51 @@ body {
     background-color: #FFC107;
 }
 
-/* Hamburger Menu Container */
-.hamburger-container {
-    position: relative; /* Relative to the container for correct positioning */
-    right: 10px; /* Adjust as needed */
-    z-index: 1100; /* Ensure it appears above other elements */
-}
 
 /* Hamburger Menu Styles */
 .custom-hamburger-menu {
-    position: absolute; /* Position relative to the .hamburger-container */
-    top: 70px; /* Adjust this to align the menu with the button */
-    right: 10px; /* Align to the right edge */
-    background-color: #ffffff; /* Background color of the menu */
-    border: 1px solid #ddd; /* Light border for better visibility */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for a pop-out effect */
-    z-index: 1050; /* Ensure it's above other elements */
-    padding: 10px; /* Internal padding inside the menu */
-    width: 200px; /* Menu width */
-    display: none; /* Initially hidden */
+    position: absolute;
+    top: 120px; /* Adjust based on header height */
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    width: 150px;
 }
 
-/* Hamburger Menu List Styles */
 .custom-hamburger-menu ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Hamburger Menu List Item */
 .custom-hamburger-menu li {
-    margin: 10px 0; /* Space between each item */
+    margin: 10px 0;
 }
 
-/* Hamburger Menu Links */
 .custom-hamburger-menu a {
-    color: #333; /* Dark gray text for better readability */
-    text-decoration: none; /* Remove underline from links */
-    font-weight: bold; /* Bold text */
-    display: block; /* Ensure the entire line is clickable */
-    padding: 5px; /* Padding inside each link for better clickability */
-    transition: background-color 0.3s ease; /* Smooth hover transition */
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
 }
 
-/* Hover Effect for Links */
-.custom-hamburger-menu a:hover {
-    background-color: #f1f1f1; /* Light gray hover background */
-    border-radius: 3px; /* Slightly rounded on hover */
-}
-
-/* Utility Classes */
 .d-none {
-    display: none !important; /* Hidden by default */
+    display: none !important;
 }
 
 .d-block {
-    display: block !important; /* Show when toggled */
+    display: block !important;
 }
 
-/* Make Sure Parent Container Doesn't Clip the Menu */
-.container {
-    overflow: visible !important; /* Prevent clipping */
+/* Hamburger container styling to position the button in the whitespace */
+.hamburger-container {
+    position: relative;
+    right: 10px; /* Adjust as needed to align with the right edge */
 }
-
 
 /* Go to Cart Button */
 .go-to-cart-button {

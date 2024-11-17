@@ -121,21 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error adding pizza to cart. Please try again.');
         }
     });
-
-    // Hamburger Menu Toggle
-    const hamburgerButton = document.querySelector('.hamburger-container button');
-    if (!hamburgerButton.dataset.listenerAdded) {
-        hamburgerButton.addEventListener('click', toggleMenu);
-        hamburgerButton.dataset.listenerAdded = 'true'; // Ensure the listener is added only once
-    }
 });
 
 function toggleMenu() {
-    console.log('Toggling menu');
     const menu = document.getElementById('hamburgerMenu');
     menu.classList.toggle('d-none');
     menu.classList.toggle('d-block');
-    console.log('Menu classes:', menu.className);
+
+    // Close menu if clicked outside
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && e.target !== document.querySelector('.hamburger-container button')) {
+            menu.classList.add('d-none');
+        }
+    });
 }
 
 function goToAccountInfo() {
