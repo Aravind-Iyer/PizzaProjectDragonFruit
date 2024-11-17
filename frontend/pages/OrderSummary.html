@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Summary</title>
+  <link rel="stylesheet" href="../css/orderSummary.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Header Section -->
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+  <div class="header-left">
+    <button class="btn btn-light" onclick="goToHome()">
+      <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
+    </button>
+  </div>
+  <div class="header-title">
+    <h1>Order Confirmation</h1>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-light" onclick="goToAccountInfo()">Account Info</button>
+    <button class="btn btn-warning" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<!-- Hamburger Menu -->
+<div class="hamburger-container text-end p-2" style="position: absolute; top: 88px; right: 10px;">
+  <button class="btn btn-light" onclick="toggleMenu()">
+    <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
+  </button>
+</div>
+
+<nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+  <ul>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="cart.html">Cart</a></li>
+    <li><a href="accountInfo.html">Account Info</a></li>
+  </ul>
+</nav>
+
+<!-- Main Content -->
+<main class="container mt-5">
+  <div class="order-summary text-center">
+    <h2>Order Confirmation</h2>
+    <ul id="orderDetails" class="list-unstyled mt-4"></ul>
+
+    <hr>
+    <div class="summary-info mt-4">
+      <p><strong>Total Cost (Tax Included):</strong> $<span id="totalCost"></span></p>
+      <p><strong>Payment Info:</strong> <span id="paymentInfo"></span></p>
+      <p><strong>Estimated Order Arrival:</strong> <span id="orderArrival"></span></p>
+      <p>If you do not receive your order, please contact our store at <strong>470-324-5382</strong>.</p>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/orderSummary.js"></script>
+</body>
+</html>
