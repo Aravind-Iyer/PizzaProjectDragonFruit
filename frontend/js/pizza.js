@@ -1,11 +1,21 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
-    var pizzaID = 0;
-    var cost = 0;
-    // Account Info and Logout Button Setup
-    const accountInfoButton = document.querySelector('.header-right button:first-child');
-    const logoutButton = document.querySelector('.header-right button.btn-warning');
+// pizza.js
 
+// Check if user is logged in
+if (!localStorage.getItem('token')) {
+    alert('You must be logged in to access the menu.');
+    window.location.href = 'login.html'; // Redirect to login page
+}
+
+// Initialize DOM elements after content is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+
+    // DOM elements
+    const accountInfoButton = document.querySelector('.header-right button:first-child'); // Account Info button
+    const logoutButton = document.querySelector('.header-right button.btn-warning'); // Logout button
+    const cartButton = document.querySelector('.go-to-cart-button');
+
+    // Show/hide Account Info and Logout buttons based on authentication
     if (token) {
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
@@ -14,188 +24,74 @@ document.addEventListener('DOMContentLoaded', async () => {
         logoutButton.style.display = 'none';
     }
 
-    // Fetch dessert data dynamically from backend
-    try {
-        const response = await fetch('http://localhost:3000/api/desserts', {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+    // Fetch cart items count (if cart exists in localStorage)
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
 
-        // If the response is not OK, log the status and the error message
-        if (!response.ok) {
-            console.error('Error in response:');
-            console.error('Status:', response.status);
-            console.error('Response Text:', await response.text());
-            throw new Error('Failed to fetch pizza options.');
-        }
-
-        const desserts = await response.json();
-        console.log('Fetched Desserts:', desserts); // Log the fetched data
-        updatePizzaPlaceholders(desserts);
-    } catch (error) {
-        console.error('Fetch error:', error); // Log the full error in the console
-        alert('Could not load desserts. Please try again later.');
+    // Update "Go to Cart" button dynamically
+    if (itemCount > 0) {
+        cartButton.textContent = `🛒 Go to Cart (${itemCount})`;
+    } else {
+        cartButton.textContent = `🛒 Go to Cart`;
     }
 
-});
+    // Set up custom pizza form
+    const pizzaForm = document.getElementById('pizzaForm');
+    const costDisplay = document.getElementById('costDisplay');
+    let totalCost = 0;
 
-// Update placeholders with dynamic data
-function updatePizzaPlaceholders(pizzas) {
-        document.querySelector('form').onsubmit = function() {
-            pizzaID += 10;
-            e.preventDefault();
-
-            const orm = require('orm');
-            const db = orm.connect('mysql://localhost/Dragonfruit');
-
-            var crust = document.querySelector('.crusts').value;
-            var sauce = document.querySelector('.sauces').value;
-            var cheese = document.querySelector('.cheeses').value;
-            var topping1 = document.querySelector('.tp1').value;
-            var topping2 = document.querySelector('.tp2').value;
-            var topping3 = document.querySelector('.tp3').value;
-            var topping4 = document.querySelector('.tp4').value;
-            var topping5 = document.querySelector('.tp5').value;
-            var size = document.querySelector('.size').value;
-            var pizzaName = document.querySelector('#form-control').value;
-            if (size === 'Small'){
-                cost+=8;
-            } else if (size === 'Medium'){
-                cost+=10;
-            } else if (size === 'Large'){
-                cost+=12;
-            } else if (size === 'Extra Large'){
-                cost+=14;
-            } else {
-                console.log("Please select a size");
-            }
-            if (topping2 !== 'None'){
-                if (document.querySelector('[title="meat"]')){
-                    cost+=2;
-                } else if (document.querySelector('[title="veggie"]')){
-                    cost+=1;
-                }
-            }
-            if (topping3 !== 'None'){
-                if (document.querySelector('[title="meat"]')){
-                    cost+=2;
-                } else if (document.querySelector('[title="veggie"]')){
-                    cost+=1;
-                }
-            }
-            if (topping4 !== 'None'){
-                if (document.querySelector('[title="meat"]')){
-                    cost+=2;
-                } else if (document.querySelector('[title="veggie"]')){
-                    cost+=1;
-                }
-            }
-            if (topping5 !== 'None'){
-                if (document.querySelector('[title="meat"]')){
-                    cost+=2;
-                } else if (document.querySelector('[title="veggie"]')){
-                    cost+=1;
-                }
-            }
-            db.query('Insert into CustomPizzas (CustomPizzasID, Crust, Sauce, Cheese, ToppingOne, ToppingTwo, ToppingThree, ToppingFour, ToppingFive, Size, Cost, Quantity) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (pizzaID, crust, sauce, cheese, topping1, topping2, topping3, topping4, topping5, size, cost, 1));
-        }
-        //goToHome();
-        /*if (pizzaCard) {
-            pizzaCard.querySelector('img').src = pizza.ImageURL;
-            pizzaCard.querySelector('h3').textContent = pizza.DessertName;
-            pizzaCard.querySelector(`#price-${index + 1}`).textContent = `$${pizza.Cost.toFixed(2)}`;
-            pizzaCard.querySelector('button').setAttribute(
-                'onclick',
-                `addToCart(${pizza.DessertID}, '${pizza.DessertName}')`
-            );
-        }*/
-}
-
-// Hamburger menu toggle
-function toggleMenu() {
-    const menu = document.getElementById("hamburgerMenu");
-    menu.classList.toggle("d-block");
-    menu.classList.toggle("d-none");
-}
-
-async function addToCart(pizzaID, pizzaName) {
-    const quantityInput = 1;
-    const quantity = parseInt(1, 10);
-    const customerId = localStorage.getItem('customerId');
-
-    if (!customerId) {
-        alert('Customer ID is missing. Please log in again.');
-        return;
-    }
-
-    if (isNaN(quantity) || quantity <= 0) {
-        alert('Please enter a valid quantity.');
-        return;
-    }
-
-    const priceSelector = cost;
-    const priceElement = document.querySelector(priceSelector);
-
-    if (!priceElement) {
-        alert(`Price element not found for ${pizzaName}`);
-        return;
-    }
-
-    const cost = parseFloat(priceElement.textContent.replace('$', ''));
-
-    console.log({
-        CustomPizzasID: pizzaID,
-        OptionsID: null,
-        Crust: 'Pizza',
-        Sauce: dessertName,
-        Cheese: cheese,
-        ToppingOne: topping1,
-        ToppingTwo: topping2,
-        ToppingThree: topping3,
-        ToppingFour: topping4,
-        ToppingFive: topping5,
-        Cost: cost,
-        Qty: 1
+    // Update total cost on form changes
+    pizzaForm.addEventListener('change', () => {
+        totalCost = calculateCost();
+        costDisplay.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
     });
 
-    // Add the item to the cart in the backend
-    try {
-        const response = await fetch('http://localhost:3000/api/cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify({
-                CustomPizzasID: pizzaID,
-                OptionsID: null,
-                Crust: 'Pizza',
-                Sauce: dessertName,
-                Cheese: cheese,
-                ToppingOne: topping1,
-                ToppingTwo: topping2,
-                ToppingThree: topping3,
-                ToppingFour: topping4,
-                ToppingFive: topping5,
-                Cost: cost,
-                Qty: 1
-            }),
-        });
+    // Handle form submission
+    pizzaForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent page reload
+        const formData = new FormData(pizzaForm);
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Error adding to cart:', errorText);
-            throw new Error('Failed to add item to cart.');
-        }
+        const pizzaDetails = {
+            crust: formData.get('crust'),
+            sauce: formData.get('sauce'),
+            toppings: formData.getAll('toppings'),
+            size: formData.get('size'),
+            pizzaName: formData.get('pizzaName'),
+            cost: totalCost,
+        };
 
-        alert(`Added ${quantity} of ${dessertName} to cart!`);
-    } catch (error) {
-        console.error('Add to cart error:', error);
-        alert('Could not add item to cart. Please try again.');
+        // Simulate adding to cart
+        console.log('Pizza Details:', pizzaDetails);
+        alert('Your custom pizza has been added to the cart.');
+
+        // TODO: Send pizzaDetails to backend API in future implementation
+    });
+
+    // Helper function: Calculate total cost
+    function calculateCost() {
+        let cost = 8; // Base cost for small pizza
+        const size = pizzaForm.querySelector('#size').value;
+
+        // Adjust cost for pizza size
+        if (size === 'medium') cost += 2;
+        if (size === 'large') cost += 4;
+
+        // Add cost for toppings (max charge for 3 toppings at $1 each)
+        const toppings = pizzaForm.querySelectorAll('#toppings option:checked').length;
+        cost += Math.min(toppings, 3); // Only charge for up to 3 toppings
+
+        return cost;
     }
+});
+
+// Function to toggle the hamburger menu
+function toggleMenu() {
+    const menu = document.getElementById('hamburgerMenu');
+    menu.classList.toggle('d-none');
+    menu.classList.toggle('d-block');
 }
 
-
-
+// Navigation functions
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }

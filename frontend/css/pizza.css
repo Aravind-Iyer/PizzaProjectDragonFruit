@@ -1,0 +1,189 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9534F; /* Red header */
+    color: white;
+    position: fixed; /* Fixes the header to the top of the viewport */
+    top: 0; /* Absolutely at the top */
+    left: 0;
+    width: 100%; /* Full width */
+    height: 60px; /* Consistent height */
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for visibility */
+    padding: 10px 20px; /* Space inside the header */
+}
+
+/* Header Title */
+.header-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #ffffff; /* White text */
+    text-align: center;
+    width: 100%; /* Ensures centering in the header */
+}
+
+/* Left Header Button */
+.header-left button {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.header-left button img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Right Header Buttons */
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+.header-right button {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.header-right button.btn-warning {
+    background-color: #FFC107;
+    color: black;
+}
+
+/* Hamburger Menu Styles */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 130px; /* Match menu.css */
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1050; /* Ensure it appears above other elements */
+    padding: 10px;
+    width: 150px;
+}
+
+.custom-hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-hamburger-menu li {
+    margin: 10px 0;
+}
+
+.custom-hamburger-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+/* Hamburger container styling */
+.hamburger-container {
+    position: relative;
+    right: 10px;
+}
+
+/* Floating Cart Button */
+.go-to-cart-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #D9534F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.go-to-cart-button:hover {
+    background-color: #c9302c;
+    transform: scale(1.1);
+}
+/* Pizza Builder Styling */
+.pizza-builder {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.pizza-builder .form-label {
+    font-weight: bold;
+    color: #D9534F;
+}
+
+.pizza-builder .form-select,
+.pizza-builder .form-control {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.pizza-builder .btn-submit {
+    background-color: #D9534F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pizza-builder .btn-submit:hover {
+    background-color: #c9302c;
+}
