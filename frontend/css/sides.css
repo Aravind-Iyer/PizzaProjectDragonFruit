@@ -85,11 +85,13 @@ body {
 }
 
 .sides-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+    width: 150px; /* Set a fixed width */
+    height: 150px; /* Set a fixed height */
+    object-fit: cover; /* Ensures images fill the area without distortion */
+    border-radius: 8px; /* Keep the rounded corners */
     margin-bottom: 10px;
 }
+
 
 .sides-item h3 {
     font-size: 1.2rem;
@@ -154,3 +156,4 @@ body {
     background-color: #c9302c; /* Slightly darker red on hover */
     transform: scale(1.1); /* Slight zoom effect on hover */
 }
+

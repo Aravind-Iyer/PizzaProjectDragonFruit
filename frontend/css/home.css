@@ -60,11 +60,13 @@ main {
 }
 
 .featured-item img {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Ensure the images are responsive within their container */
+    height: 400px; /* Set a fixed height to standardize the image sizes */
+    object-fit: cover; /* Ensures the images are cropped proportionally to fit */
     border-radius: 5px;
     margin-bottom: 10px;
 }
+
 
 .featured-item h3 {
     font-size: 1.5rem;

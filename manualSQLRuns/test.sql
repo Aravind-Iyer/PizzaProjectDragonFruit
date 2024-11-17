@@ -1,4 +1,5 @@
-ALTER TABLE OrderSummary
-    ADD CONSTRAINT FK_OrderSummary_Payments
-        FOREIGN KEY (PaymentID)
-            REFERENCES Payments(PaymentID);
+UPDATE Sides
+SET
+    SidesName = 'Homemade Dipping Sauces',
+    Cost = 3.00
+WHERE SidesID = 1;
