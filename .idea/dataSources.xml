@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Dragonfruit" uuid="d6415ac0-ba41-41c0-bf7c-70cbe55980a6">
+    <data-source source="LOCAL" name="Dragonfruit" uuid="1a28885b-8080-481a-a28a-80fe58193f63">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
