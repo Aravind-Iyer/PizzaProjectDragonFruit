@@ -61,8 +61,8 @@ https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio
 9. Change to "SQL Server Authentication" and enter your login name and password 
 10. Click on Security than Logins in the left menu 
 11. Click on the username you made 
-12. 2Under Server Roles, check public and sysadmin 
-13. 13Under Status, grant permission to connect to the database and check "Enabled" for Login
+12. Under Server Roles, check public and sysadmin 
+13. Under Status, grant permission to connect to the database and check "Enabled" for Login
 
 **Making the Database in SQL Server**
 1. Copy the code from DragonfruitDatabase.sql and paste it into a query
