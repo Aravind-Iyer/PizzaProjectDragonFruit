@@ -51,7 +51,7 @@ https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio
 3. Click on Security in the left menu
 4. Right-click Logins and click New Login
 5. Check "SQL Server authentication"
-6. Enter a login name and password 
+6. Enter a login name and password and confirm password 
 7. Uncheck "Enforce password policy" then click OK 
 
 ![new-login.png](frontend/assets/images/new-login.png)
