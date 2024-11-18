@@ -1,12 +1,23 @@
-CREATE TABLE CustomPizza (
-                             PizzaID INT IDENTITY(1,1) PRIMARY KEY,
-                             CustomerID INT NOT NULL,
-                             PizzaName NVARCHAR(100) NOT NULL,
-                             Crust NVARCHAR(50),
-                             Sauce NVARCHAR(50),
-                             Cheese NVARCHAR(50),
-                             Size NVARCHAR(20),
-                             Toppings NVARCHAR(MAX), -- Storing as a comma-separated string
-                             Cost DECIMAL(10, 2),
-                             FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
-);
+INSERT INTO Customer (
+    CustomerID,
+    Username,
+    FirstName,
+    LastName,
+    Email,
+    Address,
+    Password,
+    Phone,
+    OrderHistory,
+    Favorites
+) VALUES (
+             1002, -- Unique ID for the manager
+             'Realmanager.MP', -- Manager username
+             'Ara', -- First name
+             'Iyer', -- Last name
+             'manager@pizzeria.com', -- Email
+             '123 Manager Street', -- Address
+             '$2b$10$abcdefghijk1234567890qrstuvwxyzABCDEFGHIJKLMN', -- Pre-hashed password
+             '1234567890', -- Phone number
+             NULL, -- OrderHistory (optional)
+             NULL -- Favorites (optional)
+         );

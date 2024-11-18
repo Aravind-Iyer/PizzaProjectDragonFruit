@@ -2,13 +2,16 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
+    const isManager = localStorage.getItem('isManager') === 'true';
 
     const headerRight = document.querySelector('.header-right');
     if (token) {
         // User is logged in - Show logout and account info button
         headerRight.innerHTML = `
+            ${isManager ? `<button class="btn btn-danger ms-2" onclick="goToManagerDashboard()">Manager Dashboard</button>` : ''}
             <button class="btn btn-light me-3" onclick="goToAccountInfo()">Account Info</button>
             <button class="btn btn-warning" onclick="logout()">Logout</button>
+            
         `;
 
         // Show the hamburger menu button for logged-in users
@@ -16,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hamburgerContainer) {
             hamburgerContainer.style.display = 'block';
         }
+
     } else {
         // User is not logged in - Show Login/Create Account button
         headerRight.innerHTML = `
@@ -56,7 +60,10 @@ function goToLogin() {
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }
-
+// Function to navigate to Manager Dashboard
+function goToManagerDashboard() {
+    window.location.href = 'managerDashboard.html';
+}
 // Logout function
 function logout() {
     localStorage.removeItem('token');

@@ -17,6 +17,11 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
         alert("Password must be at least 12 characters long.");
         return;
     }
+    // Block usernames with the .MP suffix
+    if (username.endsWith('.MP')) {
+        alert("You cannot create an account with a .MP suffix. Please use a different username.");
+        return;
+    }
 
     try {
         const response = await fetch('http://localhost:3000/api/create-account', {

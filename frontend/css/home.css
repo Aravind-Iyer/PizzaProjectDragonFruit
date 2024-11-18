@@ -30,12 +30,22 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Align header-right buttons with consistent spacing */
-.header-right {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+/* Remove hover effect specifically for the Manager Dashboard button */
+.header-right button {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
+
+/* Keep the Logout button styling separate */
+.header-right .btn-warning {
+    background-color: #FFC107;
+    color: black;
+}
+
 
 .header-title h1 {
     margin: 0;

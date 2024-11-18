@@ -19,8 +19,15 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             // Store token in localStorage and redirect
             localStorage.setItem('token', data.token);
             localStorage.setItem('customerId', data.customerId); // Store the customer ID
+            localStorage.setItem('isManager', data.isManager ? 'true' : 'false'); // Explicitly store as 'true' or 'false'
             alert('Login successful');
-            window.location.href = 'home.html'; // Redirect to homepage
+            console.log('isManager:', data.isManager); // Debug log
+
+            if (data.isManager) {
+                window.location.href = 'managerDashboard.html';
+            } else {
+                window.location.href = 'home.html';
+            }
         } else {
             alert(data.message || 'Login failed. Please try again.');
         }

@@ -36,12 +36,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Function to toggle the hamburger menu
-function toggleMenu() {
-    const menu = document.getElementById("hamburgerMenu");
-    menu.classList.toggle("d-none");
-    menu.classList.toggle("d-block");
-}
+
+// Hamburger Menu Functions
+window.toggleMenu = () => {
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    if (hamburgerMenu) {
+        hamburgerMenu.classList.toggle('d-none');
+    } else {
+        console.error('Hamburger menu element not found!');
+    }
+};
+
+// Close Hamburger Menu When Clicking Outside
+document.addEventListener('click', (event) => {
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const hamburgerButton = document.querySelector('.hamburger-button');
+
+    if (!hamburgerMenu || !hamburgerButton) {
+        console.error('Hamburger menu or button element not found!');
+        return;
+    }
+
+    const isClickInsideMenu = hamburgerMenu.contains(event.target);
+    const isClickOnButton = hamburgerButton.contains(event.target);
+
+    console.log('Clicked outside hamburger menu:', !isClickInsideMenu && !isClickOnButton);
+
+    if (!isClickInsideMenu && !isClickOnButton && !hamburgerMenu.classList.contains('d-none')) {
+        hamburgerMenu.classList.add('d-none');
+    }
+});
 
 // Navigation logic for menu categories
 function navigateToCategory(category) {
@@ -63,19 +87,19 @@ function navigateToCategory(category) {
     }
 }
 
-// Placeholder function for navigating to the account info page
+
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }
 
-// Logout function
+n
 function logout() {
     localStorage.removeItem('token');
     alert('You have successfully logged out.');
     window.location.href = 'home.html';
 }
 
-// Placeholder function for navigating back to the homepage
+
 function goToHome() {
     window.location.href = 'home.html';
 }

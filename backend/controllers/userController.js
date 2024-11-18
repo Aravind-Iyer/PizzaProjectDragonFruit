@@ -23,11 +23,16 @@ const userController = {
 
             const passwordMatch = await bcrypt.compare(password, user.Password.trim());
             if (passwordMatch) {
-                const token = jwt.sign({ username: user.Username }, SECRET_KEY, { expiresIn: '1h' });
+                const isManager = user.Username.trim().endsWith('.MP');
+                console.log('Username:', user.Username); // Logs the username
+                console.log('isManager:', isManager);   // Logs the isManager value
+
+                const token = jwt.sign({ username: user.Username, isManager }, SECRET_KEY, { expiresIn: '1h' });
                 res.json({
                     message: 'Login successful',
                     token,
                     customerId: user.CustomerID,
+                    isManager, // Pass this to the frontend
                 });
 
             } else {
@@ -43,6 +48,10 @@ const userController = {
     createAccount: async (req, res) => {
         const { username, password, email, firstName, lastName } = req.body;
         try {
+            // if someone tries to create an account with .MP
+            if (username.endsWith('.MP')) {
+                return res.status(400).json({ message: 'You cannot create an account with a .MP suffix. Please use a different username.' });
+            }
             const pool = await connectToDB();
             const userExists = await pool.request()
                 .input('Username', sql.Char(100), username)
@@ -54,7 +63,7 @@ const userController = {
 
             const hashedPassword = await bcrypt.hash(password, 10);
             await pool.request()
-                .input('CustomerID', sql.Int, Math.floor(Math.random() * 10000)) // Generating a random ID for demo purposes
+                .input('CustomerID', sql.Int, Math.floor(Math.random() * 10000)) // Generating a random ID sucks if collision happens kek need to implement that later
                 .input('Username', sql.Char(100), username)
                 .input('FirstName', sql.Char(100), firstName)
                 .input('LastName', sql.Char(100), lastName)
