@@ -12,14 +12,13 @@ app.use(express.json());
 
 
 
-// Serve static files from the "frontend" folder
 app.use(express.static(path.join(__dirname, '../frontend')));
 const drinkRoutes = require('./routes/drinkRoutes');
 app.use('/api', drinkRoutes);
 
-// Importing user routes
+
 try {
-    // Import routes
+
     const userRoutes = require('./routes/userRoutes');
     const dessertRoutes = require('./routes/dessertRoutes');
 
@@ -28,6 +27,9 @@ try {
 } catch (err) {
     console.error('Error importing user routes:', err);
 }
+
+const forgotPasswordRoutes = require('./routes/forgotPasswordRoutes');
+app.use('/api', forgotPasswordRoutes);
 const cartRoutes = require('./routes/cartRoutes');
 app.use('/api', cartRoutes);
 const paymentRoutes = require('./routes/paymentRoutes');
