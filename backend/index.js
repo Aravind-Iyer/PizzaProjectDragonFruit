@@ -214,31 +214,6 @@ const initializeDatabase = async () => {
 
         console.log('Database initialized successfully.');
 
-        // Add a default user if it doesn't already exist
-        const defaultUsername = 'admin';
-        const defaultEmail = 'admin@example.com';
-        const defaultPassword = 'password123';
-
-        const userExists = db.prepare(`
-            SELECT * FROM Customer WHERE Username = ?
-        `).get(defaultUsername);
-
-        if (!userExists) {
-            const hashedPassword = await bcrypt.hash(defaultPassword, 10); // Hash the default password
-            db.prepare(`
-                INSERT INTO Customer (Username, FirstName, LastName, Email, Password)
-                VALUES (?, ?, ?, ?, ?)
-            `).run(defaultUsername, 'Admin', 'User', defaultEmail, hashedPassword);
-
-            console.log(`Default user created:
-    Username: ${defaultUsername}
-    Email: ${defaultEmail}
-    Password: ${defaultPassword}`);
-        } else {
-            console.log('Default user already exists.');
-        }
-
-        console.log('Database initialized successfully.');
 
     } catch (err) {
         console.error('Error initializing the database:', err);
