@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout System</title>
+  <link rel="stylesheet" href="../css/checkout.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Header Section -->
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+  <div class="header-left">
+    <button class="btn btn-light" onclick="goToHome()">
+      <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
+    </button>
+  </div>
+  <div class="header-title">
+    <h1>Checkout System</h1>
+  </div>
+  <div class="header-right d-flex gap-2">
+    <button class="btn btn-light" onclick="goToAccountInfo()">Account Info</button>
+    <button class="btn btn-warning" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<!-- Hamburger Menu Button -->
+<div class="hamburger-container text-end p-2" style="position: relative;">
+  <button class="btn btn-light" onclick="toggleMenu()">
+    <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
+  </button>
+  <nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="accountInfo.html">Account Info</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Main Checkout Content -->
+<main class="container mt-5">
+  <div class="row">
+    <!-- Left Column: Payment Method Options -->
+    <div class="col-md-6">
+      <section class="payment-methods">
+        <h2>Select Payment Method</h2>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="Cash">
+          <label class="form-check-label" for="cash">Cash</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="Credit/Debit Card">
+          <label class="form-check-label" for="creditCard">Credit/Debit Card</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="mobilePayment" value="Mobile Payment">
+          <label class="form-check-label" for="mobilePayment">Mobile Payment</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="giftCard" value="Gift Card">
+          <label class="form-check-label" for="giftCard">Gift Card</label>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column: Dynamic Input Section -->
+    <div class="col-md-6">
+      <!-- Credit Card Details -->
+      <section id="creditCardDetails" class="card-details d-none">
+        <h3>Enter Card Details</h3>
+        <div class="mb-3">
+          <label for="cardNumber" class="form-label">Card Number</label>
+          <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="expiryDate" class="form-label">Expiry Date</label>
+            <input type="month" class="form-control" id="expiryDate">
+          </div>
+          <div class="col-md-6">
+            <label for="cvv" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cvv" maxlength="3" placeholder="123">
+          </div>
+        </div>
+        <div class="mt-3">
+          <label for="billingAddress" class="form-label">Billing Address</label>
+          <textarea class="form-control" id="billingAddress" rows="2" placeholder="Enter billing address"></textarea>
+        </div>
+      </section>
+
+      <!-- Gift Card Details -->
+      <section id="giftCardDetails" class="gift-card-details d-none">
+        <h3>Enter Gift Card Number</h3>
+        <div class="mb-3">
+          <label for="giftCardNumber" class="form-label">Gift Card Number</label>
+          <input type="text" class="form-control" id="giftCardNumber" placeholder="Enter gift card number">
+        </div>
+      </section>
+
+      <!-- Mobile Payment Details -->
+      <section id="mobilePaymentDetails" class="mobile-payment-details d-none">
+        <h3>Scan QR Code</h3>
+        <div class="text-center">
+          <img src="../assets/images/qr-placeholder.png" alt="QR Code Placeholder" class="img-fluid" id="qrCodeImage">
+          <p class="mt-2 text-muted">Scan this QR code to complete your payment.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Summary Section -->
+  <section class="summary mt-4">
+    <h3>Summary:</h3>
+    <ul id="summaryList"></ul>
+    <div class="total mt-3">
+      <h4>Total Paid: $<span id="totalPrice">0.00</span></h4>
+    </div>
+  </section>
+
+  <!-- Action Buttons -->
+  <section class="action-buttons mt-4 d-flex justify-content-between">
+    <button class="btn btn-danger" onclick="cancelOrder()">Cancel</button>
+    <button class="btn btn-success" onclick="submitPayment()">Submit Payment</button>
+  </section>
+
+  <!-- Payment Confirmation -->
+  <section class="confirmation mt-4 d-none">
+    <h4 class="text-success">Your order has been placed successfully!</h4>
+  </section>
+</main>
+
+<script src="../js/checkout.js"></script>
+</body>
+</html>

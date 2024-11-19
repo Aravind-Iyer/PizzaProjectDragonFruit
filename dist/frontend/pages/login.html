@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's and Pop's Pizzeria - Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="../js/common.js"></script>
+
+</head>
+<body>
+<!-- Header Section -->
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+    <div class="header-left">
+        <button class="btn btn-light" onclick="goToHome()">
+            <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
+        </button>
+    </div>
+    <div class="header-title">
+        <h1>Login</h1>
+    </div>
+    <div class="header-right">
+        <button class="btn btn-light" onclick="goToLogin()">
+            Login/Create Account
+        </button>
+    </div>
+</header>
+
+
+<!-- Login Form Section -->
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h3 class="text-center mb-4">Login</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="text-right">
+                        <a href="forgotPassword.html" class="btn btn-link">Forgot Password?</a>
+                    </div>
+                    <div class="text-center my-3">
+                        <p>or</p>
+                        <a href="createAccount.html" class="btn btn-link">Create Account</a>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-danger btn-block">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- JavaScript Section -->
+<script src="../js/login.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function goToHome() {
+        window.location.href = 'home.html';
+    }
+
+    function toggleMenu() {
+        // Placeholder for future hamburger menu functionality
+        alert('Hamburger menu clicked');
+    }
+</script>
+</body>
+</html>

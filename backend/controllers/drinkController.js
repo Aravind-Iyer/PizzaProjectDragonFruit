@@ -1,23 +1,31 @@
-const { connectToDB, sql } = require('../database/dbConnection');
+const { connectToDB } = require('../database/dbConnection');
 
 const drinkController = {
-
-    getAllDrinks: async (req, res) => {
+    getAllDrinks: (req, res) => {
         try {
-            const pool = await connectToDB();
-            const result = await pool.request().query(`
+            const db = connectToDB(); // Get the SQLite database instance
+            const query = `
                 SELECT
                     DrinkID,
-                    RTRIM(DrinkName) AS DrinkName,
-                    RTRIM(Size) AS Size,
+                    DrinkName AS DrinkName,
+                    Size AS Size,
                     Cost,
-                    RTRIM(ImageURL) AS ImageURL
+                    ImageURL AS ImageURL
                 FROM Drinks
-            `);
+            `;
 
-            console.log('Database Results:', result.recordset);
+            const drinks = db.prepare(query).all(); // Execute the query and get all rows
 
-            res.status(200).json(result.recordset);
+            // Optionally trim fields if necessary (SQLite doesn't have RTRIM by default)
+            drinks.forEach(drink => {
+                drink.DrinkName = drink.DrinkName.trim();
+                drink.Size = drink.Size.trim();
+                drink.ImageURL = drink.ImageURL.trim();
+            });
+
+            console.log('Database Results:', drinks);
+
+            res.status(200).json(drinks);
         } catch (err) {
             console.error('Error fetching drinks:', err);
             res.status(500).json({ message: 'Error fetching drinks' });

@@ -1,31 +1,39 @@
-const customPizzaService = require('../services/customPizzaService');
-const cartService = require('../services/cartService');
+const { connectToDB } = require('../database/dbConnection');
 
 const customPizzaController = {
-    createPizza: async (req, res) => {
+    createPizza: (req, res) => {
         const { customerId, pizzaName, crust, sauce, cheese, size, toppings, cost } = req.body;
-        try {
-            // to table for faviored page later useagae
-            const pizzaId = await customPizzaService.createPizza({
-                customerId,
-                pizzaName,
-                crust,
-                sauce,
-                cheese,
-                size,
-                toppings,
-                cost,
-            });
 
-            // to cart
-            await cartService.addToCart({
-                customerId,
-                itemId: pizzaId,
-                itemType: `${size} Pizza`,
-                itemName: pizzaName,
-                quantity: 1, // Default quantity
-                cost,
-            });
+        if (!customerId || !pizzaName || !crust || !sauce || !cheese || !size || !toppings || !cost) {
+            return res.status(400).json({ message: 'All fields are required to create a pizza' });
+        }
+
+        try {
+            const db = connectToDB();
+            // Convert toppings array to a comma-separated string
+            const toppingsString = Array.isArray(toppings) ? toppings.join(',') : toppings;
+            // Insert the pizza into the CustomPizza table
+            const pizzaQuery = `
+                INSERT INTO CustomPizza (CustomerID, PizzaName, Crust, Sauce, Cheese, Size, Toppings, Cost)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            `;
+            const pizzaResult = db.prepare(pizzaQuery).run(customerId, pizzaName, crust, sauce, cheese, size, toppingsString, cost);
+
+            const pizzaId = pizzaResult.lastInsertRowid;
+
+            // Add the pizza to the cart
+            const cartQuery = `
+                INSERT INTO Cart (CustomerID, ItemID, ItemType, ItemName, Quantity, Cost)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `;
+            db.prepare(cartQuery).run(
+                customerId,        // CustomerID
+                pizzaId,           // ItemID (should match the PizzaID)
+                `${size} Pizza`,   // ItemType (e.g., 'Large Pizza')
+                pizzaName,         // ItemName
+                1,                 // Quantity
+                cost               // Cost
+            );
 
             res.status(201).json({ message: 'Pizza created and added to cart successfully', pizzaId });
         } catch (err) {
@@ -34,10 +42,21 @@ const customPizzaController = {
         }
     },
 
-    getPizzasByCustomer: async (req, res) => {
+    getPizzasByCustomer: (req, res) => {
         const { customerId } = req.query;
+
+        if (!customerId) {
+            return res.status(400).json({ message: 'Customer ID is required' });
+        }
+
         try {
-            const pizzas = await customPizzaService.getPizzasByCustomer(customerId);
+            const db = connectToDB();
+
+            const query = `
+                SELECT * FROM CustomPizza WHERE CustomerID = ?
+            `;
+            const pizzas = db.prepare(query).all(customerId);
+
             res.status(200).json(pizzas);
         } catch (err) {
             console.error('Error fetching pizzas:', err);
@@ -45,10 +64,28 @@ const customPizzaController = {
         }
     },
 
-    deletePizza: async (req, res) => {
+    deletePizza: (req, res) => {
         const { pizzaId } = req.body;
+
+        if (!pizzaId) {
+            return res.status(400).json({ message: 'Pizza ID is required' });
+        }
+
         try {
-            await customPizzaService.deletePizza(pizzaId);
+            const db = connectToDB();
+
+            // Delete the pizza from the CustomPizza table
+            const deletePizzaQuery = `
+                DELETE FROM CustomPizza WHERE PizzaID = ?
+            `;
+            db.prepare(deletePizzaQuery).run(pizzaId);
+
+            // Optionally, delete the associated cart item (if needed)
+            const deleteCartQuery = `
+                DELETE FROM Cart WHERE ItemID = ?
+            `;
+            db.prepare(deleteCartQuery).run(pizzaId);
+
             res.status(200).json({ message: 'Pizza deleted successfully' });
         } catch (err) {
             console.error('Error deleting pizza:', err);

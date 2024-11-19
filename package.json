@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "PizzaOrderingWebsite",
   "main": "backend/index.js",
+  "bin": "backend/index.js",
   "scripts": {
     "start": "node backend/index.js",
-    "dev": "nodemon backend/index.js"
+    "dev": "nodemon backend/index.js",
+    "build": "pkg . --targets node20-win-x64 --output dist/pizzaprojectdragonfruit.exe && xcopy /E /I /Y frontend dist\\frontend"
   },
   "repository": {
     "type": "git",
@@ -20,14 +22,25 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.5.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "jsonwebtoken": "^9.0.2",
-    "msnodesqlv8": "^4.2.1",
-    "mssql": "^11.0.1"
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@yao-pkg/pkg": "^5.4.0",
     "nodemon": "^3.1.7"
+  },
+  "pkg": {
+    "assets": [
+      "backend/**/*.js",
+      "backend/database/**/*.db",
+      "backend/routes/**/*.js"
+    ],
+    "targets": [
+      "node20-win-x64"
+    ],
+    "outputPath": "dist"
   }
 }
