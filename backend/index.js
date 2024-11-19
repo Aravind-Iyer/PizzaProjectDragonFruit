@@ -57,24 +57,6 @@ const initializeDatabase = async () => {
         const db = connectToDB();
         console.log('Initializing database...');
 
-        db.exec(`
-            DROP TABLE IF EXISTS BeverageInfo;
-            DROP TABLE IF EXISTS Beverages;
-            DROP TABLE IF EXISTS Cart;
-            DROP TABLE IF EXISTS Customer;
-            DROP TABLE IF EXISTS CustomPizza;
-            DROP TABLE IF EXISTS Desserts;
-            DROP TABLE IF EXISTS Drinks;
-            DROP TABLE IF EXISTS Employee;
-            DROP TABLE IF EXISTS Manager;
-            DROP TABLE IF EXISTS Options;
-            DROP TABLE IF EXISTS OrderSummary;
-            DROP TABLE IF EXISTS PaymentItems;
-            DROP TABLE IF EXISTS Payments;
-            DROP TABLE IF EXISTS Pizza;
-            DROP TABLE IF EXISTS Sides;
-        `);
-
         // Create necessary tables if they don't exist
         db.exec(`
             CREATE TABLE IF NOT EXISTS Customer (
