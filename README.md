@@ -2,12 +2,13 @@
 
 **Installation**
 1. https://github.com/coreybutler/nvm-windows/releases/tag/1.1.12 Install This and restart your IDE
-2. Terminal in your IDE    nvm install v20.18.0
+2. Go to your Terminal in your IDE and    nvm install v20.18.0 or directly download the node.js Version 20
 3. npm install
 4. Then open the exe folder located in the dist folder 
 5. If it doesn't work, you may need to rebuild
     a. npm rebuild
     b. npm run build
+    c. run the exe
 
 **Windows Security and Firewall Change
 1. You May need open TCP port 1433 inbound rules
