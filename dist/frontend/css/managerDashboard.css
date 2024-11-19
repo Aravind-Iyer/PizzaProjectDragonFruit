@@ -1,0 +1,116 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9534F;
+    color: white;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.header-left button {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+/* Header Right Buttons */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+}
+
+.header-right button {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px; /* Add consistent padding */
+    font-size: 0.9rem; /* Make the font size consistent */
+    cursor: pointer;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.header-right .btn-warning {
+    background-color: #FFC107;
+    color: black;
+}
+
+/* Hamburger Menu Styling */
+.custom-hamburger-menu {
+    position: absolute;
+    top: 140px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    width: 150px;
+}
+
+.custom-hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.custom-hamburger-menu li {
+    margin: 10px 0;
+}
+
+.custom-hamburger-menu a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.d-none {
+    display: none !important;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1.2rem;
+}
+
+/* List Styling */
+ul {
+    list-style: disc;
+    padding-left: 20px;
+}

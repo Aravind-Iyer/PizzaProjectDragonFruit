@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" href="../css/managerDashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Header Section -->
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+    <div class="header-left">
+        <button class="btn btn-light" onclick="goToHome()">
+            <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
+        </button>
+    </div>
+    <div class="header-title text-center w-100">
+        <h1 class="mb-0">Manager Dashboard</h1>
+    </div>
+    <div class="header-right d-flex gap-2">
+        <button class="btn btn-light" onclick="goToAccountInfo()">Account Info</button>
+        <button class="btn btn-warning" onclick="logout()">Logout</button>
+    </div>
+</header>
+
+<!-- Hamburger Menu Button -->
+<div class="hamburger-container text-end p-2">
+    <button class="hamburger-button btn btn-light" onclick="toggleMenu()">
+        <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
+    </button>
+</div>
+
+<!-- Custom Hamburger Menu -->
+<nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="accountInfo.html">Account Info</a></li>
+        <li><a href="login.html" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<main class="container mt-5">
+    <div class="row g-4">
+        <!-- Goals Section -->
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-danger">Goals and Objectives</h2>
+                    <ul>
+                        <li>10 New Customers</li>
+                        <li>100 Pizzas Sold</li>
+                        <li>Efficient Scheduling</li>
+                        <li>Order more marinara sauce</li>
+                        <li>Nightly cleanup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Information Section -->
+        <div class="col-lg-6 col-md-12">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h3 class="text-danger"># of Pizzas Sold</h3>
+                    <p class="text-secondary" id="numOfPizzas">Loading...</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h3 class="text-danger">Next Employees Scheduled Today</h3>
+                    <p class="text-secondary" id="employeeSchedule">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="../js/managerDashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

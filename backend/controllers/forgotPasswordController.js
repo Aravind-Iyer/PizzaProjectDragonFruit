@@ -1,5 +1,3 @@
-
-
 const forgotPasswordService = require('../services/forgotPasswordService');
 
 const forgotPasswordController = {
@@ -11,9 +9,12 @@ const forgotPasswordController = {
         }
 
         try {
-            const emailExists = await forgotPasswordService.checkEmailExists(email);
+            // Check if the email exists in the database
+            const emailExists = forgotPasswordService.checkEmailExists(email);
 
             if (emailExists) {
+                // Assume the service handles sending the reset email
+                forgotPasswordService.sendPasswordResetEmail(email);
                 return res.status(200).json({ message: 'Account found, sent password reset email.' });
             } else {
                 return res.status(404).json({ message: 'Email not found. Please try again.' });

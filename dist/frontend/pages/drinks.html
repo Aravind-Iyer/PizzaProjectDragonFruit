@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks - Mom's and Pop's Pizzeria</title>
+    <link rel="stylesheet" href="../css/drinks.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Header Section -->
+<header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
+    <div class="header-left">
+        <button class="btn btn-light" onclick="goToHome()">
+            <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
+        </button>
+    </div>
+    <div class="header-title">
+        <h1>Drinks</h1>
+    </div>
+    <div class="header-right d-flex gap-2">
+        <button class="btn btn-light" onclick="goToAccountInfo()">Account Info</button>
+        <button class="btn btn-warning" onclick="logout()">Logout</button>
+    </div>
+</header>
+
+<!-- Hamburger Menu Button -->
+<div class="hamburger-container text-end p-2" style="position: relative;">
+    <button class="btn btn-light" onclick="toggleMenu()">
+        <img src="../assets/icons/hamburger-menu.png" alt="Menu" width="24">
+    </button>
+    <!-- Custom Hamburger Menu -->
+    <nav id="hamburgerMenu" class="d-none custom-hamburger-menu">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="accountInfo.html">Account Info</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Main Content for Drinks -->
+<main class="container mt-5 text-center">
+    <div class="drink-options">
+        <!-- Placeholder Drink Cards -->
+        <div class="drink-item" id="drink-1">
+            <img src="../assets/images/placeholder.png" alt="Drink Placeholder">
+            <h3>Drink Name</h3>
+            <p id="price-1">$0.00</p>
+            <form>
+                <input type="radio" id="small1" name="size1" value="Small">
+                <label for="small1">Small</label><br>
+                <input type="radio" id="medium1" name="size1" value="Medium">
+                <label for="medium1">Medium</label><br>
+                <input type="radio" id="large1" name="size1" value="Large">
+                <label for="large1">Large</label>
+            </form>
+            <div class="quantity">
+                <label for="quantity-1">Qty:</label>
+                <input type="number" id="quantity-1" min="0" value="0">
+            </div>
+            <button onclick="addToCart(1)">Add to Cart</button>
+        </div>
+        <div class="drink-item" id="drink-2">
+            <img src="../assets/images/placeholder.png" alt="Drink Placeholder">
+            <h3>Drink Name</h3>
+            <p id="price-2">$0.00</p>
+            <form>
+                <input type="radio" id="small2" name="size2" value="Small">
+                <label for="small2">Small</label><br>
+                <input type="radio" id="medium2" name="size2" value="Medium">
+                <label for="medium2">Medium</label><br>
+                <input type="radio" id="large2" name="size2" value="Large">
+                <label for="large2">Large</label>
+            </form>
+            <div class="quantity">
+                <label for="quantity-2">Qty:</label>
+                <input type="number" id="quantity-2" min="0" value="0">
+            </div>
+            <button onclick="addToCart(2)">Add to Cart</button>
+        </div>
+        <div class="drink-item" id="drink-3">
+            <img src="../assets/images/placeholder.png" alt="Drink Placeholder">
+            <h3>Drink Name</h3>
+            <p id="price-3">$0.00</p>
+            <form>
+                <input type="radio" id="small3" name="size3" value="Small">
+                <label for="small3">Small</label><br>
+                <input type="radio" id="medium3" name="size3" value="Medium">
+                <label for="medium3">Medium</label><br>
+                <input type="radio" id="large3" name="size3" value="Large">
+                <label for="large3">Large</label>
+            </form>
+            <div class="quantity">
+                <label for="quantity-3">Qty:</label>
+                <input type="number" id="quantity-3" min="0" value="0">
+            </div>
+            <button onclick="addToCart(3)">Add to Cart</button>
+        </div>
+        <div class="drink-item" id="drink-4">
+            <img src="../assets/images/placeholder.png" alt="Drink Placeholder">
+            <h3>Drink Name</h3>
+            <p id="price-4">$0.00</p>
+            <form>
+                <input type="radio" id="small4" name="size4" value="Small">
+                <label for="small4">Small</label><br>
+                <input type="radio" id="medium4" name="size4" value="Medium">
+                <label for="small4">Medium</label><br>
+                <input type="radio" id="large4" name="size4" value="Large">
+                <label for="small4">Large</label>
+            </form>
+            <div class="quantity">
+                <label for="quantity-4">Qty:</label>
+                <input type="number" id="quantity-4" min="0" value="0">
+            </div>
+            <button onclick="addToCart(4)">Add to Cart</button>
+        </div>
+        <div class="drink-item" id="drink-5">
+            <img src="../assets/images/placeholder.png" alt="Drink Placeholder">
+            <h3>Drink Name</h3>
+            <p id="price-5">$0.00</p>
+            <form>
+                <input type="radio" id="small5" name="size5" value="Small">
+                <label for="small5">Small</label><br>
+                <input type="radio" id="medium5" name="size5" value="Medium">
+                <label for="medium5">Medium</label><br>
+                <input type="radio" id="large5" name="size5" value="Large">
+                <label for="large5">Large</label>
+            </form>
+            <div class="quantity">
+                <label for="quantity-5">Qty:</label>
+                <input type="number" id="quantity-5" min="0" value="0">
+            </div>
+            <button onclick="addToCart(5)">Add to Cart</button>
+        </div>
+        <div class="drink-item" id="drink-6">
+            <img src="../assets/images/placeholder.png" alt="Drink Placeholder">
+            <h3>Drink Name</h3>
+            <p id="price-6">$0.00</p>
+            <form>
+                <input type="radio" id="small6" name="size6" value="Small">
+                <label for="small6">Small</label><br>
+                <input type="radio" id="medium6" name="size6" value="Medium">
+                <label for="medium6">Medium</label><br>
+                <input type="radio" id="large6" name="size6" value="Large">
+                <label for="large6">Large</label>
+            </form>
+            <div class="quantity">
+                <label for="quantity-6">Qty:</label>
+                <input type="number" id="quantity-6" min="0" value="0">
+            </div>
+            <button onclick="addToCart(6)">Add to Cart</button>
+        </div>
+        <div class="drink-item" id="drink-7">
+            <img src="../assets/images/placeholder.png" alt="Drink Placeholder">
+            <h3>Drink Name</h3>
+            <p id="price-7">$0.00</p>
+            <form>
+                <input type="radio" id="small7" name="size7" value="Small">
+                <label for="small7">Small</label><br>
+                <input type="radio" id="medium7" name="size7" value="Medium">
+                <label for="medium7">Medium</label><br>
+                <input type="radio" id="large7" name="size7" value="Large">
+                <label for="large7">Large</label>
+            </form>
+            <div class="quantity">
+                <label for="quantity-7">Qty:</label>
+                <input type="number" id="quantity-7" min="0" value="0">
+            </div>
+            <button onclick="addToCart(7)">Add to Cart</button>
+        </div>
+    </div>
+</main>
+<!-- "Go to Cart" Floating Button -->
+<a href="cart.html" class="btn btn-danger go-to-cart-button">
+    🛒 Go to Cart
+</a>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/drinks.js"></script>
+</body>
+</html>

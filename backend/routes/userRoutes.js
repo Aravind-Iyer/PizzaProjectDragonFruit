@@ -5,6 +5,9 @@ const userController = require('../controllers/userController');
 
 console.log('userController:', userController);
 
+console.log('userController.login:', userController.login ? 'Defined' : 'Undefined');
+
+
 
 router.post('/login', userController.login);
 
