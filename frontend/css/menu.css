@@ -60,24 +60,26 @@ body {
     height: 20px;
 }
 
-/* Right Header Buttons */
-.header-right {
-    display: flex;
-    gap: 10px;
-}
-
+/* General styling for header-right buttons */
 .header-right button {
-    background-color: white;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
+    background-color: white; /* White background */
+    color: black; /* Black text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Consistent padding */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 14px; /* Consistent font size */
 }
 
+/* Logout button specific styling */
 .header-right button.btn-warning {
-    background-color: #FFC107;
+    background-color: #FFC107; /* Yellow background */
     color: black;
+}
+
+/* Hover effect for all header buttons except Logout */
+.header-right button:not(.btn-warning):hover {
+    background-color: #f0f0f0; /* Light gray on hover */
 }
 
 /* Hamburger Menu Styles */

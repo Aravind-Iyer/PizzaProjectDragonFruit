@@ -20,8 +20,16 @@
         <h1>Welcome to Mom's and Pop's Pizzeria</h1>
     </div>
     <div class="header-right d-flex gap-2">
-        <button class="btn btn-light" onclick="goToAccountInfo()" style="display: none;">Account Info</button>
-        <button class="btn btn-warning" onclick="logout()" style="display: none;">Logout</button>
+        <button class="btn btn-light" onclick="goToManagerDashboard()" id="managerDashboardButton" style="display: none;">
+            Manager Dashboard
+        </button>
+        <button id="accountInfoButton" class="btn btn-light" onclick="goToAccountInfo()" style="display: none;">
+            Account Info
+        </button>
+        <!-- Logout Button -->
+        <button class="btn btn-warning" onclick="logout()" style="display: none;">
+            Logout
+        </button>
     </div>
 </header>
 

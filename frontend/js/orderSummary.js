@@ -87,7 +87,9 @@ function logout() {
 function goToHome() {
     window.location.href = 'home.html';
 }
-
+function goToManagerDashboard() {
+    window.location.href = 'managerDashboard.html';
+}
 function toggleMenu() {
     const menu = document.getElementById('hamburgerMenu');
     menu.classList.toggle('d-none');

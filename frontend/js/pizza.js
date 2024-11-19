@@ -5,17 +5,29 @@ if (!localStorage.getItem('token')) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
+    const isManager = JSON.parse(localStorage.getItem('isManager')) || false;
 
     // Account Info and Logout buttons
-    const accountInfoButton = document.querySelector('.header-right button:first-child');
-    const logoutButton = document.querySelector('.header-right button.btn-warning');
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    const logoutButton = document.getElementById('logoutButton');
 
     if (token) {
+        // Show Account Info and Logout buttons for all logged-in users
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
+
+        // Show Manager Dashboard button only for managers
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        } else {
+            managerDashboardButton.style.display = 'none';
+        }
     } else {
+        // Hide all buttons if user is not logged in
         accountInfoButton.style.display = 'none';
         logoutButton.style.display = 'none';
+        managerDashboardButton.style.display = 'none';
     }
 
     // Update Cart Button with Item Count
@@ -148,4 +160,7 @@ function logout() {
 
 function goToHome() {
     window.location.href = 'home.html';
+}
+function goToManagerDashboard() {
+    window.location.href = 'managerDashboard.html';
 }

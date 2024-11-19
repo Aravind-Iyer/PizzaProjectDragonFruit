@@ -1,16 +1,28 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
+    const isManager = JSON.parse(localStorage.getItem('isManager')) || false;
 
-    // Account Info and Logout Button Setup
-    const accountInfoButton = document.querySelector('.header-right button:first-child');
-    const logoutButton = document.querySelector('.header-right button.btn-warning');
+    // Select buttons by their IDs
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    const logoutButton = document.getElementById('logoutButton');
 
     if (token) {
+        // Show Account Info and Logout buttons for all logged-in users
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
+
+        // Show Manager Dashboard button only for managers
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        } else {
+            managerDashboardButton.style.display = 'none';
+        }
     } else {
+        // Hide all buttons if user is not logged in
         accountInfoButton.style.display = 'none';
         logoutButton.style.display = 'none';
+        managerDashboardButton.style.display = 'none';
     }
 
     // Fetch drink data dynamically from backend
@@ -34,6 +46,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Fetch error:', error); // Log the full error in the console
         alert('Could not load drinks. Please try again later.');
     }
+
+    // Close the hamburger menu when clicking outside
+    document.addEventListener('click', (event) => {
+        const menu = document.getElementById('hamburgerMenu');
+        const menuButton = document.querySelector('.hamburger-container button');
+
+        if (menu && !menu.contains(event.target) && !menuButton.contains(event.target)) {
+            menu.classList.add('d-none');
+            menu.classList.remove('d-block');
+        }
+    })
     const cartButton = document.querySelector('.go-to-cart-button');
 
     // Fetch cart items count (assuming cart is stored in localStorage)

@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
-    const isManager = localStorage.getItem('isManager') === 'true';
+    const isManager = localStorage.getItem('isManager');
 
     const headerRight = document.querySelector('.header-right');
     if (token) {

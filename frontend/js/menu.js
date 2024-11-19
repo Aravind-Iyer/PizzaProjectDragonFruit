@@ -9,19 +9,29 @@ if (!localStorage.getItem('token')) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
+    const isManager = JSON.parse(localStorage.getItem('isManager')) || false;
 
-    const accountInfoButton = document.querySelector('.header-right button:first-child'); // Account Info button
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    // Account Info button
     const logoutButton = document.querySelector('.header-right button.btn-warning'); // Logout button
 
     if (token) {
-        // Show "Account Info" and "Logout" buttons if logged in
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
+
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        } else {
+            managerDashboardButton.style.display = 'none';
+        }
     } else {
-        // Hide buttons (extra safety check)
+        // Hide all buttons if the user is not logged in
         accountInfoButton.style.display = 'none';
         logoutButton.style.display = 'none';
+        managerDashboardButton.style.display = 'none';
     }
+
     const cartButton = document.querySelector('.go-to-cart-button');
 
     // Fetch cart items count (assuming cart is stored in localStorage)
@@ -37,35 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Hamburger Menu Functions
-window.toggleMenu = () => {
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    if (hamburgerMenu) {
-        hamburgerMenu.classList.toggle('d-none');
-    } else {
-        console.error('Hamburger menu element not found!');
-    }
-};
-
-// Close Hamburger Menu When Clicking Outside
-document.addEventListener('click', (event) => {
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    const hamburgerButton = document.querySelector('.hamburger-button');
-
-    if (!hamburgerMenu || !hamburgerButton) {
-        console.error('Hamburger menu or button element not found!');
-        return;
-    }
-
-    const isClickInsideMenu = hamburgerMenu.contains(event.target);
-    const isClickOnButton = hamburgerButton.contains(event.target);
-
-    console.log('Clicked outside hamburger menu:', !isClickInsideMenu && !isClickOnButton);
-
-    if (!isClickInsideMenu && !isClickOnButton && !hamburgerMenu.classList.contains('d-none')) {
-        hamburgerMenu.classList.add('d-none');
-    }
-});
+function toggleMenu() {
+    const menu = document.getElementById("hamburgerMenu");
+    menu.classList.toggle("d-none");
+    menu.classList.toggle("d-block");
+}
 
 // Navigation logic for menu categories
 function navigateToCategory(category) {
@@ -86,7 +72,10 @@ function navigateToCategory(category) {
             alert('Category not available.');
     }
 }
-
+// Navigation functions
+function goToManagerDashboard() {
+    window.location.href = 'managerDashboard.html';
+}
 
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';

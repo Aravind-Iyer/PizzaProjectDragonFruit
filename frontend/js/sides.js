@@ -1,16 +1,30 @@
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
+    const isManager = JSON.parse(localStorage.getItem('isManager')) || false;
 
-    // Setup for Account Info and Logout Buttons
-    const accountInfoButton = document.querySelector('.header-right button:first-child');
-    const logoutButton = document.querySelector('.header-right button.btn-warning');
+    // Select buttons by their IDs
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    const logoutButton = document.getElementById('logoutButton');
 
     if (token) {
+        // Show "Account Info" and "Logout" buttons for all logged-in users
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
+
+        // Show "Manager Dashboard" button only for managers
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        } else {
+            managerDashboardButton.style.display = 'none';
+        }
     } else {
+        // Hide all buttons if the user is not logged in
         accountInfoButton.style.display = 'none';
         logoutButton.style.display = 'none';
+        managerDashboardButton.style.display = 'none';
     }
 
     // Fetch sides data dynamically from backend
