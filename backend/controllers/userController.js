@@ -7,11 +7,11 @@ const SECRET_KEY = 'your_secret_key';
 const userController = {
     // Login
     login: (req, res) => {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
         try {
             const db = connectToDB();
-            const query = 'SELECT * FROM Customer WHERE Username = ?';
-            const user = db.prepare(query).get(username);
+            const query = 'SELECT * FROM Customer WHERE Email = ?';
+            const user = db.prepare(query).get(email);
 
             if (!user) {
                 return res.status(400).json({ message: 'Invalid credentials' });
@@ -44,6 +44,19 @@ const userController = {
         try {
             if (username.endsWith('.MP')) {
                 return res.status(400).json({ message: 'You cannot create an account with a .MP suffix.' });
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailRegex)) {
+                return res.status(400).json({ message: 'Invalid email format.' });
+            }
+
+            // Validate password complexity
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_\-+])[A-Za-z\d@$!%*?&#^()_\-+]{10,}$/;
+
+            if (!password.match(passwordRegex)) {
+                return res.status(400).json({ message: 'Password must be at least 10 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.' });
             }
 
             const db = connectToDB();
