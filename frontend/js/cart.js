@@ -96,14 +96,31 @@ async function removeFromCart(cartId) {
 }
 
 // Proceed to checkout
-function proceedToCheckout() {
-    if (currentCartItemCount === 0) {
-        alert('Your cart is empty. Please add items to your cart before proceeding to checkout.');
-        return;
-    }
-    alert('Proceeding to checkout...');
+async function proceedToCheckout() {
+    const customerId = parseInt(localStorage.getItem('customerId'));
 
-    window.location.href = 'checkout.html';
+    try {
+        // Fetch cart items to ensure we have the latest data
+        const response = await fetch(`http://localhost:3000/api/cart?customerId=${customerId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        if (!response.ok) throw new Error('Failed to fetch cart items.');
+
+        const cartItems = await response.json();
+
+        // Check if there are any items in the cart
+        if (cartItems.length === 0) {
+            alert('Your cart is empty. Please add items to your cart before proceeding to checkout.');
+            return;
+        }
+
+        // If there are items in the cart, proceed to checkout
+        alert('Proceeding to checkout...');
+        window.location.href = 'checkout.html';
+    } catch (error) {
+        console.error('Error during cart check for checkout:', error);
+        alert('Could not verify cart items before checkout. Please try again.');
+    }
 }
 
 // Cancel order and redirect to menu
