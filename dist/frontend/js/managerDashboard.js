@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Fetch number of pizzas sold
+
             const pizzaResponse = await fetch('http://localhost:3000/api/pizzas-sold', {
                 headers: { Authorization: `Bearer ${token}` },
             });
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const numOfPizzasElement = document.getElementById('numOfPizzas');
             numOfPizzasElement.textContent = pizzaData.count || '0';
 
-            // Fetch employee schedule
+
             const scheduleResponse = await fetch('http://localhost:3000/api/employee-schedule', {
                 headers: { Authorization: `Bearer ${token}` },
             });
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Hamburger Menu Functions
+
     window.toggleMenu = () => {
         const hamburgerMenu = document.getElementById('hamburgerMenu');
         if (hamburgerMenu) {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-// Close Hamburger Menu When Clicking Outside
+
     document.addEventListener('click', (event) => {
         const hamburgerMenu = document.getElementById('hamburgerMenu');
         const hamburgerButton = document.querySelector('.hamburger-button');

@@ -6,7 +6,6 @@ if (!localStorage.getItem('token')) {
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
 
-    // Account Info and Logout buttons
     const accountInfoButton = document.querySelector('.header-right button:first-child');
     const logoutButton = document.querySelector('.header-right button.btn-warning');
 
@@ -24,13 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
     cartButton.textContent = itemCount > 0 ? `🛒 Go to Cart (${itemCount})` : '🛒 Go to Cart';
 
-    // Pizza Form Logic
     const costDisplay = document.getElementById('costDisplay');
     let baseCost = 8;
     let totalCost = baseCost;
     const selectedToppings = new Set();
 
-    // Toppings selection logic
     document.querySelectorAll('.center-section input[type="checkbox"]').forEach(input => {
         input.addEventListener('change', () => {
             if (input.checked) {
@@ -44,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Update cost display
     function updateCost() {
         const size = document.getElementById('size').value;
         const cheese = document.getElementById('cheese').value;
@@ -63,11 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
         costDisplay.textContent = `Total Cost: $${(baseCost + sizeCost + cheeseCost + selectedToppings.size * 1.5).toFixed(2)}`;
     }
 
-    // Trigger cost updates on size and cheese change
     document.getElementById('size').addEventListener('change', updateCost);
     document.getElementById('cheese').addEventListener('change', updateCost);
 
-    // Add to Cart
     document.getElementById('addToCartBtn').addEventListener('click', async () => {
         const pizzaName = document.getElementById('pizzaName').value;
         if (!pizzaName.trim()) {
@@ -75,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Gather pizza details
         const pizzaDetails = {
             crust: document.getElementById('crust').value,
             sauce: document.getElementById('sauce').value,
@@ -94,10 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Include token if needed
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
                 body: JSON.stringify({
-                    customerId: localStorage.getItem('customerId'), // Ensure customerId is set
+                    customerId: localStorage.getItem('customerId'),
                     pizzaName: pizzaDetails.name,
                     crust: pizzaDetails.crust,
                     sauce: pizzaDetails.sauce,

@@ -16,12 +16,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (response.ok) {
-            // Store token in localStorage and redirect
+
             localStorage.setItem('token', data.token);
-            localStorage.setItem('customerId', data.customerId); // Store the customer ID
-            localStorage.setItem('isManager', data.isManager ? 'true' : 'false'); // Explicitly store as 'true' or 'false'
+            localStorage.setItem('customerId', data.customerId);
+            localStorage.setItem('isManager', data.isManager ? 'true' : 'false');
             alert('Login successful');
-            console.log('isManager:', data.isManager); // Debug log
+            console.log('isManager:', data.isManager);
 
             if (data.isManager) {
                 window.location.href = 'managerDashboard.html';

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
 
-    // Account Info and Logout Button Setup
+
     const accountInfoButton = document.querySelector('.header-right button:first-child');
     const logoutButton = document.querySelector('.header-right button.btn-warning');
 
@@ -79,14 +79,14 @@ function renderDrinkCards(drinks) {
     });
 }
 
-// Hamburger menu toggle
+
 function toggleMenu() {
     const menu = document.getElementById("hamburgerMenu");
     menu.classList.toggle("d-none");
     menu.classList.toggle("d-block");
 }
 
-// Add item to cart
+
 async function addToCart(drinkId) {
     const token = localStorage.getItem('token');
     const customerId = localStorage.getItem('customerId'); // Retrieve customerId from localStorage

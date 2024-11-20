@@ -1,11 +1,9 @@
-// menu.js
-// Immediate authentication check before page rendering
 if (!localStorage.getItem('token')) {
     alert('You must be logged in to access the menu.');
     window.location.href = 'login.html'; // Redirect to login page
 }
 
-// menu.js
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
@@ -24,11 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const cartButton = document.querySelector('.go-to-cart-button');
 
-    // Fetch cart items count (assuming cart is stored in localStorage)
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
 
-    // Update the button text dynamically
     if (itemCount > 0) {
         cartButton.textContent = `🛒 Go to Cart (${itemCount})`;
     } else {
@@ -37,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Hamburger Menu Functions
 window.toggleMenu = () => {
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     if (hamburgerMenu) {
@@ -47,7 +42,6 @@ window.toggleMenu = () => {
     }
 };
 
-// Close Hamburger Menu When Clicking Outside
 document.addEventListener('click', (event) => {
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const hamburgerButton = document.querySelector('.hamburger-button');
@@ -67,7 +61,6 @@ document.addEventListener('click', (event) => {
     }
 });
 
-// Navigation logic for menu categories
 function navigateToCategory(category) {
     switch (category) {
         case 'pizza':

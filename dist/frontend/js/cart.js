@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // Fetch cart items when the page loads
+
     fetchCart();
 });
 
@@ -108,13 +108,13 @@ async function proceedToCheckout() {
 
         const cartItems = await response.json();
 
-        // Check if there are any items in the cart
+
         if (cartItems.length === 0) {
             alert('Your cart is empty. Please add items to your cart before proceeding to checkout.');
             return;
         }
 
-        // If there are items in the cart, proceed to checkout
+
         alert('Proceeding to checkout...');
         window.location.href = 'checkout.html';
     } catch (error) {

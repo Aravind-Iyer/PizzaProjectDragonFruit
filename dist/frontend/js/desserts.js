@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
 
-    // Account Info and Logout Button Setup
+
     const accountInfoButton = document.querySelector('.header-right button:first-child');
     const logoutButton = document.querySelector('.header-right button.btn-warning');
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             headers: { Authorization: `Bearer ${token}` }
         });
 
-        // If the response is not OK, log the status and the error message
+
         if (!response.ok) {
             console.error('Error in response:');
             console.error('Status:', response.status);
@@ -28,19 +28,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const desserts = await response.json();
-        console.log('Fetched Desserts:', desserts); // Log the fetched data
+        console.log('Fetched Desserts:', desserts);
         updateDessertPlaceholders(desserts);
     } catch (error) {
-        console.error('Fetch error:', error); // Log the full error in the console
+        console.error('Fetch error:', error);
         alert('Could not load desserts. Please try again later.');
     }
     const cartButton = document.querySelector('.go-to-cart-button');
 
-    // Fetch cart items count (assuming cart is stored in localStorage)
+
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
 
-    // Update the button text dynamically
+    // i tried it wont work dont bother but i kept it here for just in case
     if (itemCount > 0) {
         cartButton.textContent = `🛒 Go to Cart (${itemCount})`;
     } else {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-// Update placeholders with dynamic data
+
 function updateDessertPlaceholders(desserts) {
     desserts.forEach((dessert, index) => {
         const dessertCard = document.getElementById(`dessert-${index + 1}`);
@@ -65,7 +65,7 @@ function updateDessertPlaceholders(desserts) {
     });
 }
 
-// Hamburger menu toggle
+
 function toggleMenu() {
     const menu = document.getElementById("hamburgerMenu");
     menu.classList.toggle("d-none");
@@ -112,7 +112,7 @@ async function addToCart(dessertId, dessertName) {
         cost: cost,
     });
 
-    // Add the item to the cart in the backend
+
     try {
         const response = await fetch('http://localhost:3000/api/cart', {
             method: 'POST',
