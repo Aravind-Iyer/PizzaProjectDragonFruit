@@ -60,7 +60,15 @@ function renderOrderSummary(orderData) {
 
     // Adjust arrival time to be 45 minutes from order time
     const orderDate = new Date(orderData[0]?.OrderDate);
-    const estimatedArrival = new Date(orderDate.getTime() + 45 * 60000); // Adding 45 minutes
+
+    // Adjust order date to the local time zone (remove the offset if necessary)
+    const userTimezoneOffset = orderDate.getTimezoneOffset() * 60000; // Convert minutes to milliseconds
+    const localOrderDate = new Date(orderDate.getTime() - userTimezoneOffset);
+
+    // Calculate estimated arrival time
+    const estimatedArrival = new Date(localOrderDate.getTime() + 45 * 60000); // Adding 45 minutes
+
+    // Format the arrival time
     document.getElementById('estimatedArrival').textContent = estimatedArrival.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit'
