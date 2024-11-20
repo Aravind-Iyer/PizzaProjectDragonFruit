@@ -9,6 +9,7 @@ const paymentController = {
             giftCardNumber,
             cartItems,
             totalPrice,
+            deliveryOption
         } = req.body;
 
         // Validate input
@@ -20,6 +21,9 @@ const paymentController = {
         }
         if (!cartItems || cartItems.length === 0) {
             return res.status(400).json({ error: 'Cart items are required' });
+        }
+        if (!deliveryOption) {
+            return res.status(400).json({ error: 'Delivery option is required' });
         }
 
         const db = connectToDB();
@@ -50,14 +54,31 @@ const paymentController = {
 
                 // 3. Insert cart items into OrderSummary table
                 const orderStmt = db.prepare(`
-                    INSERT INTO OrderSummary (CustomerID, PaymentMethod, ItemType, ItemName, Quantity, Cost)
-                    VALUES (?, ?, ?, ?, ?, ?)
+                    INSERT INTO OrderSummary (CustomerID, PaymentMethod, ItemType, ItemName, Quantity, Cost, DeliveryOption, OrderDate)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
                 `);
 
                 cartItems.forEach(item => {
                     orderStmt.run(
                         customerId,
                         paymentMethod,
+                        item.ItemType.trim(),
+                        item.ItemName.trim(),
+                        item.Quantity,
+                        item.Cost,
+                        deliveryOption
+                );
+                });
+                // 4. Insert cart items into CustomerOrdersTable (copying them from Cart table)
+                const customerOrdersStmt = db.prepare(`
+                    INSERT INTO CustomerOrdersTable (CustomerID, ItemID, ItemType, ItemName, Quantity, Cost)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                `);
+
+                cartItems.forEach(item => {
+                    customerOrdersStmt.run(
+                        customerId,
+                        item.ItemID,
                         item.ItemType.trim(),
                         item.ItemName.trim(),
                         item.Quantity,

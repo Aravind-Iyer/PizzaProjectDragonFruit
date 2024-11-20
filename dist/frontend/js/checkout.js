@@ -1,3 +1,7 @@
+if (!localStorage.getItem('token')) {
+    alert('You must be logged in to access the menu.');
+    window.location.href = 'login.html'; // Redirect to login page
+}
 document.addEventListener('DOMContentLoaded', () => {
     const paymentMethods = document.getElementsByName('paymentMethod');
     const creditCardDetails = document.getElementById('creditCardDetails');
@@ -10,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || []; // Retrieve cart from localStorage
     let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0; // Retrieve total price from localStorage
     const customerId = parseInt(localStorage.getItem('customerId'));
+    const token = localStorage.getItem('token');
 
     // Fetch cart data dynamically
     fetch(`http://localhost:3000/api/cart?customerId=${customerId}`) // Use the correct customerId
@@ -26,13 +31,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Listen for payment method selection
     paymentMethods.forEach(method => {
-        method.addEventListener('change', () => {
+        method.addEventListener('change', async () => {
             creditCardDetails.classList.add('d-none');
             giftCardDetails.classList.add('d-none');
             mobilePaymentDetails.classList.add('d-none');
 
             if (method.id === 'creditCard') {
                 creditCardDetails.classList.remove('d-none');
+
+                // Fetch user card information
+                if (token) {
+                    try {
+                        const response = await  fetch('http://localhost:3000/api/account-info', {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json',
+                            }
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            document.getElementById('cardNumber').value = data.cardNumber || '';
+                            document.getElementById('expiryDate').value = data.cardExpiry || '';
+                            document.getElementById('cvv').value = data.cardCVV || '';
+                            document.getElementById('billingAddress').value = data.address || '';
+                        } else {
+                            console.error('Failed to fetch account info for autofill.');
+                        }
+                    } catch (error) {
+                        console.error('Error fetching account info:', error);
+                    }
+                }
             } else if (method.id === 'giftCard') {
                 giftCardDetails.classList.remove('d-none');
             } else if (method.id === 'mobilePayment') {
@@ -69,6 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Submit payment functionality
     window.submitPayment = () => {
         const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        const selectedDeliveryOption = document.querySelector('input[name="deliveryOption"]:checked');
+        if (!selectedDeliveryOption) {
+            alert('Please select a delivery option.');
+            return;
+        }
         if (!selectedMethod) {
             alert('Please select a payment method.');
             return;
@@ -77,8 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const paymentData = {
             customerId, // Customer ID
             paymentMethod: selectedMethod.value, // Selected payment method
+            deliveryOption: selectedDeliveryOption.value, // Selected delivery option
             cartItems: cart, // Cart data (item details)
             totalPrice, // Total price of the cart
+            deliveryOption: selectedDeliveryOption.value // Selected delivery option
         };
 
         // Handle credit card details if selected

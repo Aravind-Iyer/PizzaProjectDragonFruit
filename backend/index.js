@@ -68,8 +68,10 @@ const initializeDatabase = async () => {
             Address TEXT,
             Password TEXT NOT NULL,
             Phone TEXT,
-            OrderHistory TEXT,
-            Favorites TEXT
+            CardNumber TEXT,    
+            CardExpiry TEXT,    
+            CardCVV TEXT             
+                                                
             );
 
             CREATE TABLE IF NOT EXISTS Cart (
@@ -94,6 +96,7 @@ const initializeDatabase = async () => {
             PaymentMethod TEXT,
             CardNumber TEXT,
             PaymentID INTEGER,
+            DeliveryOption TEXT DEFAULT 'Pickup',
             FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
             FOREIGN KEY (PaymentID) REFERENCES Payments(PaymentID)
                 );
@@ -180,6 +183,18 @@ const initializeDatabase = async () => {
             Ingredients TEXT NOT NULL,
             FOREIGN KEY (OptionsID) REFERENCES Options(OptionsID)
                 );
+
+            CREATE TABLE IF NOT EXISTS CustomerOrdersTable (
+            OrderID INTEGER PRIMARY KEY AUTOINCREMENT,
+            CustomerID INTEGER,
+            ItemID INTEGER,
+            ItemType TEXT,
+            ItemName TEXT,
+            Quantity INTEGER,
+            Cost REAL,
+            FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+            );
+
         `);
 
         // Insert default data for Sides, if the table is empty

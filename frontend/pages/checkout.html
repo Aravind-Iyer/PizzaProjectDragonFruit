@@ -41,7 +41,20 @@
 
 <!-- Main Checkout Content -->
 <main class="container mt-5">
-  <div class="row">
+  <!-- Delivery or Pickup Option -->
+  <section class="delivery-options">
+    <h2>Select Delivery Option</h2>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="deliveryOption" id="pickup" value="Pickup">
+      <label class="form-check-label" for="pickup">Pickup</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="deliveryOption" id="delivery" value="Delivery">
+      <label class="form-check-label" for="delivery">Delivery</label>
+    </div>
+  </section>
+
+  <div class="row mt-4">
     <!-- Left Column: Payment Method Options -->
     <div class="col-md-6">
       <section class="payment-methods">
@@ -64,7 +77,6 @@
         </div>
       </section>
     </div>
-
     <!-- Right Column: Dynamic Input Section -->
     <div class="col-md-6">
       <!-- Credit Card Details -->
@@ -77,7 +89,7 @@
         <div class="row">
           <div class="col-md-6">
             <label for="expiryDate" class="form-label">Expiry Date</label>
-            <input type="month" class="form-control" id="expiryDate">
+            <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
           </div>
           <div class="col-md-6">
             <label for="cvv" class="form-label">CVV</label>

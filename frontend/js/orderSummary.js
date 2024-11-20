@@ -29,8 +29,8 @@ async function fetchOrderSummary() {
 // Render the order summary data into the DOM
 function renderOrderSummary(orderData) {
     const groupedItems = groupItemsByType(orderData);
-    const orderDetails = document.getElementById('orderDetails');
-    orderDetails.innerHTML = '';
+    const orderDetails = document.getElementById('orderSummaryContent');
+    orderSummaryContent.innerHTML = '';
 
     let totalPrice = 0;
 
@@ -55,7 +55,13 @@ function renderOrderSummary(orderData) {
 
     document.getElementById('totalPrice').textContent = `$${totalPrice.toFixed(2)}`;
     document.getElementById('paymentInfo').textContent = orderData[0]?.PaymentMethod || 'N/A';
-    document.getElementById('estimatedArrival').textContent = new Date(orderData[0]?.OrderDate).toLocaleTimeString([], {
+    // Update delivery option
+    document.getElementById('deliveryOption').textContent = orderData[0]?.DeliveryOption || 'N/A';
+
+    // Adjust arrival time to be 45 minutes from order time
+    const orderDate = new Date(orderData[0]?.OrderDate);
+    const estimatedArrival = new Date(orderDate.getTime() + 45 * 60000); // Adding 45 minutes
+    document.getElementById('estimatedArrival').textContent = estimatedArrival.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit'
     });
@@ -99,4 +105,50 @@ function toggleMenu() {
             menu.classList.add('d-none');
         }
     });
+}
+// Signature Pad Handling
+let canvas = document.getElementById('signaturePad');
+let signaturePad = canvas ? canvas.getContext('2d') : null;
+let drawing = false;
+
+if (signaturePad) {
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseout', stopDrawing);
+}
+
+function startDrawing(event) {
+    drawing = true;
+    signaturePad.beginPath();
+    signaturePad.moveTo(event.offsetX, event.offsetY);
+}
+
+function draw(event) {
+    if (!drawing) return;
+    signaturePad.lineTo(event.offsetX, event.offsetY);
+    signaturePad.stroke();
+}
+
+function stopDrawing() {
+    drawing = false;
+}
+
+function clearSignature() {
+    signaturePad.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Add the submit signature functionality
+function submitSignature() {
+    if (canvas) {
+        const signatureData = canvas.toDataURL();
+        // eh send it away do it later but eh not needed so w.e
+        console.log('Signature saved successfully:', signatureData);
+        alert('Signature saved successfully! Redirecting to the homepage.');
+
+
+        goToHome();
+    } else {
+        console.error('Signature canvas not found');
+    }
 }

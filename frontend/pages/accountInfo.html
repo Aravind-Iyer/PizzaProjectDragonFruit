@@ -109,6 +109,18 @@
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" value="" readonly>
             </div>
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" class="form-control" id="cardNumber" value="" required>
+            </div>
+            <div class="form-group">
+                <label for="cardExpiry">Card Expiry Date (MM/YY)</label>
+                <input type="text" class="form-control" id="cardExpiry" value="" required>
+            </div>
+            <div class="form-group">
+                <label for="cardCVV">Card CVV</label>
+                <input type="text" class="form-control" id="cardCVV" value="" required>
+            </div>
             <div class="text-center mt-4">
                 <button type="button" class="btn btn-primary mr-2" onclick="saveAccountInfo()">Save</button>
                 <button type="button" class="btn btn-danger" onclick="deleteAccount()">Delete Account</button>

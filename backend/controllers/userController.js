@@ -40,7 +40,7 @@ const userController = {
 
     // Create Account
     createAccount: (req, res) => {
-        const { username, password, email, firstName, lastName } = req.body;
+        const { username, password, email, firstName, lastName, cardNumber, cardExpiry, cardCVV } = req.body;
         try {
             if (username.endsWith('.MP')) {
                 return res.status(400).json({ message: 'You cannot create an account with a .MP suffix.' });
@@ -72,15 +72,18 @@ const userController = {
                 }
 
                 db.prepare(`
-                    INSERT INTO Customer (CustomerID, Username, FirstName, LastName, Email, Password)
-                    VALUES (?, ?, ?, ?, ?, ?)
+                    INSERT INTO Customer (CustomerID, Username, FirstName, LastName, Email, Password, CardNumber, CardExpiry, CardCVV)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 `).run(
                     Math.floor(Math.random() * 10000), // Replace with a proper unique ID mechanism
                     username,
                     firstName,
                     lastName,
                     email,
-                    hashedPassword
+                    hashedPassword,
+                    cardNumber,
+                    cardExpiry,
+                    cardCVV
                 );
 
                 res.status(201).json({ message: 'Account created successfully' });
@@ -108,6 +111,9 @@ const userController = {
                     phone: user.Phone || '',
                     dob: user.DOB || '',
                     address: user.Address || '',
+                    cardNumber: user.CardNumber || '',
+                    cardExpiry: user.CardExpiry || '',
+                    cardCVV: user.CardCVV || '',
                 });
             } else {
                 res.status(404).json({ message: 'User not found' });
@@ -127,7 +133,7 @@ const userController = {
 
         try {
             const decoded = jwt.verify(token, SECRET_KEY);
-            const { email, phone, address } = req.body;
+            const { email, phone, address, cardNumber, cardExpiry, cardCVV } = req.body;
 
             if (!email || !phone || !address) {
                 return res.status(400).json({ message: 'All fields (email, phone, address) are required.' });
@@ -143,9 +149,9 @@ const userController = {
             if (userExists) {
                 const changes = db.prepare(`
                     UPDATE Customer
-                    SET Email = ?, Phone = ?, Address = ?
+                    SET Email = ?, Phone = ?, Address = ?, CardNumber = ?, CardExpiry = ?, CardCVV = ?
                     WHERE Username = ?
-                `).run(email, phone, address, decoded.username);
+                `).run(email, phone, address,cardNumber, cardExpiry, cardCVV, decoded.username);
 
                 if (changes.changes === 0) {
                     return res.status(400).json({ message: 'Update failed, no rows affected.' });

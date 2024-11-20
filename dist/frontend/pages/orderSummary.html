@@ -43,16 +43,30 @@
 <!-- Main Content -->
 <main class="container mt-5">
     <h2 class="text-center mb-4">Order Summary</h2>
-    <div id="orderDetails" class="mb-5">
-        <!-- Dynamically populated grouped order items -->
-    </div>
+    <div id="orderSummaryContent"></div>
+
+    <!-- Delivery or Pickup Information -->
+    <section class="delivery-info mt-4">
+        <h4>Delivery Option: <span id="deliveryOption"></span></h4>
+    </section>
+
     <div class="order-summary p-3 bg-light">
         <h4>Total Cost (Tax Included): <span id="totalPrice">0.00</span></h4>
         <p>Payment Info: <span id="paymentInfo"></span></p>
         <p>Estimated Order Arrival: <span id="estimatedArrival"></span></p>
     </div>
+    <!-- Signature Section -->
+    <section class="signature mt-4">
+        <h4>Signature:</h4>
+        <canvas id="signaturePad" width="400" height="200" style="border: 1px solid #000;"></canvas>
+        <div class="text-center mt-2">
+            <button class="btn btn-danger" onclick="clearSignature()">Clear Signature</button>
+            <button class="btn btn-success" onclick="submitSignature()">Submit Signature</button>
+        </div>
+    </section>
+
     <footer class="text-center mt-4">
-        <p>If you do not receive your order, please contact our store at: <strong>470-324-5382</strong></p>
+        <p>If you do not receive your order, please contact our store at: <strong>770-555-1212</strong></p>
     </footer>
 </main>
 

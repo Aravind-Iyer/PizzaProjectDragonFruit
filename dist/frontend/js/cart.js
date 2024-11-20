@@ -97,8 +97,12 @@ async function removeFromCart(cartId) {
 
 // Proceed to checkout
 function proceedToCheckout() {
+    if (currentCartItemCount === 0) {
+        alert('Your cart is empty. Please add items to your cart before proceeding to checkout.');
+        return;
+    }
     alert('Proceeding to checkout...');
-    // Redirect or implement checkout logic
+
     window.location.href = 'checkout.html';
 }
 

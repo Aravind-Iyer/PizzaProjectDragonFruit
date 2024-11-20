@@ -7,6 +7,9 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     const retypePassword = document.getElementById('retypePassword').value;
+    const cardNumber = document.getElementById('cardNumber').value.trim();
+    const cardExpiry = document.getElementById('cardExpiry').value.trim();
+    const cardCVV = document.getElementById('cardCVV').value.trim();
 
     if (password !== retypePassword) {
         alert("Passwords do not match. Please re-enter.");
@@ -29,7 +32,7 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password, firstName, lastName, email })
+            body: JSON.stringify({ username, password, firstName, lastName, email, cardNumber, cardExpiry, cardCVV })
         });
 
         if (response.ok) {

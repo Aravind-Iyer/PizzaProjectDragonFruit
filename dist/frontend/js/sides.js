@@ -1,5 +1,10 @@
+
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
+    if (!localStorage.getItem('token')) {
+        alert('You must be logged in to access the menu.');
+        window.location.href = 'login.html'; // Redirect to login page
+    }
 
     // Setup for Account Info and Logout Buttons
     const accountInfoButton = document.querySelector('.header-right button:first-child');

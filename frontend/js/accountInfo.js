@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('phone').value = data.phone || "";
             document.getElementById('address').value = data.address || "";
             document.getElementById('username').value = data.username || ""; // Read-only
+            document.getElementById('cardNumber').value = data.cardNumber || "";
+            document.getElementById('cardExpiry').value = data.cardExpiry || "";
+            document.getElementById('cardCVV').value = data.cardCVV || "";
         } else {
             alert('Failed to load account information.');
             window.location.href = 'login.html';
@@ -37,6 +40,9 @@ async function saveAccountInfo() {
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
+    const cardNumber = document.getElementById('cardNumber').value.trim();
+    const cardExpiry = document.getElementById('cardExpiry').value.trim();
+    const cardCVV = document.getElementById('cardCVV').value.trim();
 
     try {
         const response = await fetch('http://localhost:3000/api/account-info', {
@@ -45,7 +51,7 @@ async function saveAccountInfo() {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, phone, address })
+            body: JSON.stringify({ email, phone, address, cardNumber, cardExpiry, cardCVV })
         });
 
         if (response.ok) {

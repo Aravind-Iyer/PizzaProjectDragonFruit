@@ -17,7 +17,8 @@ const orderSummaryController = {
                     Quantity, 
                     Cost, 
                     PaymentMethod, 
-                    OrderDate
+                    OrderDate,
+                    DeliveryOption  
                 FROM OrderSummary
                 WHERE CustomerID = ?
                 ORDER BY OrderDate DESC
