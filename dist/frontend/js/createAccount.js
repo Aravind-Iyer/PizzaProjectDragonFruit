@@ -21,6 +21,27 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
         alert("You cannot create an account with a .MP suffix. Please use a different username.");
         return;
     }
+    // Validation for Card Details
+    if (!/^\d{16}$/.test(cardNumber)) {
+        alert('Card number must be exactly 16 digits.');
+        return;
+    }
+
+    if (!/^\d{3}$/.test(cardCVV)) {
+        alert('CVV must be exactly 3 digits.');
+        return;
+    }
+
+    if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
+        alert('Card expiry must be in MM/YY format.');
+        return;
+    }
+
+    const [month, year] = cardExpiry.split('/').map(Number);
+    if (month < 1 || month > 12) {
+        alert('Invalid month in expiry date. It should be between 01 and 12.');
+        return;
+    }
 
     try {
         const response = await fetch('http://localhost:3000/api/create-account', {

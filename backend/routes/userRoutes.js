@@ -23,4 +23,6 @@ router.put('/account-info', userController.updateAccountInfo);
 
 router.delete('/account-info', userController.deleteAccount);
 
+router.delete('/delete-account', userController.deleteAccount);
+
 module.exports = router;
