@@ -94,12 +94,12 @@ const paymentController = {
 
                 return paymentId;
             } catch (err) {
-                throw err; // Rethrow the error to trigger transaction rollback
+                throw err;
             }
         });
 
         try {
-            const paymentId = transaction(); // Execute the transaction
+            const paymentId = transaction();
             res.status(200).json({
                 message: 'Payment processed successfully',
                 paymentId,

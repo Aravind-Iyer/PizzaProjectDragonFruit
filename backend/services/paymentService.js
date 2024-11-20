@@ -60,7 +60,7 @@ const paymentService = {
         } catch (err) {
             console.error('Error processing payment in service:', err);
 
-            // Rollback transaction if there's an error
+
             if (transaction) await transaction.rollback();
             throw err;
         }

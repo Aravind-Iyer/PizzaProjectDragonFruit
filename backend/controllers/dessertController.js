@@ -1,11 +1,10 @@
 const { connectToDB } = require('../database/dbConnection');
 
-// Controller for Dessert Operations
 const dessertController = {
-    // Get all desserts
+
     getAllDesserts: (req, res) => {
         try {
-            const db = connectToDB(); // Get the SQLite database instance
+            const db = connectToDB();
             const query = `
                 SELECT
                     DessertID,
@@ -15,7 +14,7 @@ const dessertController = {
                 FROM Desserts
             `;
 
-            const desserts = db.prepare(query).all(); // Synchronously fetch all desserts
+            const desserts = db.prepare(query).all();
             console.log('Fetched Desserts:', desserts);
             res.status(200).json(desserts);
         } catch (err) {

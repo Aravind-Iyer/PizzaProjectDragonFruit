@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
 
-// Routes
+
 router.get('/cart', cartController.getCart);
 router.post('/cart', cartController.addToCart);
 router.put('/cart', cartController.updateCart);

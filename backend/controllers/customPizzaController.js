@@ -10,7 +10,7 @@ const customPizzaController = {
 
         try {
             const db = connectToDB();
-            // Convert toppings array to a comma-separated string
+
             const toppingsString = Array.isArray(toppings) ? toppings.join(',') : toppings;
             // Insert the pizza into the CustomPizza table
             const pizzaQuery = `
@@ -27,12 +27,12 @@ const customPizzaController = {
                 VALUES (?, ?, ?, ?, ?, ?)
             `;
             db.prepare(cartQuery).run(
-                customerId,        // CustomerID
-                pizzaId,           // ItemID (should match the PizzaID)
-                `${size} Pizza`,   // ItemType (e.g., 'Large Pizza')
-                pizzaName,         // ItemName
-                1,                 // Quantity
-                cost               // Cost
+                customerId,
+                pizzaId,
+                `${size} Pizza`,
+                pizzaName,
+                1,
+                cost
             );
 
             res.status(201).json({ message: 'Pizza created and added to cart successfully', pizzaId });
@@ -74,13 +74,13 @@ const customPizzaController = {
         try {
             const db = connectToDB();
 
-            // Delete the pizza from the CustomPizza table
+
             const deletePizzaQuery = `
                 DELETE FROM CustomPizza WHERE PizzaID = ?
             `;
             db.prepare(deletePizzaQuery).run(pizzaId);
 
-            // Optionally, delete the associated cart item (if needed)
+
             const deleteCartQuery = `
                 DELETE FROM Cart WHERE ItemID = ?
             `;

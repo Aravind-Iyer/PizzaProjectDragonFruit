@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
     if (!localStorage.getItem('token')) {
         alert('You must be logged in to access the menu.');
-        window.location.href = 'login.html'; // Redirect to login page
+        window.location.href = 'login.html';
     }
 
-    // Setup for Account Info and Logout Buttons
+
     const accountInfoButton = document.querySelector('.header-right button:first-child');
     const logoutButton = document.querySelector('.header-right button.btn-warning');
 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             headers: { Authorization: `Bearer ${token}` },
         });
 
-        // If the response is not OK, log the status and throw an error
+
         if (!response.ok) {
             console.error('Error in response:', response.status);
             throw new Error('Failed to fetch sides.');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Could not load sides. Please try again later.');
     }
 
-    // Close the hamburger menu when clicking outside
+
     document.addEventListener('click', (event) => {
         const menu = document.getElementById('hamburgerMenu');
         const menuButton = document.querySelector('.hamburger-container button');
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
 
-    // Update the button text dynamically
+
     if (itemCount > 0) {
         cartButton.textContent = `🛒 Go to Cart (${itemCount})`;
     } else {
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Render sides dynamically into the DOM
 function renderSides(sides) {
     const sidesContainer = document.querySelector('.sides-options');
-    sidesContainer.innerHTML = ''; // Clear existing content
+    sidesContainer.innerHTML = '';
 
     sides.forEach((side) => {
-        const imagePath = `/${side.ImageURL}`; // Prepend '/' to make the path relative to the server's root
+        const imagePath = `/${side.ImageURL}`;
         const sideItem = `
             <div class="sides-item">
                 <img src="${imagePath}" alt="${side.SidesName}">
@@ -85,7 +85,7 @@ function renderSides(sides) {
     });
 }
 
-// Add item to cart
+
 async function addToCart(sidesID, sidesName, cost) {
     const quantityInput = document.querySelector(`#quantity-${sidesID}`);
     const quantity = parseInt(quantityInput.value, 10);
@@ -107,7 +107,7 @@ async function addToCart(sidesID, sidesName, cost) {
         return;
     }
 
-    // Add the item to the cart in the backend
+
     try {
         const response = await fetch('http://localhost:3000/api/cart', {
             method: 'POST',
@@ -138,7 +138,6 @@ async function addToCart(sidesID, sidesName, cost) {
     }
 }
 
-// Other utility functions
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }

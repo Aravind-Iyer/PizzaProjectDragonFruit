@@ -20,7 +20,7 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
         alert("Password must be at least 12 characters long.");
         return;
     }
-    // Block usernames with the .MP suffix
+    // Block usernames with the .MP suffix for managers......
     if (username.endsWith('.MP')) {
         alert("You cannot create an account with a .MP suffix. Please use a different username.");
         return;

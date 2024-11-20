@@ -9,11 +9,11 @@ const forgotPasswordController = {
         }
 
         try {
-            // Check if the email exists in the database
+
             const emailExists = forgotPasswordService.checkEmailExists(email);
 
             if (emailExists) {
-                // Assume the service handles sending the reset email
+
                 forgotPasswordService.sendPasswordResetEmail(email);
                 return res.status(200).json({ message: 'Account found, sent password reset email.' });
             } else {

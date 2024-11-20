@@ -9,7 +9,7 @@ const orderSummaryController = {
         }
 
         try {
-            const db = connectToDB(); // Get the SQLite database instance
+            const db = connectToDB();
             const query = `
                 SELECT 
                     ItemType, 
@@ -24,7 +24,7 @@ const orderSummaryController = {
                 ORDER BY OrderDate DESC
             `;
 
-            const orderSummary = db.prepare(query).all(customerId); // Execute the query with the customerId parameter
+            const orderSummary = db.prepare(query).all(customerId);
 
             res.status(200).json(orderSummary);
         } catch (err) {

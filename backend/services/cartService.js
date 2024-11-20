@@ -14,7 +14,7 @@ const cartService = {
         return result.recordset;
     },
 
-    // add cart
+
     addToCart: async ({ customerId, itemId, itemType, itemName, quantity, cost }) => {
         const pool = await connectToDB();
         await pool.request()

@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     fetchOrderSummary();
 });
 
-// Fetch the order summary grouped by item type and payment info
 async function fetchOrderSummary() {
     const customerId = localStorage.getItem('customerId');
     try {
@@ -26,7 +25,6 @@ async function fetchOrderSummary() {
     }
 }
 
-// Render the order summary data into the DOM
 function renderOrderSummary(orderData) {
     const groupedItems = groupItemsByType(orderData);
     const orderDetails = document.getElementById('orderSummaryContent');
@@ -76,7 +74,6 @@ function renderOrderSummary(orderData) {
 }
 
 
-// Group items by their type
 function groupItemsByType(items) {
     return items.reduce((groups, item) => {
         if (!groups[item.ItemType]) {
@@ -87,7 +84,6 @@ function groupItemsByType(items) {
     }, {});
 }
 
-// Utility functions
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }
@@ -107,7 +103,6 @@ function toggleMenu() {
     menu.classList.toggle('d-none');
     menu.classList.toggle('d-block');
 
-    // Close menu if clicked outside
     document.addEventListener('click', (e) => {
         if (!menu.contains(e.target) && e.target !== document.querySelector('.hamburger-container button')) {
             menu.classList.add('d-none');

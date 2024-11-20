@@ -3,7 +3,7 @@ const { connectToDB } = require('../database/dbConnection');
 const sidesController = {
     getAllSides: (req, res) => {
         try {
-            const db = connectToDB(); // Get the SQLite database instance
+            const db = connectToDB();
             const query = `
                 SELECT
                     SidesID,
@@ -13,9 +13,9 @@ const sidesController = {
                 FROM Sides
             `;
 
-            const sides = db.prepare(query).all(); // Execute the query and fetch all rows
+            const sides = db.prepare(query).all();
 
-            // Optionally trim fields if necessary (SQLite doesn't have RTRIM by default)
+
             sides.forEach(side => {
                 side.SidesName = side.SidesName.trim();
                 side.ImageURL = side.ImageURL.trim();

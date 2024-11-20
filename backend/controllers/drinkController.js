@@ -3,7 +3,7 @@ const { connectToDB } = require('../database/dbConnection');
 const drinkController = {
     getAllDrinks: (req, res) => {
         try {
-            const db = connectToDB(); // Get the SQLite database instance
+            const db = connectToDB();
             const query = `
                 SELECT
                     DrinkID,
@@ -14,9 +14,9 @@ const drinkController = {
                 FROM Drinks
             `;
 
-            const drinks = db.prepare(query).all(); // Execute the query and get all rows
+            const drinks = db.prepare(query).all();
 
-            // Optionally trim fields if necessary (SQLite doesn't have RTRIM by default)
+
             drinks.forEach(drink => {
                 drink.DrinkName = drink.DrinkName.trim();
                 drink.Size = drink.Size.trim();

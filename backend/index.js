@@ -14,11 +14,11 @@ app.use(cors());
 // Middleware to parse JSON
 app.use(express.json());
 
-// Determine the base directory for static files
+
 const baseDir = process.pkg ? path.dirname(process.execPath) : __dirname;
 const staticDir = process.pkg
   ? path.join(baseDir, 'frontend') // When packaged, 'frontend' is alongside the executable
-  : path.join(baseDir, '../frontend'); // During development
+  : path.join(baseDir, '../frontend'); // During dev useee
 
 // Log the static directory path for debugging
 console.log(`Serving static files from: ${staticDir}`);
@@ -57,7 +57,7 @@ const initializeDatabase = async () => {
         const db = connectToDB();
         console.log('Initializing database...');
 
-        // Create necessary tables if they don't exist
+
         db.exec(`
             CREATE TABLE IF NOT EXISTS Customer (
             CustomerID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -235,10 +235,10 @@ const initializeDatabase = async () => {
     }
 };
 
-// Call the database initialization function
+
 initializeDatabase();
 
-// Root endpoint to test if the server is running
+
 app.get('/', (req, res) => {
     res.send('Server is up and running!');
 });

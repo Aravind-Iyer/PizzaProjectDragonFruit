@@ -75,7 +75,7 @@ const userController = {
                     INSERT INTO Customer (CustomerID, Username, FirstName, LastName, Email, Password, CardNumber, CardExpiry, CardCVV)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 `).run(
-                    Math.floor(Math.random() * 10000), // Replace with a proper unique ID mechanism
+                    Math.floor(Math.random() * 10000), // kek too bad if collision happens LOLL oh well rng
                     username,
                     firstName,
                     lastName,

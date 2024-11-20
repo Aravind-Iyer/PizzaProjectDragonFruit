@@ -1,4 +1,4 @@
-
+// THE ONLY NON DEPRECATED FILE LOL
 
 const { connectToDB, sql } = require('../database/dbConnection');
 
@@ -11,7 +11,7 @@ const forgotPasswordService = {
                 .input('Email', sql.Char(150), email)
                 .query('SELECT * FROM Customer WHERE Email = @Email');
 
-            return result.recordset.length > 0; // Returns true if email exists, false otherwise
+            return result.recordset.length > 0;
         } catch (error) {
             console.error('Error checking email existence:', error);
             throw new Error('Database query failed');

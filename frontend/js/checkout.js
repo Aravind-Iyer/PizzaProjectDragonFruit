@@ -1,6 +1,6 @@
 if (!localStorage.getItem('token')) {
     alert('You must be logged in to access the menu.');
-    window.location.href = 'login.html'; // Redirect to login page
+    window.location.href = 'login.html';
 }
 document.addEventListener('DOMContentLoaded', () => {
     const paymentMethods = document.getElementsByName('paymentMethod');
@@ -11,21 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryList = document.getElementById('summaryList');
     const totalPriceEl = document.getElementById('totalPrice');
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || []; // Retrieve cart from localStorage
-    let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0; // Retrieve total price from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
     const customerId = parseInt(localStorage.getItem('customerId'));
     const token = localStorage.getItem('token');
 
     // Fetch cart data dynamically
-    fetch(`http://localhost:3000/api/cart?customerId=${customerId}`) // Use the correct customerId
+    fetch(`http://localhost:3000/api/cart?customerId=${customerId}`)
         .then(response => {
-            if (!response.ok) throw new Error('Failed to fetch cart items'); // Handle errors
+            if (!response.ok) throw new Error('Failed to fetch cart items');
             return response.json();
         })
         .then(data => {
             cart = data; // Store fetched cart data
-            console.log('Cart fetched successfully:', cart); // Debug - Log fetched cart
-            renderCartSummary(cart); // Render the cart summary
+            console.log('Cart fetched successfully:', cart);
+            renderCartSummary(cart);
         })
         .catch(err => console.error('Error fetching cart data:', err));
 
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (method.id === 'creditCard') {
                 creditCardDetails.classList.remove('d-none');
 
-                // Fetch user card information
+
                 if (token) {
                     try {
                         const response = await  fetch('http://localhost:3000/api/account-info', {
@@ -73,20 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render the cart summary
     function renderCartSummary(cartItems) {
-        summaryList.innerHTML = ''; // Clear the summary section
-        totalPrice = 0; // Reset total price
+        summaryList.innerHTML = '';
+        totalPrice = 0;
 
         cartItems.forEach(item => {
-            console.log('Rendering item:', item); // Debug - Log each item in the cart
+            console.log('Rendering item:', item);
             const listItem = document.createElement('li');
             listItem.textContent = `${item.ItemName} (x${item.Quantity}) - $${(item.Quantity * item.Cost).toFixed(2)}`;
             summaryList.appendChild(listItem);
 
-            totalPrice += item.Quantity * item.Cost; // Accumulate the total price
+            totalPrice += item.Quantity * item.Cost;
         });
 
-        console.log('Total Price:', totalPrice); // Debug - Log calculated total price
-        totalPriceEl.textContent = totalPrice.toFixed(2); // Update the total price in the DOM
+        console.log('Total Price:', totalPrice);
+        totalPriceEl.textContent = totalPrice.toFixed(2);
     }
 
     // Cancel order functionality
@@ -110,12 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const paymentData = {
-            customerId, // Customer ID
-            paymentMethod: selectedMethod.value, // Selected payment method
-            deliveryOption: selectedDeliveryOption.value, // Selected delivery option
-            cartItems: cart, // Cart data (item details)
-            totalPrice, // Total price of the cart
-            deliveryOption: selectedDeliveryOption.value // Selected delivery option
+            customerId,
+            paymentMethod: selectedMethod.value,
+            deliveryOption: selectedDeliveryOption.value,
+            cartItems: cart,
+            totalPrice,
+            deliveryOption: selectedDeliveryOption.value
         };
 
         // Handle credit card details if selected
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!response.ok) {
                             console.error('Failed to clear cart:', response);
                         }
-                        window.location.href = 'orderSummary.html'; // Redirect after clearing the cart
+                        window.location.href = 'orderSummary.html';
                     })
                     .catch(err => console.error('Error clearing cart:', err));
             })
@@ -193,14 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    // Hamburger Menu Toggle
+
     window.toggleMenu = () => {
         const menu = document.getElementById('hamburgerMenu');
         menu.classList.toggle('d-none');
         menu.classList.toggle('d-block');
     };
 
-    // Account Info and Logout Functions
+
     window.goToAccountInfo = () => {
         window.location.href = 'accountInfo.html';
     };

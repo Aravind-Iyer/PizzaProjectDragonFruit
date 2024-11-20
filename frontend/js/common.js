@@ -1,12 +1,12 @@
 // common.js - Adjusts navigation links based on user login status
-
+// only one page uses this too lazy to switch so w.e use if u want but yeah
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const isManager = localStorage.getItem('isManager') === 'true';
 
     const headerRight = document.querySelector('.header-right');
     if (token) {
-        // User is logged in - Show logout and account info button
+
         headerRight.innerHTML = `
             ${isManager ? `<button class="btn btn-danger ms-2" onclick="goToManagerDashboard()">Manager Dashboard</button>` : ''}
             <button class="btn btn-light me-3" onclick="goToAccountInfo()">Account Info</button>
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
     } else {
-        // User is not logged in - Show Login/Create Account button
+
         headerRight.innerHTML = `
             <button class="btn btn-light" onclick="goToLogin()">Login/Create Account</button>
         `;
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the hamburger menu
     initializeHamburgerMenu(token);
 
-    // Close the menu when clicking outside
+
     document.addEventListener('click', (event) => {
         const menu = document.getElementById('hamburgerMenu');
         const button = document.querySelector('.hamburger-container button');
@@ -46,32 +46,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Function to navigate to Home
+
 function goToHome() {
     window.location.href = 'home.html';
 }
 
-// Function to navigate to Login page
+
 function goToLogin() {
     window.location.href = 'login.html';
 }
 
-// Function to navigate to Account Info page
+
 function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }
-// Function to navigate to Manager Dashboard
+
 function goToManagerDashboard() {
     window.location.href = 'managerDashboard.html';
 }
-// Logout function
+
 function logout() {
     localStorage.removeItem('token');
     alert('You have successfully logged out.');
     window.location.href = 'home.html';
 }
 
-// Toggle the hamburger menu visibility
+
 function toggleMenu() {
     console.log("Hamburger menu button clicked"); // Debug message
     const menu = document.getElementById('hamburgerMenu');
@@ -82,7 +82,7 @@ function toggleMenu() {
     }
 }
 
-// Close the hamburger menu
+
 function closeMenu() {
     const menu = document.getElementById('hamburgerMenu');
     if (menu) {
@@ -91,7 +91,7 @@ function closeMenu() {
     }
 }
 
-// Initialize Hamburger Menu Based on User Authentication State
+
 function initializeHamburgerMenu(token) {
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     if (!hamburgerMenu) return;
