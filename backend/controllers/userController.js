@@ -176,16 +176,26 @@ const userController = {
             const user = db.prepare('SELECT * FROM Customer WHERE Username = ?').get(decoded.username);
 
             if (user) {
+                // Step 1: Delete from related tables
+                db.prepare('DELETE FROM OrderSummary WHERE CustomerID = ?').run(user.CustomerID);
+                db.prepare('DELETE FROM CustomPizza WHERE CustomerID = ?').run(user.CustomerID);
+                db.prepare('DELETE FROM Payments WHERE CustomerID = ?').run(user.CustomerID);
+                db.prepare('DELETE FROM CustomerOrdersTable WHERE CustomerID = ?').run(user.CustomerID);
+                db.prepare('DELETE FROM Cart WHERE CustomerID = ?').run(user.CustomerID);
+
+                // Step 2: Delete customer record
                 db.prepare('DELETE FROM Customer WHERE Username = ?').run(decoded.username);
+
                 res.json({ message: 'Account deleted successfully' });
             } else {
                 res.status(404).json({ message: 'User not found' });
             }
         } catch (err) {
             console.error('Delete account error:', err);
-            res.status(401).json({ message: 'Invalid or expired token' });
+            res.status(500).json({ message: 'Server error' });
         }
-    },
+    }
+
 };
 
 module.exports = userController;
