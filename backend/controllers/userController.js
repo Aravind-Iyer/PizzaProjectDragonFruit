@@ -22,7 +22,7 @@ const userController = {
                     return res.status(400).json({ message: 'Invalid credentials' });
                 }
 
-                const isManager = user.Username.trim().endsWith('.MP');
+                const isManager = email.toLowerCase().endsWith('@mp.com');
                 const token = jwt.sign({ username: user.Username, isManager }, SECRET_KEY, { expiresIn: '2h' });
 
                 res.json({

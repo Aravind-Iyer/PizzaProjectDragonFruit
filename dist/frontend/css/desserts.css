@@ -31,7 +31,25 @@ body {
     font-size: 1.5rem;
     margin: 0;
 }
+/* Consistent button styles for header buttons */
+.header-button {
+    padding: 8px 16px; /* Consistent padding */
+    font-size: 16px; /* Consistent font size */
+    color: #000; /* Black text color for better readability */
+    background-color: #f8f9fa; /* Light color to match existing button style */
+    border: none; /* Remove any default border */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    cursor: pointer; /* Pointer cursor */
+}
 
+.header-button:hover {
+    background-color: #e2e6ea; /* Slightly darker on hover */
+}
+
+.btn-warning {
+    color: #fff; /* Override text color to be white for Logout button */
+}
 /* Hamburger Menu */
 .custom-hamburger-menu {
     position: absolute;

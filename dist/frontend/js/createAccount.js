@@ -21,6 +21,10 @@ document.getElementById('createAccountForm').addEventListener('submit', async (e
         alert("You cannot create an account with a .MP suffix. Please use a different username.");
         return;
     }
+    // Restrict emails ending in "@MP.com"
+    if (email.toLowerCase().endsWith('@mp.com')) {
+        return res.status(400).json({ message: 'You cannot create an account with an email ending in @MP.com.' });
+    }
     // Validation for Card Details
     if (!/^\d{16}$/.test(cardNumber)) {
         alert('Card number must be exactly 16 digits.');

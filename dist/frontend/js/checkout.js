@@ -3,6 +3,32 @@ if (!localStorage.getItem('token')) {
     window.location.href = 'login.html';
 }
 document.addEventListener('DOMContentLoaded', () => {
+
+    const token = localStorage.getItem('token');
+    const isManager = localStorage.getItem('isManager') === 'true';
+
+    // Get buttons by their IDs
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
+
+    if (token) {
+        // Show "Account Info" and "Logout" buttons if logged in
+        accountInfoButton.style.display = 'inline-block';
+        logoutButton.style.display = 'inline-block';
+
+        // Show "Manager Dashboard" button if user is a manager
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        }
+    } else {
+        // Hide all buttons (extra safety check)
+        accountInfoButton.style.display = 'none';
+        logoutButton.style.display = 'none';
+        managerDashboardButton.style.display = 'none';
+    }
+
+
     const paymentMethods = document.getElementsByName('paymentMethod');
     const creditCardDetails = document.getElementById('creditCardDetails');
     const giftCardDetails = document.getElementById('giftCardDetails');
@@ -14,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
     const customerId = parseInt(localStorage.getItem('customerId'));
-    const token = localStorage.getItem('token');
 
     // Fetch cart data dynamically
     fetch(`http://localhost:3000/api/cart?customerId=${customerId}`)
@@ -207,11 +232,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('isManager');
+        localStorage.removeItem('customerId');
         alert('You have successfully logged out.');
         window.location.href = 'home.html';
     };
 
+
     window.goToHome = () => {
         window.location.href = 'home.html';
+    };
+    window.goToManagerDashboard = () => {
+        window.location.href = 'managerDashboard.html';
     };
 });

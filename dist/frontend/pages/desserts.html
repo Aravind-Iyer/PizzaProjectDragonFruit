@@ -11,7 +11,7 @@
 <!-- Header Section -->
 <header class="d-flex justify-content-between align-items-center p-3 bg-danger text-white">
     <div class="header-left">
-        <button class="btn btn-light" onclick="goToHome()">
+        <button class="btn btn-light header-button" onclick="goToHome()">
             <img src="../assets/icons/home-icon.png" alt="Home" width="24"> Home
         </button>
     </div>
@@ -19,8 +19,9 @@
         <h1>Desserts</h1>
     </div>
     <div class="header-right d-flex gap-2">
-        <button class="btn btn-light" onclick="goToAccountInfo()" style="display: none;">Account Info</button>
-        <button class="btn btn-warning" onclick="logout()" style="display: none;">Logout</button>
+        <button id="managerDashboardButton" class="btn btn-light header-button" onclick="goToManagerDashboard()" style="display: none;">Manager Dashboard</button>
+        <button id="accountInfoButton" class="btn btn-light header-button" onclick="goToAccountInfo()" style="display: none;">Account Info</button>
+        <button id="logoutButton" class="btn btn-warning header-button" onclick="logout()" style="display: none;">Logout</button>
     </div>
 </header>
 

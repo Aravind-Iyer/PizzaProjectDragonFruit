@@ -6,6 +6,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    const isManager = localStorage.getItem('isManager') === 'true';
+
+    // Get buttons by their IDs
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    const logoutButton = document.getElementById('logoutButton');
+
+    if (token) {
+        accountInfoButton.style.display = 'inline-block';
+        logoutButton.style.display = 'inline-block';
+
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        }
+    }
+
     fetchOrderSummary();
 });
 
@@ -90,6 +106,8 @@ function goToAccountInfo() {
 
 function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('isManager');
+    localStorage.removeItem('customerId');
     alert('You have successfully logged out.');
     window.location.href = 'home.html';
 }
@@ -154,4 +172,7 @@ function submitSignature() {
     } else {
         console.error('Signature canvas not found');
     }
+}
+function goToManagerDashboard() {
+    window.location.href = 'managerDashboard.html';
 }

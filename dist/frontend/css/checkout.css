@@ -25,7 +25,25 @@ header .btn {
     align-items: center;
     gap: 5px;
 }
+/* Consistent button styles for header buttons */
+.header-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #000;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
 
+.header-button:hover {
+    background-color: #e2e6ea;
+}
+
+.btn-warning {
+    color: #fff;
+}
 /* Hamburger Menu */
 .custom-hamburger-menu {
     position: absolute;

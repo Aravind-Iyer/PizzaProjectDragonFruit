@@ -6,16 +6,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = 'login.html';
     }
 
+    const isManager = localStorage.getItem('isManager') === 'true';
 
-    const accountInfoButton = document.querySelector('.header-right button:first-child');
-    const logoutButton = document.querySelector('.header-right button.btn-warning');
+    // Get buttons by their IDs
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
 
     if (token) {
+        // Show "Account Info" and "Logout" buttons if logged in
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
+
+        // Show "Manager Dashboard" button if user is a manager
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        }
     } else {
+        // Hide all buttons (extra safety check)
         accountInfoButton.style.display = 'none';
         logoutButton.style.display = 'none';
+        managerDashboardButton.style.display = 'none';
     }
 
     // Fetch sides data dynamically from backend
@@ -144,6 +155,8 @@ function goToAccountInfo() {
 
 function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('isManager');
+    localStorage.removeItem('customerId');
     alert('You have successfully logged out.');
     window.location.href = 'home.html';
 }
@@ -156,4 +169,7 @@ function toggleMenu() {
     const menu = document.getElementById('hamburgerMenu');
     menu.classList.toggle('d-none');
     menu.classList.toggle('d-block');
+}
+function goToManagerDashboard() {
+    window.location.href = 'managerDashboard.html';
 }
