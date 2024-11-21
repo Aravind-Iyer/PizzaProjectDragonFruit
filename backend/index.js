@@ -230,6 +230,7 @@ const initializeDatabase = async () => {
         console.log('Database initialized successfully.');
 
 
+
     } catch (err) {
         console.error('Error initializing the database:', err);
     }

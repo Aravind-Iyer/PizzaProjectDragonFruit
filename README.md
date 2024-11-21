@@ -23,7 +23,15 @@ If **Server Port 3000 Produces Error** erros such as already being used
 4. taskkill /PID (Insert number that shows up) /F
 5. npm run dev
 
-**Login Instructions:**
 
-* Username: admin
-* Password: admin123
+
+**Login Instructions:**
+You should be able to create a user account
+the only you won't be able to create is the manager type
+so please use the below provided manager acc details
+
+* Username: manager@mp.com
+* Password: defaultManagerPassword
+
+* Username: aravind030702@gmail.com
+* Password: Aravind03!#!

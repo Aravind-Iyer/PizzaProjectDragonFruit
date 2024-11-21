@@ -7,21 +7,30 @@ if (!localStorage.getItem('token')) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
+    const isManager = localStorage.getItem('isManager') === 'true';
 
-    const accountInfoButton = document.querySelector('.header-right button:first-child'); // Account Info button
-    const logoutButton = document.querySelector('.header-right button.btn-warning'); // Logout button
+    const accountInfoButton = document.getElementById('accountInfoButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const managerDashboardButton = document.getElementById('managerDashboardButton');
 
     if (token) {
         // Show "Account Info" and "Logout" buttons if logged in
         accountInfoButton.style.display = 'inline-block';
         logoutButton.style.display = 'inline-block';
+
+        // Show "Manager Dashboard" button if user is a manager
+        if (isManager) {
+            managerDashboardButton.style.display = 'inline-block';
+        }
     } else {
-        // Hide buttons (extra safety check)
+        // Hide all buttons (extra safety check)
         accountInfoButton.style.display = 'none';
         logoutButton.style.display = 'none';
+        managerDashboardButton.style.display = 'none';
     }
-    const cartButton = document.querySelector('.go-to-cart-button');
 
+    // Update cart button content
+    const cartButton = document.querySelector('.go-to-cart-button');
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const itemCount = cart.reduce((total, item) => total + item.Quantity, 0);
 
@@ -32,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
+function goToManagerDashboard() {
+    window.location.href = 'managerDashboard.html';
+}
 window.toggleMenu = () => {
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     if (hamburgerMenu) {
@@ -85,9 +96,10 @@ function goToAccountInfo() {
     window.location.href = 'accountInfo.html';
 }
 
-n
 function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('isManager');
+    localStorage.removeItem('customerId');
     alert('You have successfully logged out.');
     window.location.href = 'home.html';
 }
